@@ -1,0 +1,1524 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>English Bible Exam Prep · RTS</title>
+<link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>📖</text></svg>">
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2.117.3/dist/umd/supabase.js"></script>
+<style>:root{
+  --bg:#FAFAFA; --card:#FFFFFF; --ink:#262626; --muted:#737373; --line:#DBDBDB; --soft:#EFEFEF;
+  --accent:#0095F6; --accent-ink:#FFFFFF; --bad:#ED4956; --good:#2E7D32; --warn:#B76E00;
+  --grad:linear-gradient(45deg,#F58529,#DD2A7B,#8134AF,#515BD4);
+  color-scheme: light;
+}
+@media (prefers-color-scheme: dark){ :root:not([data-theme="light"]){
+  --bg:#000000; --card:#121212; --ink:#F5F5F5; --muted:#A8A8A8; --line:#363636; --soft:#262626;
+  --accent:#1DA1F7; --accent-ink:#FFFFFF; --bad:#FF6B76; --good:#5BD16B; --warn:#F2B13C; color-scheme: dark; } }
+:root[data-theme="dark"]{ --bg:#000000; --card:#121212; --ink:#F5F5F5; --muted:#A8A8A8; --line:#363636; --soft:#262626;
+  --accent:#1DA1F7; --accent-ink:#FFFFFF; --bad:#FF6B76; --good:#5BD16B; --warn:#F2B13C; color-scheme: dark; }
+:root{ box-sizing:border-box; padding-top:env(safe-area-inset-top,0px); padding-bottom:env(safe-area-inset-bottom,0px); }
+html{ scroll-padding-top:calc(env(safe-area-inset-top,0px) + 64px); }
+*,*::before,*::after{ box-sizing:inherit; }
+body{ margin:0; background:var(--bg); color:var(--ink); font:15px/1.5 -apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif; -webkit-font-smoothing:antialiased; }
+body::before{ content:""; position:fixed; inset:0 0 auto; height:env(safe-area-inset-top,0px); z-index:10; background:var(--card); }
+button,input{ font:inherit; color:inherit; }
+:focus-visible{ outline:2px solid var(--accent); outline-offset:2px; border-radius:6px; }
+a{ color:var(--accent); }
+
+header.top{ position:sticky; top:env(safe-area-inset-top,0px); z-index:5; background:var(--card); border-bottom:1px solid var(--line); }
+.top-in{ max-width:935px; margin:0 auto; display:flex; align-items:center; gap:16px; padding:10px 16px; }
+.brand{ display:flex; align-items:center; gap:10px; font-weight:700; font-size:18px; letter-spacing:-.2px; background:none; border:0; cursor:pointer; padding:0; }
+.brand .ring{ width:34px; height:34px; border-radius:50%; background:var(--grad); padding:2px; }
+.brand .ring span{ display:grid; place-items:center; width:100%; height:100%; border-radius:50%; background:var(--card); font-size:15px; }
+nav.tabs{ display:flex; gap:2px; margin-left:auto; }
+nav.tabs button{ background:none; border:0; padding:8px 11px; border-radius:8px; cursor:pointer; color:var(--muted); font-weight:600; font-size:14px; }
+nav.tabs button[aria-current="page"]{ color:var(--ink); background:var(--soft); }
+.iconbtn{ background:none; border:1px solid var(--line); border-radius:8px; padding:6px 9px; cursor:pointer; }
+nav.bottom{ display:none; }
+@media (max-width:760px){
+  nav.tabs{ display:none; }
+  nav.bottom{ display:flex; position:fixed; bottom:0; left:0; right:0; z-index:6; background:var(--card); border-top:1px solid var(--line); padding-bottom:env(safe-area-inset-bottom,0px); }
+  nav.bottom button{ flex:1; background:none; border:0; padding:8px 2px 9px; font-size:11px; color:var(--muted); display:flex; flex-direction:column; align-items:center; gap:2px; cursor:pointer; }
+  nav.bottom button span.i{ font-size:19px; line-height:1; }
+  nav.bottom button[aria-current="page"]{ color:var(--ink); font-weight:700; }
+  main{ padding-bottom:80px !important; }
+  .brand .wordmark small{ display:none; }
+}
+main{ max-width:935px; margin:0 auto; padding:20px 16px 48px; }
+h1{ font-size:24px; line-height:1.25; margin:0 0 6px; letter-spacing:-.3px; }
+h2{ font-size:18px; margin:0 0 10px; letter-spacing:-.2px; }
+h3{ font-size:15px; margin:0 0 6px; }
+p{ margin:0 0 10px; }
+.muted{ color:var(--muted); }
+.small{ font-size:13px; }
+.lead{ font-size:16px; max-width:62ch; }
+.card{ background:var(--card); border:1px solid var(--line); border-radius:12px; padding:18px; margin-bottom:14px; }
+.card.flat{ background:transparent; }
+.row{ display:flex; gap:12px; flex-wrap:wrap; align-items:center; }
+.grid2{ display:grid; grid-template-columns:repeat(2,minmax(0,1fr)); gap:14px; }
+.grid3{ display:grid; grid-template-columns:repeat(3,minmax(0,1fr)); gap:14px; }
+@media (max-width:760px){ .grid2,.grid3{ grid-template-columns:1fr; } }
+.btn{ border:0; border-radius:8px; padding:10px 16px; font-weight:600; font-size:14px; cursor:pointer; background:var(--accent); color:var(--accent-ink); }
+.btn:disabled{ opacity:.45; cursor:not-allowed; }
+.btn.ghost{ background:var(--soft); color:var(--ink); }
+.btn.line{ background:transparent; border:1px solid var(--line); color:var(--ink); }
+.btn.grad{ background:var(--grad); color:#fff; }
+.btn.sm{ padding:6px 11px; font-size:13px; }
+.pill{ display:inline-block; font-size:12px; font-weight:600; padding:2px 9px; border-radius:999px; background:var(--soft); color:var(--ink); }
+.pill.bad{ background:color-mix(in srgb,var(--bad) 16%,transparent); color:var(--bad); }
+.pill.good{ background:color-mix(in srgb,var(--good) 16%,transparent); color:var(--good); }
+.pill.warn{ background:color-mix(in srgb,var(--warn) 18%,transparent); color:var(--warn); }
+.pill.acc{ background:color-mix(in srgb,var(--accent) 14%,transparent); color:var(--accent); }
+
+/* stories row — the lesson sequence */
+.stories{ display:flex; gap:18px; overflow-x:auto; padding:4px 2px 8px; }
+.story{ background:none; border:0; cursor:pointer; display:flex; flex-direction:column; align-items:center; gap:6px; min-width:72px; padding:0; }
+.story .o{ width:70px; height:70px; border-radius:50%; padding:3px; background:var(--grad); }
+.story.done .o{ background:var(--line); }
+.story.locked .o{ background:repeating-conic-gradient(var(--line) 0 8deg, transparent 8deg 16deg); }
+.story .in{ width:100%; height:100%; border-radius:50%; background:var(--card); border:3px solid var(--card); display:grid; place-items:center; font-weight:800; font-size:22px; }
+.story.done .in{ color:var(--muted); }
+.story small{ font-size:12px; color:var(--ink); max-width:80px; text-align:center; line-height:1.25; }
+.story.locked small{ color:var(--muted); }
+
+.stat{ display:flex; flex-direction:column; gap:2px; }
+.stat b{ font-size:26px; letter-spacing:-.5px; line-height:1.1; }
+.bar{ height:8px; background:var(--soft); border-radius:99px; overflow:hidden; position:relative; }
+.bar > i{ display:block; height:100%; background:var(--accent); border-radius:99px; }
+.bar.grad > i{ background:var(--grad); }
+.bar .mark{ position:absolute; top:-3px; bottom:-3px; width:2px; background:var(--ink); }
+.split{ display:flex; height:12px; border-radius:99px; overflow:hidden; }
+.split .w{ background:var(--grad); } .split .s{ background:var(--good); }
+table.t{ width:100%; border-collapse:collapse; font-size:14px; }
+table.t th,table.t td{ text-align:left; padding:8px 6px; border-bottom:1px solid var(--line); vertical-align:top; }
+table.t th{ font-size:12px; color:var(--muted); font-weight:600; }
+.tablewrap{ overflow-x:auto; }
+
+/* questions */
+.q{ background:var(--card); border:1px solid var(--line); border-radius:12px; padding:16px; margin-bottom:12px; }
+.q .num{ font-size:12px; color:var(--muted); font-weight:600; margin-bottom:4px; }
+.q .stem{ font-size:16px; font-weight:600; margin-bottom:12px; }
+.opts{ display:grid; gap:8px; }
+.opt{ display:flex; gap:12px; align-items:center; text-align:left; width:100%; min-height:48px; padding:10px 12px; border-radius:10px; border:1px solid var(--line); background:var(--card); cursor:pointer; font-size:15px; }
+.opt .k{ flex:none; width:28px; height:28px; border-radius:50%; border:1px solid var(--line); display:grid; place-items:center; font-weight:700; font-size:13px; color:var(--muted); }
+.opt[aria-pressed="true"]{ border-color:var(--accent); box-shadow:inset 0 0 0 1px var(--accent); }
+.opt[aria-pressed="true"] .k{ background:var(--accent); border-color:var(--accent); color:#fff; }
+.opt.right{ border-color:var(--good); box-shadow:inset 0 0 0 1px var(--good); }
+.opt.wrong{ border-color:var(--bad); box-shadow:inset 0 0 0 1px var(--bad); }
+.conf{ display:flex; gap:8px; margin-top:12px; flex-wrap:wrap; align-items:center; }
+.conf button{ border:1px solid var(--line); background:var(--card); border-radius:999px; padding:7px 13px; font-size:13px; font-weight:600; cursor:pointer; }
+.conf button[aria-pressed="true"]{ background:var(--ink); color:var(--card); border-color:var(--ink); }
+.conf .need{ font-size:12px; color:var(--warn); font-weight:600; }
+.qgrid{ display:grid; grid-template-columns:repeat(auto-fill,minmax(30px,1fr)); gap:4px; }
+.qgrid button{ height:30px; border-radius:6px; border:1px solid var(--line); background:var(--card); font-size:11px; cursor:pointer; padding:0; }
+.qgrid button.a{ background:color-mix(in srgb,var(--accent) 18%,var(--card)); border-color:transparent; }
+.qgrid button.p{ background:color-mix(in srgb,var(--warn) 22%,var(--card)); }
+.qgrid button.cur{ outline:2px solid var(--ink); }
+.sticky-foot{ position:sticky; bottom:0; background:var(--bg); padding:10px 0; border-top:1px solid var(--line); display:flex; gap:8px; align-items:center; flex-wrap:wrap; z-index:2; }
+@media (max-width:760px){ .sticky-foot{ bottom:58px; } }
+
+.expl{ font-size:14px; border-top:1px solid var(--line); margin-top:12px; padding-top:10px; }
+.expl .src{ font-size:12px; color:var(--muted); }
+.supp{ font-size:12px; color:var(--muted); font-style:italic; }
+.flag{ border-left:3px solid var(--warn); padding:6px 10px; background:color-mix(in srgb,var(--warn) 9%,transparent); border-radius:0 8px 8px 0; font-size:13px; margin:8px 0; }
+
+/* learn */
+.stage{ display:flex; gap:6px; margin:10px 0 16px; flex-wrap:wrap; }
+.stage span{ font-size:12px; font-weight:600; padding:4px 10px; border-radius:999px; background:var(--soft); color:var(--muted); }
+.stage span.on{ background:var(--ink); color:var(--card); }
+.stage span.ok{ color:var(--good); }
+.lesson h2{ font-size:20px; }
+.big-answer{ font-size:22px; font-weight:700; letter-spacing:-.3px; margin:6px 0 12px; }
+.controls{ display:flex; gap:8px; flex-wrap:wrap; margin-top:14px; }
+.panel{ background:var(--soft); border-radius:10px; padding:12px 14px; margin-top:12px; font-size:14px; }
+.seqline{ display:flex; flex-wrap:wrap; gap:6px; }
+.seqline span{ padding:4px 10px; border-radius:999px; border:1px solid var(--line); font-size:13px; }
+.seqline span.hl{ background:var(--ink); color:var(--card); border-color:var(--ink); }
+
+/* flashcards */
+.flash{ perspective:1200px; margin:6px auto 14px; max-width:560px; }
+.flash .face{ min-height:210px; border-radius:16px; border:1px solid var(--line); background:var(--card); padding:22px; display:flex; flex-direction:column; justify-content:center; gap:8px; text-align:center; }
+.flash.back .face{ background:linear-gradient(var(--card),var(--card)) padding-box, var(--grad) border-box; border:2px solid transparent; }
+.flash .face .big{ font-size:20px; font-weight:700; }
+.chips{ display:flex; flex-wrap:wrap; gap:8px; }
+.chip{ border:1px solid var(--line); background:var(--card); border-radius:10px; padding:9px 12px; cursor:pointer; font-size:14px; text-align:left; }
+.chip.sel{ border-color:var(--accent); box-shadow:inset 0 0 0 1px var(--accent); }
+.chip.done{ opacity:.45; cursor:default; border-style:dashed; }
+.chip.shake{ animation:shake .35s; border-color:var(--bad); }
+@keyframes shake{ 25%{transform:translateX(-5px)} 75%{transform:translateX(5px)} }
+.match{ display:grid; grid-template-columns:1fr 1fr; gap:10px; }
+
+/* score ring */
+.ring-score{ --p:0; width:120px; height:120px; border-radius:50%; background:conic-gradient(var(--accent) calc(var(--p)*1%), var(--soft) 0); display:grid; place-items:center; flex:none; }
+.ring-score > div{ width:96px; height:96px; border-radius:50%; background:var(--card); display:grid; place-items:center; text-align:center; }
+.ring-score b{ font-size:26px; display:block; line-height:1; }
+
+/* celebration */
+.celebrate{ position:fixed; inset:0; pointer-events:none; z-index:50; overflow:hidden; }
+.celebrate .target{ position:absolute; left:50%; top:16%; transform:translateX(-50%); }
+.celebrate .ball{ position:absolute; font-size:44px; animation-duration:1.1s; animation-timing-function:cubic-bezier(.3,.6,.4,1); animation-fill-mode:forwards; }
+.celebrate.big .ball{ font-size:64px; }
+.celebrate .label{ position:absolute; left:50%; top:42%; transform:translate(-50%,-50%) scale(.4); font-weight:900; font-size:40px; letter-spacing:-1px; background:var(--grad); -webkit-background-clip:text; background-clip:text; color:transparent; animation:pop 1.3s .45s forwards; opacity:0; white-space:nowrap; filter:drop-shadow(0 2px 6px rgba(0,0,0,.18)); }
+.celebrate.big .label{ font-size:52px; }
+@keyframes pop{ 0%{opacity:0;transform:translate(-50%,-50%) scale(.4)} 30%{opacity:1;transform:translate(-50%,-50%) scale(1.12)} 75%{opacity:1;transform:translate(-50%,-50%) scale(1)} 100%{opacity:0;transform:translate(-50%,-60%) scale(1)} }
+.hoop{ width:76px; height:14px; border:5px solid #FF7A00; border-radius:50%; position:relative; }
+.hoop::after{ content:""; position:absolute; left:6px; right:6px; top:8px; height:34px; background:repeating-linear-gradient(60deg,transparent 0 6px,rgba(140,140,140,.7) 6px 7px),repeating-linear-gradient(-60deg,transparent 0 6px,rgba(140,140,140,.7) 6px 7px); clip-path:polygon(0 0,100% 0,80% 100%,20% 100%); }
+.netline{ width:180px; height:46px; border-top:4px solid var(--ink); background:repeating-linear-gradient(90deg,transparent 0 8px,var(--line) 8px 9px); opacity:.85; }
+.goal{ width:150px; height:76px; border:5px solid var(--ink); border-bottom:none; background:repeating-linear-gradient(45deg,transparent 0 7px,var(--line) 7px 8px),repeating-linear-gradient(-45deg,transparent 0 7px,var(--line) 7px 8px); }
+.uprights{ width:110px; height:90px; border-left:6px solid #F2B13C; border-right:6px solid #F2B13C; border-bottom:6px solid #F2B13C; position:relative; }
+.uprights::after{ content:""; position:absolute; left:50%; top:100%; width:6px; height:40px; background:#F2B13C; transform:translateX(-50%); }
+.endzone{ width:220px; height:60px; background:repeating-linear-gradient(90deg,#2E7D32 0 22px,#3E9442 22px 44px); border-radius:6px; display:grid; place-items:center; color:#fff; font-weight:900; letter-spacing:3px; }
+.pocket{ width:52px; height:52px; border-radius:50%; background:#111; box-shadow:0 0 0 9px #6B3E1F; }
+.emoji-target{ font-size:56px; }
+@keyframes arc{ 0%{left:12%;top:78%;transform:scale(.7) rotate(0)} 55%{left:46%;top:6%;transform:scale(1.1) rotate(220deg)} 100%{left:calc(50% - 22px);top:17%;transform:scale(.55) rotate(330deg);opacity:0} }
+@keyframes longarc{ 0%{left:2%;top:86%;transform:scale(.6)} 50%{left:38%;top:0%;transform:scale(1.15) rotate(260deg)} 100%{left:calc(50% - 22px);top:17%;transform:scale(.5) rotate(380deg);opacity:0} }
+@keyframes drop{ 0%{left:calc(50% - 22px);top:-10%;transform:scale(1.2)} 70%{left:calc(50% - 22px);top:16%;transform:scale(1)} 100%{left:calc(50% - 22px);top:30%;transform:scale(.6);opacity:0} }
+@keyframes line{ 0%{left:-8%;top:62%;transform:scale(.8) rotate(0)} 100%{left:calc(50% - 22px);top:19%;transform:scale(.7) rotate(540deg);opacity:.2} }
+@keyframes zig{ 0%{left:6%;top:70%} 25%{left:30%;top:30%} 50%{left:22%;top:55%} 75%{left:44%;top:22%} 100%{left:calc(50% - 22px);top:18%;opacity:.2} }
+@keyframes spike{ 0%{left:20%;top:0%;transform:scale(1.2)} 100%{left:calc(50% - 22px);top:30%;transform:scale(.8) rotate(400deg);opacity:.2} }
+@keyframes roll{ 0%{left:-8%;top:24%;transform:rotate(0)} 100%{left:calc(50% - 22px);top:19%;transform:rotate(720deg);opacity:.3} }
+@keyframes homer{ 0%{left:45%;top:85%;transform:scale(.6)} 100%{left:85%;top:-12%;transform:scale(1.3) rotate(720deg);opacity:0} }
+.confetti{ position:absolute; width:8px; height:12px; top:-20px; border-radius:2px; animation:fall 1.6s ease-in forwards; }
+@keyframes fall{ to{ transform:translateY(110vh) rotate(720deg); } }
+canvas#fw{ position:fixed; inset:0; width:100%; height:100%; pointer-events:none; z-index:49; }
+.victory{ text-align:center; border:2px solid var(--good); }
+@media (prefers-reduced-motion: reduce){ .celebrate .ball,.confetti{ animation-duration:.01s !important; } .celebrate .label{ animation-duration:1.4s; } }
+.toast{ position:fixed; left:50%; bottom:24px; transform:translateX(-50%); background:var(--ink); color:var(--card); padding:9px 16px; border-radius:999px; font-size:13px; z-index:60; }
+@media (max-width:760px){ .toast{ bottom:84px; } }
+.drop{ border:2px dashed var(--line); border-radius:12px; padding:22px; text-align:center; }
+details summary{ cursor:pointer; font-weight:600; }
+.kbd{ font-size:11px; border:1px solid var(--line); border-radius:4px; padding:0 5px; color:var(--muted); }
+</style></head>
+<body><div id="app"></div>
+<script>
+// ===== SOURCE: the 100 entries actually present in the uploaded PDF (pages 2–19 of 19) =====
+// [entry#, page, term, definition] — verbatim from the PDF text layer.
+const RAW = [
+[1,2,"Name Noah's sons","Shem, Ham and Japheth (Genesis 10:1-11:9)"],
+[2,2,"What major event happened in the book of Joshua?","conquest of the land of Canaan"],
+[3,2,"Three elements of the cultural mandate","work, marriage, sabbath"],
+[4,2,"Seed of the woman bruising the head of the serpent","Gen 3"],
+[5,3,"Name the sons of Abraham","Ishmael (with Hagar); Isaac (with Sarah); Zimran, Jokshan, Medan, Midian, Ishbak, Shuah (with Keturah)"],
+[6,3,"mother of Isaac","Sarah"],
+[7,3,"mother of Jacob","Rebekah"],
+[8,3,"Where are the blessings and curses of the covenant located?","Deut 28"],
+[9,3,"Where is the renewal of the covenant at Shechem located?","Joshua 23-24"],
+[10,4,"list the judges of Israel","Othniel, Ehud, Shamgar, Deborah, Gideon, Tola, Jair, Jephthah, Ibzan, Elon, Abdon, and Samson"],
+[11,4,"Where is the Song of Deborah located?","Judges 5"],
+[12,4,"T/F: Naomi is an ancestor of David's from Moab","true"],
+[13,4,"Kings of united monarchy","Saul, David, Solomon"],
+[14,4,"Asa king of","Judah"],
+[15,5,"2 samuel 7","God's covenant with David"],
+[16,5,"The first king of the southern kingdom of Judah.","Rehoboam"],
+[17,5,"first king of the northern kingdom","Jeroboam"],
+[18,5,"Jezebel's husband","Ahab"],
+[19,5,"where did elijah meet the prophets of Baal","Mount Carmel"],
+[20,5,"what year did the northern kingdom fall to the assyrians","722 bce"],
+[21,5,"what king of judah was wicked","manasseh"],
+[22,6,"\"Jacob I have loved by Esau I have hated\"","Rom 9, Mal 1"],
+[23,6,"prophecy of the new covenant","Jeremiah 31"],
+[24,6,"the burning bush","Ex 3"],
+[25,6,"Ten commandments are where?","Ex 20 and Deut 5"],
+[26,6,"What is the theme of Leviticus?","Holiness—of God and man, i.e. man must revere God in \"holiness.\""],
+[27,7,"Sinai to Moab where","Numbers"],
+[28,7,"Where is the account of Rahab and the spies?","Joshua 2"],
+[29,7,"Prophecy of the dry bones","Ezekiel 37"],
+[30,7,"Which prophet focuses on rebuilding the temple?","Haggai and Zechariah"],
+[31,7,"Which prophetic book is significantly different from the others?","Jonah"],
+[32,8,"Which prophetic book teaches the resurrection of the righteous and unrighteous?","Daniel"],
+[33,8,"What king in Judah instituted a series of reforms in 620 BC?","Josiah"],
+[34,8,"where are the songs of the suffering servant found?","Isaiah 52-53"],
+[35,8,"role of an OT prophet","preacher of God's law"],
+[36,8,"Minor prophets","Hosea, Joel, Amos, Obadiah, Jonah, Micah, Nahum, Habakkuk, Zephaniah, Haggai, Zechariah, and Malachi."],
+[37,8,"how majestic is your name bible verse","Psalm 8"],
+[38,8,"account of the 12 spies","numbers 13"],
+[39,9,"joshua chapter(s) tell the story of the crossing of the jordan","3"],
+[40,9,"the lord says to my lord","Psalm 110"],
+[41,9,"Job's three comforters","Eliphaz, Bildad and Zophar"],
+[42,9,"T/F Job received twice of all he had before","True"],
+[43,9,"preacher's conclusion end of eccl","fear God and keep his commandments"],
+[44,10,"sermon on the mount","Matt 5-7"],
+[45,10,"Synoptics where the parable of the sower is found.","Matthew 13; Mark 4; Luke 8"],
+[46,10,"Synoptics where the Olivet discourse is found.","Matthew 24; Mark 13; Luke 21"],
+[47,10,"Synoptics where Jesus is praying in the Garden of Gethsemane.","Matthew 26; Mark 14; Luke 22"],
+[48,10,"birth narratives with dreams","Matthew"],
+[49,10,"prologue of John","light, life, and word (not way)"],
+[50,10,"wedding at cana","John 2"],
+[51,11,"conversation with Nicodemus","John 3"],
+[52,11,"For I am not ashamed of the gospel, for it is the power of God for salvation to everyone who believes, to the Jew first and also to the Greek.","Romans 1:16"],
+[53,11,"Oh, the depth of the riches and wisdom and knowledge of God! How unsearchable are his judgments and how inscrutable his ways!","Romans 11:33"],
+[54,11,"samaritan woman conversation","John 4"],
+[55,11,"high priestly prayer","John 17"],
+[56,11,"appointment of deacons","Acts 6"],
+[57,11,"conversion of Saul","Acts 9"],
+[58,12,"Paul's areopagus address","Acts 17"],
+[59,12,"Christ emptying himself of divine perogatives","Phil 2"],
+[60,12,"Cite a verse on which the ordo salutis is partly based.","Romans 8:29-30"],
+[61,12,"phil 2 doctrine","Christology"],
+[62,12,"Eph 4:1-7 aspect of the church","unity"],
+[63,12,"onesimus master","Philemon"],
+[64,13,"hidden with christ in god","Col 3:3"],
+[65,13,"for me to live is christ to die is gain","Philippians 1:21"],
+[66,13,"colossians fullness of deity","2:9"],
+[67,13,"1 Peter addresses elders","5"],
+[68,13,"1 peter wives unbelieving husbands","3"],
+[69,13,"now faith is the substance","Heb 11:1"],
+[70,13,"1 john 4:10 teaches what doctrine","propitiation"],
+[71,14,"John confidence in god's forgiveness","1:9"],
+[72,14,"which millenial position interprets rev 20 as occuring during the historical development fo the church","amillenialism"],
+[73,14,"pastoral letters theme","church order"],
+[74,14,"\"in the heavenlies\"","Eph 1"],
+[75,14,"1000 year reign of Christ","rev 20"],
+[76,14,"Where does Peter speak of the church as a \"holy nation, a royal priesthood, etc...\"","1 Peter 2:9"],
+[77,14,"T/F 1 John false teachers?","True"],
+[78,15,"In what chapter is the Fall of Man found?","Gen 3 — Man rebelled against God's authority and partook of the tree of knowledge of good and evil."],
+[79,15,"Explain the significance of Genesis 3:15 for redemptive history and its relation to Christ.","Enmity between the serpent's offspring and the woman's… Christ's victory over Satan is promised here."],
+[80,15,"Explain the Noahic covenant and where it is found.","Gen 9 — A covenant of nature… never again a flood to destroy all flesh. The rainbow… was the sign. A \"royal grant.\""],
+[81,15,"Which of his sons did Noah curse?","Ham (Gen. 9:24)"],
+[82,15,"Why did Noah curse one of his sons?","Because Ham saw the nakedness of his father (Gen. 9:22)"],
+[83,15,"Who was the father of the Canaanites?","Ham (Gen. 9:22)"],
+[84,16,"Explain the Table of Nations and where it is found.","Gen 10 — An account of the descendants of Noah by his three sons… Shem, Ham, and Japheth."],
+[85,16,"In what chapter is the Tower of Babel found?","Gen 11"],
+[86,16,"In what chapters of the Bible is \"patriarchal history\" found?","Genesis 12-50"],
+[87,16,"What chapters of the Bible tell the story of Abraham?","Genesis 12-25"],
+[88,16,"What three chapters of the Bible contain the Abrahamic covenant?","Genesis 12, 15, & 17"],
+[89,16,"In what chapter of the Bible is the destruction of Sodom located?","Genesis 19"],
+[90,16,"In what chapter of the Bible is the testing of Abraham found?","Genesis 22"],
+[91,17,"What is the significance of Genesis 22:14?","\"The Lord will Provide\"… During the Israelite monarchy the phrase referred to the temple mount in Jerusalem."],
+[92,17,"In what chapter of the Bible does Joseph reveal his identity to his brothers?","Genesis 45"],
+[93,17,"In what books of the Bible are the Exodus and Conquest found?","Exodus, Leviticus, Deuteronomy, and Joshua"],
+[94,17,"What are the three main divisions found in the book of Exodus?","Divine redemption (1-18); Covenant at Sinai (19-24); Divine worship (25-40)"],
+[95,17,"In what chapters of the Bible are the plagues on Egypt found?","Exodus 7-11"],
+[96,18,"What are the ten plagues on Egypt?","Blood, Frogs, Gnats, Flies, Livestock, Boils, Hail, Locusts, Darkness, Firstborn"],
+[97,18,"In what chapters of the Bible is the Book of the Covenant found and what is this Book?","Ex 20-23 — the code of laws given to Moses at Mount Sinai immediately after the Ten Commandments."],
+[98,18,"Explain the significance of Exodus 34:6-7 and give cross references throughout the Old Testament.","The Lord's proclamation of His name… frequently recalled elsewhere in the OT (Nu 14:18; Ps 86:15; Joel 2:13; Jonah 4:2)"],
+[99,19,"Where does Leviticus say \"You shall therefore be holy, for I am holy.\"","Leviticus 11:45, 19:2, 20:26"],
+[100,19,"What are the two provisions God makes for His people in the wilderness?","1) Manna 2) Water"],
+];
+const SOURCE_STATED_TOTAL = 344;
+
+// Review flags. "exclude" = never auto-tested until reviewed; "note" = tested, with a caution shown.
+const FLAGS = {
+  12:{level:"exclude", msg:"Ruth, not Naomi, was David's Moabite ancestor (Ruth 1:4; 4:13–22). Naomi was from Bethlehem in Judah."},
+  81:{level:"exclude", msg:"Genesis 9:25 names Canaan, Ham's son, as the one cursed — not Ham."},
+  93:{level:"exclude", msg:"Leaves out Numbers, which narrates the journey from Sinai to Moab (see entry 27)."},
+  82:{level:"note", msg:"The card assumes Noah cursed Ham. Only the fact itself (what Ham did, Gen 9:22) is tested."},
+  9:{level:"note", msg:"Joshua 23 is Joshua's farewell; the ceremony at Shechem itself is Joshua 24."},
+  33:{level:"note", msg:"Josiah's reform is usually dated 622/621 BC; the card's 620 BC is approximate."},
+  42:{level:"note", msg:"Job's possessions were doubled (42:10, 12); he received the same number of children (42:13)."},
+  100:{level:"note", msg:"Scripture also records quail (Ex 16; Num 11). The card names manna and water."},
+  35:{level:"note", msg:"An interpretive summary from the card, not a direct biblical statement."},
+};
+// Overlapping entries (same fact or same passage tested by more than one card).
+const OVERLAPS = [
+  {entries:[4,78,79], why:"All point to Genesis 3."},
+  {entries:[80,81,82,83], why:"All from Genesis 9."},
+  {entries:[25,97], why:"Ten Commandments (Ex 20) sit at the head of the Book of the Covenant (Ex 20–23)."},
+  {entries:[59,61], why:"Both about Philippians 2."},
+  {entries:[95,96], why:"Both about the plagues."},
+  {entries:[86,87,88,89,90], why:"Nested ranges inside Genesis 12–50."},
+  {entries:[36], why:"Minor Prophets list also overlaps the canonical-order curriculum."},
+];
+
+const SECTIONS = {
+  PENT:{name:"Pentateuch", t:"OT", day:1}, HIST:{name:"Historical Books", t:"OT", day:2},
+  WIS:{name:"Wisdom & Poetry", t:"OT", day:2}, MAJ:{name:"Major Prophets", t:"OT", day:2},
+  MIN:{name:"Minor Prophets", t:"OT", day:2}, GOS:{name:"Gospels", t:"NT", day:3},
+  ACTS:{name:"Acts", t:"NT", day:3}, PAUL:{name:"Pauline Epistles", t:"NT", day:4},
+  GEN:{name:"General Epistles", t:"NT", day:4}, REV:{name:"Revelation", t:"NT", day:4},
+};
+const KINDS = {loc:"Chapter & verse locations", people:"People & families", chron:"Kings & chronology", theme:"Book themes & structure", doctrine:"Doctrine & theology", list:"Lists & sequences", canon:"Canonical order"};
+
+// Topic lessons (Learn stage). Text written for this app = supplemental explanation, not source.
+const TOPICS = {
+ T1:{name:"Genesis 1–11: creation to Babel", sec:"PENT",
+   intro:"Genesis 1–11 is primeval history: creation, fall, flood, nations, and Babel. Exam questions here are mostly about which chapter holds which event.",
+   context:"The chapters run as a chain: creation ordinances (1–2), the fall and first gospel promise (3), the flood (6–8), God's covenant with Noah (9), the nations descended from Noah's sons (10), and Babel (11). Chapter 11 then narrows to Shem's line, which leads to Abram in chapter 12.",
+   confuse:"Genesis 9 vs 10 vs 11: covenant with Noah → table of nations → tower. The cards also mix up Ham and Canaan: Ham saw Noah's nakedness, but Genesis 9:25 curses Canaan.",
+   trick:"3-9-10-11 = Fall, rainbow, family tree, tower. Think: “Fall at 3, rainbow at 9, then the tree (10) grew a tower (11).”",
+   exam:"Expect chapter-location questions with neighboring chapters as distractors, and the elements of the cultural mandate."},
+ T2:{name:"Genesis patriarchs: key chapters", sec:"PENT",
+   intro:"Genesis 12–50 is patriarchal history. Abraham fills 12–25; Joseph's story closes the book. A handful of chapters are high-value exam targets.",
+   context:"God's covenant with Abraham appears in 12 (call and promise), 15 (covenant ceremony), and 17 (circumcision, name change). Sodom falls in 19, right after Abraham's intercession in 18. Abraham is tested with Isaac in 22, where he names the place “The LORD will provide.” Joseph reveals himself to his brothers in 45, after the silver-cup test in 44.",
+   confuse:"18 (intercession) vs 19 (destruction). 44 (Benjamin's sack) vs 45 (the reveal). Abraham's story (12–25) vs all patriarchal history (12–50).",
+   trick:"Covenant 12-15-17 counts up like a combination lock. 19 = Sodom's fire; 22 = two people go up the mountain (Abraham and Isaac); 45 = Joseph is “forty-five and finally alive” to his brothers.",
+   exam:"The chapter numbers 12, 15, 17, 19, 22, 45 and the ranges 12–25 and 12–50."},
+ T3:{name:"Genesis families", sec:"PENT",
+   intro:"Who is whose mother and son is a reliable source of multiple-choice traps.",
+   context:"Abraham had Ishmael by Hagar, Isaac by Sarah, and six sons by Keturah (Zimran, Jokshan, Medan, Midian, Ishbak, Shuah). Isaac married Rebekah, who bore Jacob and Esau.",
+   confuse:"Keturah is the most common wrong answer for Isaac's mother. Rebekah (Jacob's mother) is often confused with Rachel (Jacob's wife).",
+   trick:"S-I, R-J: Sarah → Isaac, Rebekah → Jacob, alphabetical pairs. Keturah's sons include Midian, ancestor of the Midianites.",
+   exam:"Mothers of Isaac and Jacob; which son came from which wife."},
+ T4:{name:"Exodus: redemption, Sinai, worship", sec:"PENT",
+   intro:"Exodus divides into three movements and contains several famous chapters: the burning bush, the plagues, the Ten Commandments, and the LORD's self-description in chapter 34.",
+   context:"Divine redemption (1–18) includes the call at the bush (3) and the plagues (7–11). The covenant at Sinai (19–24) contains the Ten Commandments (20) and the Book of the Covenant (20–23). Divine worship (25–40) centers on the tabernacle. In 34:6–7 the LORD proclaims His name — compassionate, gracious, slow to anger — and that formula echoes through the Old Testament.",
+   confuse:"Ten plagues order, especially hail-locusts-darkness. Exodus 3 (bush) vs Exodus 20 (law). The Book of the Covenant (Ex 20–23) vs the Holiness Code (Lev 17–26).",
+   trick:"Plagues: “Blood Frogs Gnats Flew Live Boiling Hail, Locusts Darkened First” — or in threes: blood/frogs/gnats, flies/livestock/boils, hail/locusts/darkness, then firstborn. Exodus 34:6–7 echoes: “Numbers, Psalms, Joel, Jonah.”",
+   exam:"Plague order, chapter ranges, the outline divisions, and where 34:6–7 is echoed."},
+ T5:{name:"Leviticus, Numbers, Deuteronomy", sec:"PENT",
+   intro:"Three books with one big idea each: Leviticus is holiness, Numbers is the journey from Sinai to Moab, Deuteronomy is the covenant renewed.",
+   context:"Leviticus repeats “Be holy, for I am holy” (11:45; 19:2; 20:26). Numbers 13 sends twelve spies into Canaan. Deuteronomy 5 repeats the Ten Commandments, and chapter 28 lays out the covenant's blessings and curses.",
+   confuse:"Deuteronomy 28 (blessings and curses) vs Deuteronomy 5 (Decalogue repeated). Numbers 13 (spies sent) vs Numbers 14 (rebellion that follows).",
+   trick:"Lev = “Live holy.” Num = “Numbers of miles” from Sinai to Moab. Deut 28: “Twenty-eight ways it can go right or wrong.”",
+   exam:"Book themes and these specific chapter locations."},
+ T6:{name:"Joshua & Judges", sec:"HIST",
+   intro:"Joshua is conquest; Judges is the cycle of deliverers. Exam questions favor chapter numbers and the list of judges.",
+   context:"Rahab hides the spies (Josh 2), Israel crosses the Jordan (3), and Joshua's farewell and covenant renewal close the book (23–24, the ceremony at Shechem in 24). Judges lists twelve judges, from Othniel to Samson; Deborah's victory is told in prose (4) and in song (5).",
+   confuse:"Judges 4 vs 5 (story vs song). The minor judges Tola, Jair, Ibzan, Elon, Abdon are easy to mix with kings.",
+   trick:"Joshua: 2 spies → 3 crossing. Judges: “Othniel Opens, Samson Shuts.”",
+   exam:"Chapter numbers in Joshua, the Song of Deborah, first and last judges."},
+ T7:{name:"Kings: united & divided monarchy", sec:"HIST",
+   intro:"Know the three kings of the united monarchy, the first king of each divided kingdom, and which kings belong to Judah (south) vs Israel (north).",
+   context:"Saul, David, and Solomon ruled the united kingdom; God's covenant with David is 2 Samuel 7. After Solomon, Rehoboam ruled Judah in the south and Jeroboam ruled Israel in the north. Ahab, Jezebel's husband, ruled the north; Elijah faced Baal's prophets on Mount Carmel. The north fell to Assyria in 722 BC. In Judah, Asa and Josiah were reformers (Josiah around 620 BC) and Manasseh was notoriously wicked.",
+   confuse:"Rehoboam (south) vs Jeroboam (north). Josiah's reform (c. 620) vs Hezekiah's earlier reform. Mount Carmel (Baal contest) vs Horeb (where Elijah fled).",
+   trick:"Rehoboam is Royal line of David — south. Jeroboam Jumped ship — north. 722: “seven-two-two, Israel's through.”",
+   exam:"North vs south kings, 722 BC, and 2 Samuel 7."},
+ T8:{name:"Wisdom & Psalms", sec:"WIS",
+   intro:"Wisdom books are usually tested on people, conclusions, and a few famous psalms.",
+   context:"Job's three comforters are Eliphaz, Bildad, and Zophar; a fourth speaker, Elihu, appears later. At the end the LORD gives Job twice as much as he had. Ecclesiastes concludes, “Fear God and keep His commandments.” Psalm 8 opens and closes with “how majestic is Your name,” and Psalm 110 begins “The LORD says to my Lord.”",
+   confuse:"Elihu is not one of the three comforters. Psalm 110 vs Psalm 2 (both royal and messianic).",
+   trick:"Comforters: “Eli, Bill, and Zo.” Psalm 8 = majesty; Psalm 110 = “one-ten, My Lord's right hand.”",
+   exam:"Comforters' names, Ecclesiastes' conclusion, Psalms 8 and 110."},
+ T9:{name:"Major Prophets", sec:"MAJ",
+   intro:"Each Major Prophet has one or two chapters every exam expects you to know.",
+   context:"Isaiah 52–53 contains the great Suffering Servant song. Jeremiah 31 promises the new covenant. Ezekiel 37 is the valley of dry bones. Daniel teaches the resurrection of both the righteous and the unrighteous (Dan 12:2). The cards summarize the prophet's role as a preacher of God's law.",
+   confuse:"Ezekiel 36 (new heart) vs 37 (dry bones). Jeremiah 31 (new covenant) vs 29 (letter to exiles).",
+   trick:"Isaiah 53 — the cross. Jeremiah 31 — the last day of the month before something new. Ezekiel 37 — the bones rattle right after the new heart of 36.",
+   exam:"Chapter locations and which prophet teaches what."},
+ T10:{name:"Minor Prophets", sec:"MIN",
+   intro:"Twelve short books, often tested on order and on one theme each.",
+   context:"Order: Hosea, Joel, Amos, Obadiah, Jonah, Micah, Nahum, Habakkuk, Zephaniah, Haggai, Zechariah, Malachi. Haggai and Zechariah urged the returned exiles to rebuild the temple. Jonah is unlike the others because it is mostly narrative about the prophet. Malachi 1 (“Jacob I loved, but Esau I hated”) is quoted in Romans 9.",
+   confuse:"Nahum and Habakkuk order; Haggai before Zechariah; Micah right after Jonah.",
+   trick:"“Hosea Joel Amos — Obadiah Jonah Micah — Nahum Habakkuk Zephaniah — Haggai Zechariah Malachi.” Chant in four triplets. Last three are post-exile: “HZM — Home, Zion, Messenger.”",
+   exam:"First and last minor prophet, neighbors in the order, and themes."},
+ T11:{name:"Matthew & the Synoptic parallels", sec:"GOS",
+   intro:"Synoptic parallels are pure memorization, and they appear on the exam as triples.",
+   context:"Sermon on the Mount: Matthew 5–7. Parable of the sower: Matthew 13, Mark 4, Luke 8. Olivet Discourse: Matthew 24, Mark 13, Luke 21. Gethsemane: Matthew 26, Mark 14, Luke 22. Matthew's birth narrative is the one with revelatory dreams (to Joseph and the magi).",
+   confuse:"Off-by-one triples. Olivet (24/13/21) and Gethsemane (26/14/22) sit close together.",
+   trick:"Sower 13-4-8. Olivet 24-13-21. Gethsemane 26-14-22: from Olivet, add 2, add 1, add 1.",
+   exam:"Distractors shift one number in the triple. Learn each triple as a unit."},
+ T12:{name:"John", sec:"GOS",
+   intro:"John's early chapters run in a neat sequence of encounters.",
+   context:"The prologue (John 1) centers on light, life, and Word. Then: Cana wedding (2), Nicodemus (3), Samaritan woman (4). Jesus' high priestly prayer is John 17.",
+   confuse:"The prologue's terms are light, life, and Word — “way” belongs to John 14:6, not the prologue.",
+   trick:"2-3-4: Wine, Wind (born of the Spirit), Well. 17 = the High Priestly Prayer.",
+   exam:"Chapters 2, 3, 4, 17 and the prologue's key words."},
+ T13:{name:"Acts", sec:"ACTS",
+   intro:"Three Acts chapters are on the cards.",
+   context:"Deacons are appointed in Acts 6. Saul is converted on the Damascus road in Acts 9. Paul addresses the Areopagus in Athens in Acts 17.",
+   confuse:"Acts 7 (Stephen's speech) vs 6 (deacons chosen). Acts 9 (conversion) vs 22 and 26 (Paul retelling it).",
+   trick:"6 servants, 9 Damascus light, 17 Athens: “six serve, nine sees, seventeen speaks.”",
+   exam:"Chapter locations."},
+ T14:{name:"Romans", sec:"PAUL",
+   intro:"Romans is tested by famous verses.",
+   context:"Romans 1:16 — not ashamed of the gospel. Romans 8:29–30 — the golden chain behind the ordo salutis (foreknew, predestined, called, justified, glorified). Romans 9 quotes Malachi 1. Romans 11:33 — the doxology on the depth of God's riches.",
+   confuse:"Romans 11:33 vs Ephesians 3:18 (breadth, length, height, depth).",
+   trick:"1:16 → gospel power; 8:29–30 → five-link chain; 11:33 → “Oh, the depth!” closes chapters 9–11.",
+   exam:"Matching quotes to references."},
+ T15:{name:"Ephesians, Philippians, Colossians, Philemon", sec:"PAUL",
+   intro:"Prison letters: verse references and one doctrine per passage.",
+   context:"Ephesians 1 blesses us “in the heavenly places”; Ephesians 4:1–7 calls for the church's unity. Philippians 1:21 — to live is Christ, to die is gain; Philippians 2 — Christ emptying Himself, a key Christology text. Colossians 2:9 — the fullness of deity dwells bodily; 3:3 — your life is hidden with Christ in God. Philemon is Onesimus's master.",
+   confuse:"Colossians 1:19 is close to 2:9 in wording; the card is 2:9. Archippus and Tychicus appear near Philemon and Onesimus but are not Onesimus's master.",
+   trick:"Phil 1:21 = “21 and I'm living for Christ.” Col 3:3 = “three-three, hidden in Thee.”",
+   exam:"Verse references and the doctrine of Philippians 2."},
+ T16:{name:"Pastorals, Hebrews & General Epistles", sec:"GEN",
+   intro:"Chapter and verse locations for Hebrews, 1 Peter, and 1 John, plus the theme of the Pastorals.",
+   context:"Pastoral letters (1–2 Timothy, Titus) focus on church order. Hebrews 11:1 defines faith. 1 Peter 2:9 calls the church a royal priesthood and holy nation; chapter 3 addresses wives of unbelieving husbands; chapter 5 addresses elders. 1 John 1:9 — confess and be forgiven; 4:10 — Christ the propitiation; the letter also confronts false teachers.",
+   confuse:"1 Peter 2:9 vs Exodus 19:6, which Peter is quoting. 1 John 1:9 vs 2:1 (Jesus our advocate).",
+   trick:"1 Peter in order: 2 priesthood, 3 wives, 5 elders. 1 John 1:9 = “one-nine, sins resign.”",
+   exam:"Exact chapters in 1 Peter and 1 John; Hebrews 11:1."},
+ T17:{name:"Revelation & the millennium", sec:"REV",
+   intro:"Revelation 20 and its interpretation.",
+   context:"Revelation 20 describes the thousand-year reign of Christ. Amillennialism reads it as describing the present age of the church, between Christ's first and second comings.",
+   confuse:"Premillennial views place the thousand years after Christ's return.",
+   trick:"“A-mill = Already now.”",
+   exam:"Rev 20 and the amillennial position."},
+};
+
+// ===== FACTS (testable units derived from entries). e = entry #, p = PDF page.
+// k kind; q question; a answer; d distractors (≥3); r refs for overlap checking [book, start, end]
+// ev short event label (allows reverse questions); n supplemental note; m memory hook; g overlap group; alt second formulation
+const FACTS = [
+ // ---------- Pentateuch ----------
+ {id:"f001",e:1,b:"Genesis",s:"PENT",t:"T1",k:"people",q:"Who were the three sons of Noah?",a:"Shem, Ham, and Japheth",d:["Shem, Ham, and Canaan","Shem, Japheth, and Eber","Ham, Japheth, and Cush","Shem, Ham, and Enoch"],n:"Genesis 10 traces the nations descended from these three.",m:"S-H-J: “She Hears Jesus.”",
+   alt:{q:"Canaan, Cush, and Eber are all descendants of Noah. Which list gives Noah's own three sons?",a:"Shem, Ham, and Japheth",d:["Shem, Canaan, and Japheth","Ham, Cush, and Eber","Japheth, Eber, and Shem","Ham, Shem, and Cush"]}},
+ {id:"f003",e:3,b:"Genesis",s:"PENT",t:"T1",k:"theme",q:"Which three elements make up the cultural mandate?",a:"Work, marriage, and Sabbath",d:["Work, worship, and government","Marriage, family, and dominion","Sabbath, sacrifice, and tithe","Work, rest, and covenant"],n:"These creation ordinances come from Genesis 1–2, before the fall.",m:"W-M-S: “We Make Saturday” — work, marriage, Sabbath."},
+ {id:"f004",e:4,b:"Genesis",s:"PENT",t:"T1",k:"loc",q:"Where is the promise that the seed of the woman will bruise the serpent's head?",a:"Genesis 3",d:["Genesis 2","Genesis 4","Genesis 9","Genesis 12"],r:[["Genesis",3,3]],ev:"The seed of the woman promised to crush the serpent",g:"gen3",n:"Genesis 3:15 comes right after the fall, in the same chapter.",m:"Fall and promise share chapter 3."},
+ {id:"f078",e:78,b:"Genesis",s:"PENT",t:"T1",k:"loc",q:"In what chapter is the fall of man found?",a:"Genesis 3",d:["Genesis 2","Genesis 4","Genesis 6","Genesis 11"],r:[["Genesis",3,3]],ev:"The fall of man",g:"gen3",n:"Man rebelled against God's authority and ate from the tree of the knowledge of good and evil.",m:"“3 = Tree.”"},
+ {id:"f079",e:79,b:"Genesis",s:"PENT",t:"T1",k:"doctrine",q:"Why is Genesis 3:15 significant for redemptive history?",a:"It first promises Christ's victory over Satan",d:["It institutes the Sabbath ordinance","It records the first sacrifice for sin","It promises the land to Abraham's offspring","It establishes the rainbow as a covenant sign"],n:"Often called the protoevangelium, the “first gospel.”",m:"3:15 = first gospel: the heel is struck, the head is crushed."},
+ {id:"f080",e:80,b:"Genesis",s:"PENT",t:"T1",k:"loc",q:"Where is the Noahic covenant, with the rainbow as its sign, found?",a:"Genesis 9",d:["Genesis 7","Genesis 11","Genesis 12","Genesis 15"],r:[["Genesis",9,9]],ev:"God's covenant with Noah and the rainbow sign",g:"gen9",n:"A covenant of nature: never again a flood to destroy all flesh. The card calls it a “royal grant.”",m:"Nine looks like a raindrop under a rainbow."},
+ {id:"f082",e:82,b:"Genesis",s:"PENT",t:"T1",k:"people",q:"According to Genesis 9:22, what did Ham do after the flood?",a:"He saw his father's nakedness and told his brothers",d:["He built an altar to a foreign god","He refused to leave the ark","He mocked Noah while the ark was being built","He took his brother's birthright"],g:"gen9",n:"Shem and Japheth covered their father. Genesis 9:25 then curses Canaan, Ham's son.",m:"Ham saw; Canaan cursed."},
+ {id:"f083",e:83,b:"Genesis",s:"PENT",t:"T1",k:"people",q:"Who was the father of Canaan, ancestor of the Canaanites?",a:"Ham",d:["Shem","Japheth","Cush","Eber"],g:"gen9",n:"Genesis 9:22 calls him “Ham, the father of Canaan.”",m:"Ham → Canaan."},
+ {id:"f084",e:84,b:"Genesis",s:"PENT",t:"T1",k:"loc",q:"Where is the Table of Nations (descendants of Shem, Ham, and Japheth) found?",a:"Genesis 10",d:["Genesis 5","Genesis 11","Genesis 25","Genesis 36"],r:[["Genesis",10,10]],ev:"The Table of Nations",n:"Genesis 5 is the line from Adam to Noah; Genesis 10 spreads Noah's family into nations.",m:"10 = the tree of nations."},
+ {id:"f085",e:85,b:"Genesis",s:"PENT",t:"T1",k:"loc",q:"In what chapter is the Tower of Babel found?",a:"Genesis 11",d:["Genesis 9","Genesis 10","Genesis 6","Genesis 12"],r:[["Genesis",11,11]],ev:"The Tower of Babel",n:"After Babel, chapter 11 narrows to Shem's line and introduces Abram.",m:"11 looks like two towers."},
+ {id:"f086",e:86,b:"Genesis",s:"PENT",t:"T2",k:"loc",q:"In which chapters is patriarchal history found?",a:"Genesis 12–50",d:["Genesis 1–11","Genesis 12–25","Genesis 25–36","Genesis 37–50"],r:[["Genesis",12,50]],n:"Abraham (12–25), Isaac and Jacob (25–36), Joseph (37–50).",m:"Primeval 1–11, patriarchs 12–50."},
+ {id:"f087",e:87,b:"Genesis",s:"PENT",t:"T2",k:"loc",q:"Which chapters tell the story of Abraham?",a:"Genesis 12–25",d:["Genesis 11–20","Genesis 12–22","Genesis 25–36","Genesis 15–24"],r:[["Genesis",12,25]],n:"Abraham dies in Genesis 25.",m:"Abraham's story is 12 to 25 — a dozen to a quarter-century."},
+ {id:"f088",e:88,b:"Genesis",s:"PENT",t:"T2",k:"loc",q:"Which three chapters contain the Abrahamic covenant?",a:"Genesis 12, 15, and 17",d:["Genesis 9, 15, and 17","Genesis 12, 14, and 18","Genesis 13, 16, and 18","Genesis 12, 19, and 21"],r:[["Genesis",12,12],["Genesis",15,15],["Genesis",17,17]],n:"12 promise; 15 covenant ceremony between the pieces; 17 circumcision and new name.",m:"12-15-17: a combination lock."},
+ {id:"f089",e:89,b:"Genesis",s:"PENT",t:"T2",k:"loc",q:"In which chapter is Sodom destroyed?",a:"Genesis 19",d:["Genesis 18","Genesis 14","Genesis 13","Genesis 20"],r:[["Genesis",19,19]],ev:"The destruction of Sodom",dn:{"Genesis 18":"Genesis 18 is Abraham's intercession for Sodom, the chapter before.","Genesis 13":"Genesis 13 is where Lot chooses the Jordan valley near Sodom.","Genesis 14":"Genesis 14 is Abram's rescue of Lot and the meeting with Melchizedek."},n:"Abraham pleads for Sodom in 18; the city falls in 19.",m:"18 pleads, 19 burns."},
+ {id:"f090",e:90,b:"Genesis",s:"PENT",t:"T2",k:"loc",q:"In which chapter is Abraham tested with Isaac?",a:"Genesis 22",d:["Genesis 21","Genesis 20","Genesis 24","Genesis 15"],r:[["Genesis",22,22]],ev:"Abraham tested with the sacrifice of Isaac",dn:{"Genesis 21":"Genesis 21 is Isaac's birth.","Genesis 24":"Genesis 24 is finding a wife for Isaac."},n:"Isaac is born in 21; the test comes in 22.",m:"22 = two going up the mountain."},
+ {id:"f091",e:91,b:"Genesis",s:"PENT",t:"T2",k:"theme",q:"In Genesis 22:14 Abraham names the place “The LORD will provide.” During the monarchy, the saying came to refer to what?",a:"The temple mount in Jerusalem",d:["Mount Sinai","Mount Carmel","Bethel","Mount Gerizim"],n:"“On the mount of the LORD it shall be provided.”",m:"Moriah → temple mount (see 2 Chr 3:1)."},
+ {id:"f092",e:92,b:"Genesis",s:"PENT",t:"T2",k:"loc",q:"In which chapter does Joseph reveal his identity to his brothers?",a:"Genesis 45",d:["Genesis 42","Genesis 43","Genesis 44","Genesis 50"],r:[["Genesis",45,45]],ev:"Joseph reveals himself to his brothers",dn:{"Genesis 44":"Genesis 44 is the silver cup in Benjamin's sack, just before the reveal.","Genesis 50":"Genesis 50 is Jacob's burial and “you meant evil… God meant it for good.”"},n:"The silver-cup test (44) leads straight into the reveal (45).",m:"44 tests, 45 reveals."},
+ {id:"f005a",e:5,b:"Genesis",s:"PENT",t:"T3",k:"people",q:"Which son did Abraham have with Hagar?",a:"Ishmael",d:["Isaac","Midian","Esau","Zimran"],n:"Isaac was Sarah's son; Zimran and Midian were Keturah's.",m:"Hagar → Ishmael, the son of the slave woman (Gal 4:22)."},
+ {id:"f005b",e:5,b:"Genesis",s:"PENT",t:"T3",k:"people",q:"Which of these was a son of Abraham by Keturah?",a:"Midian",d:["Ishmael","Isaac","Esau","Laban"],n:"Keturah's sons: Zimran, Jokshan, Medan, Midian, Ishbak, Shuah.",m:"Keturah's Kids include the Midianites."},
+ {id:"f006",e:6,b:"Genesis",s:"PENT",t:"T3",k:"people",q:"Who was the mother of Isaac?",a:"Sarah",d:["Keturah","Hagar","Rebekah","Leah"],n:"Keturah was Abraham's later wife; Rebekah was Isaac's wife.",m:"Sarah laughed — Isaac means “he laughs.”"},
+ {id:"f007",e:7,b:"Genesis",s:"PENT",t:"T3",k:"people",q:"Who was the mother of Jacob?",a:"Rebekah",d:["Rachel","Sarah","Leah","Keturah"],n:"Rachel and Leah were Jacob's wives.",m:"Rebekah → Jacob and Esau, the twins."},
+ {id:"f024",e:24,b:"Exodus",s:"PENT",t:"T4",k:"loc",q:"Where is the burning bush?",a:"Exodus 3",d:["Exodus 2","Exodus 6","Exodus 14","Exodus 19"],r:[["Exodus",3,4]],ev:"Moses at the burning bush",dn:{"Exodus 14":"Exodus 14 is crossing the Red Sea.","Exodus 19":"Exodus 19 is arrival at Sinai."},n:"God reveals His name, “I AM WHO I AM” (3:14).",m:"3 = “I AM” — three words in “I AM WHO.”"},
+ {id:"f025",e:25,b:"Exodus",s:"PENT",t:"T4",k:"loc",q:"Where are the Ten Commandments?",a:"Exodus 20 and Deuteronomy 5",d:["Exodus 19 and Deuteronomy 6","Exodus 21 and Deuteronomy 4","Exodus 24 and Deuteronomy 12","Exodus 20 and Deuteronomy 6"],r:[["Exodus",20,20],["Deuteronomy",5,5]],ev:"The Ten Commandments",dn:{"Exodus 20 and Deuteronomy 6":"Deuteronomy 6 is the Shema, right after the commandments are repeated in chapter 5."},n:"Deuteronomy 5 repeats the Decalogue for the new generation.",m:"20/5: “Twenty fingers and toes, five on a hand.”"},
+ {id:"f094a",e:94,b:"Exodus",s:"PENT",t:"T4",k:"theme",q:"Which outline matches the three main divisions of Exodus?",a:"Redemption (1–18), covenant at Sinai (19–24), worship (25–40)",d:["Redemption (1–12), covenant at Sinai (13–24), worship (25–40)","Redemption (1–18), covenant at Sinai (19–31), worship (32–40)","Redemption (1–20), covenant at Sinai (21–30), worship (31–40)","Redemption (1–15), covenant at Sinai (16–24), worship (25–40)"],n:"Arrival at Sinai is chapter 19; tabernacle instructions begin in 25.",m:"18-24-40: “out, up, in” — out of Egypt, up the mountain, into worship."},
+ {id:"f094b",e:94,b:"Exodus",s:"PENT",t:"T4",k:"theme",q:"In the card's outline of Exodus, chapters 25–40 focus on:",a:"Divine worship",d:["Divine redemption","The covenant at Sinai","Wilderness complaints","Preparing for conquest"],n:"Mostly the tabernacle: instructions (25–31) and construction (35–40).",m:"25–40 = the tent of meeting."},
+ {id:"f095",e:95,b:"Exodus",s:"PENT",t:"T4",k:"loc",q:"In which chapters are the plagues on Egypt found?",a:"Exodus 7–11",d:["Exodus 3–6","Exodus 4–8","Exodus 13–15","Exodus 15–18"],r:[["Exodus",7,11]],ev:"The plagues on Egypt",n:"The tenth plague strikes on Passover night in chapter 12.",m:"7–11: plagues run from lucky 7 to a 9-1-1 emergency."},
+ {id:"f096a",e:96,b:"Exodus",s:"PENT",t:"T4",k:"list",q:"Which plague came immediately before the death of the firstborn?",a:"Darkness",d:["Locusts","Hail","Boils","Blood"],g:"plagues",n:"Hail (7), locusts (8), darkness (9), firstborn (10).",m:"Lights out, then death."},
+ {id:"f096b",e:96,b:"Exodus",s:"PENT",t:"T4",k:"list",q:"What was the first plague on Egypt?",a:"Water turned to blood",d:["Frogs","Gnats","Darkness","Hail"],g:"plagues",n:"Blood, frogs, gnats open the sequence.",m:"Begin with Blood."},
+ {id:"f096c",e:96,b:"Exodus",s:"PENT",t:"T4",k:"list",q:"Which plague was third?",a:"Gnats",d:["Flies","Frogs","Boils","Livestock"],g:"plagues",n:"Blood, frogs, gnats, flies…",m:"B-F-G: alphabetical start."},
+ {id:"f096d",e:96,b:"Exodus",s:"PENT",t:"T4",k:"list",q:"Which sequence of plagues is in the correct order?",a:"Hail, locusts, darkness",d:["Locusts, hail, darkness","Flies, gnats, livestock","Boils, livestock, hail","Darkness, locusts, firstborn"],g:"plagues",n:"Plagues 7, 8, 9.",m:"Sky falls (hail), sky fills (locusts), sky fails (darkness)."},
+ {id:"f097",e:97,b:"Exodus",s:"PENT",t:"T4",k:"loc",q:"Where is the Book of the Covenant, the law code given right after the Ten Commandments?",a:"Exodus 20–23",d:["Exodus 12–13","Exodus 25–31","Leviticus 17–26","Deuteronomy 12–26"],r:[["Exodus",20,23]],ev:"The Book of the Covenant",dn:{"Leviticus 17–26":"Leviticus 17–26 is usually called the Holiness Code.","Exodus 25–31":"Exodus 25–31 is the tabernacle instructions.","Deuteronomy 12–26":"Deuteronomy 12–26 is the Deuteronomic law code."},n:"Named in Exodus 24:7, when Moses reads it to the people.",m:"20 to 23: right after the Ten."},
+ {id:"f098a",e:98,b:"Exodus",s:"PENT",t:"T4",k:"loc",q:"Where does the LORD proclaim Himself “compassionate and gracious, slow to anger, abounding in steadfast love”?",a:"Exodus 34",d:["Exodus 3","Exodus 15","Exodus 20","Exodus 24"],r:[["Exodus",34,34]],ev:"The LORD proclaims His name to Moses (“compassionate and gracious”)",g:"ex34",n:"Verses 6–7, when the covenant is renewed after the golden calf.",m:"34:6–7 — after the calf, mercy."},
+ {id:"f098b",e:98,b:"Exodus",s:"PENT",t:"T4",k:"theme",q:"Exodus 34:6–7 is echoed in which set of Old Testament passages?",a:"Num 14:18; Ps 86:15; Joel 2:13; Jonah 4:2",d:["Gen 12:3; Ps 23:1; Isa 53:5; Mic 6:8","Deut 6:4; Ps 1:1; Jer 31:31; Hab 2:4","Lev 19:2; Ps 110:1; Ezek 37:1; Zech 9:9","Num 6:24; Ps 51:1; Isa 40:1; Mal 3:6"],g:"ex34",n:"The formula became Israel's classic confession of God's character.",m:"“Numbers, Psalms, Joel, Jonah” — Jonah quotes it while complaining."},
+ {id:"f100",e:100,b:"Exodus",s:"PENT",t:"T4",k:"theme",q:"According to the card, what two provisions did God make for His people in the wilderness?",a:"Manna and water",d:["Oil and wine","Grain and new wine","Gold and silver","Milk and honey"],n:"Bread from heaven and water from the rock.",m:"Bread and drink."},
+ {id:"f026",e:26,b:"Leviticus",s:"PENT",t:"T5",k:"theme",q:"What is the theme of Leviticus?",a:"Holiness",d:["Deliverance from Egypt","Testing in the wilderness","Covenant renewal before entering the land","Conquest of Canaan"],n:"God is holy, and His people must revere Him in holiness.",m:"Leviticus = Live holy."},
+ {id:"f099",e:99,b:"Leviticus",s:"PENT",t:"T5",k:"loc",q:"Where does Leviticus say, “You shall be holy, for I am holy”?",a:"Leviticus 11:45; 19:2; 20:26",d:["Leviticus 1:4; 16:30; 23:3","Leviticus 6:13; 17:11; 25:10","Leviticus 8:12; 18:5; 26:12","Leviticus 2:13; 14:7; 24:20"],r:[["Leviticus",11,11],["Leviticus",19,20]],n:"Peter quotes it in 1 Peter 1:16.",m:"11-19-20: “holy, holy, holy” three times."},
+ {id:"f027",e:27,b:"Numbers",s:"PENT",t:"T5",k:"theme",q:"Which book traces Israel's journey from Sinai to the plains of Moab?",a:"Numbers",d:["Exodus","Leviticus","Deuteronomy","Joshua"],n:"Deuteronomy is spoken on the plains of Moab once the journey is over.",m:"Numbers = the miles."},
+ {id:"f038",e:38,b:"Numbers",s:"PENT",t:"T5",k:"loc",q:"Where is the account of the twelve spies sent into Canaan?",a:"Numbers 13",d:["Numbers 11","Numbers 16","Numbers 20","Numbers 22"],r:[["Numbers",13,14]],ev:"Twelve spies sent into Canaan",dn:{"Numbers 16":"Numbers 16 is Korah's rebellion.","Numbers 20":"Numbers 20 is water from the rock at Meribah.","Numbers 22":"Numbers 22 is Balaam."},n:"Chapter 14 tells of the people's rebellion after the report.",m:"Twelve spies in chapter thirteen — one more than the team."},
+ {id:"f008",e:8,b:"Deuteronomy",s:"PENT",t:"T5",k:"loc",q:"Where are the blessings and curses of the covenant located?",a:"Deuteronomy 28",d:["Deuteronomy 6","Deuteronomy 18","Deuteronomy 32","Deuteronomy 10"],r:[["Deuteronomy",27,30]],ev:"The blessings and curses of the covenant",dn:{"Deuteronomy 6":"Deuteronomy 6 is the Shema.","Deuteronomy 18":"Deuteronomy 18 promises a prophet like Moses.","Deuteronomy 32":"Deuteronomy 32 is the Song of Moses."},n:"Leviticus 26 has a parallel list.",m:"28 days in a month of blessings or curses."},
+ // ---------- Historical ----------
+ {id:"f002",e:2,b:"Joshua",s:"HIST",t:"T6",k:"theme",q:"What major event happens in the book of Joshua?",a:"The conquest of Canaan",d:["The exodus from Egypt","The wilderness wanderings","The cycle of the judges","The return from exile"],n:"Joshua leads Israel across the Jordan and into the land.",m:"Joshua = Jordan to Jericho to the land."},
+ {id:"f028",e:28,b:"Joshua",s:"HIST",t:"T6",k:"loc",q:"Where is the account of Rahab and the spies?",a:"Joshua 2",d:["Joshua 1","Joshua 3","Joshua 5","Joshua 7"],r:[["Joshua",2,2],["Joshua",6,6]],ev:"Rahab hides the spies",dn:{"Joshua 7":"Joshua 7 is Achan's sin.","Joshua 5":"Joshua 5 is circumcision at Gilgal and the commander of the LORD's army."},n:"She is spared when Jericho falls in chapter 6.",m:"2 spies in chapter 2."},
+ {id:"f039",e:39,b:"Joshua",s:"HIST",t:"T6",k:"loc",q:"Which chapter of Joshua tells of crossing the Jordan?",a:"Joshua 3",d:["Joshua 1","Joshua 2","Joshua 5","Joshua 6"],r:[["Joshua",3,4]],ev:"Israel crosses the Jordan",dn:{"Joshua 6":"Joshua 6 is the fall of Jericho."},n:"Chapter 4 sets up the memorial stones.",m:"Spies (2), then cross (3)."},
+ {id:"f009",e:9,b:"Joshua",s:"HIST",t:"T6",k:"loc",q:"Where is the renewal of the covenant at Shechem?",a:"Joshua 23–24",d:["Joshua 1–2","Joshua 6–7","Judges 1–2","Joshua 13–14"],r:[["Joshua",23,24]],ev:"Covenant renewal at Shechem",n:"Joshua's farewell (23) and the Shechem ceremony (24) end the book.",m:"The book ends where it renews."},
+ {id:"f010a",e:10,b:"Judges",s:"HIST",t:"T6",k:"list",q:"Who is the first judge listed in Judges?",a:"Othniel",d:["Ehud","Shamgar","Gideon","Deborah"],g:"judges",n:"Othniel, Caleb's relative, delivers Israel in Judges 3.",m:"Othniel Opens."},
+ {id:"f010b",e:10,b:"Judges",s:"HIST",t:"T6",k:"list",q:"Which of these was not one of Israel's judges?",a:"Jehu",d:["Tola","Ibzan","Abdon","Elon","Jair","Shamgar"],g:"judges",n:"Jehu was a king of the northern kingdom.",m:"Judges list: Othniel, Ehud, Shamgar, Deborah, Gideon, Tola, Jair, Jephthah, Ibzan, Elon, Abdon, Samson."},
+ {id:"f010c",e:10,b:"Judges",s:"HIST",t:"T6",k:"list",q:"Which judge comes last in the card's list of Israel's judges?",a:"Samson",d:["Abdon","Jephthah","Gideon","Elon"],g:"judges",n:"Samson's story fills Judges 13–16.",m:"Samson Shuts."},
+ {id:"f011",e:11,b:"Judges",s:"HIST",t:"T6",k:"loc",q:"Where is the Song of Deborah?",a:"Judges 5",d:["Judges 4","Judges 6","Judges 3","Judges 11"],r:[["Judges",5,5]],ev:"The Song of Deborah",dn:{"Judges 4":"Judges 4 is the prose account of Deborah's victory; the song is chapter 5.","Judges 6":"Judges 6 is Gideon's call.","Judges 11":"Judges 11 is Jephthah."},n:"Chapter 4 tells the battle; chapter 5 sings it.",m:"4 tells, 5 sings."},
+ {id:"f013",e:13,b:"1 Samuel",s:"HIST",t:"T7",k:"chron",q:"Who were the kings of the united monarchy?",a:"Saul, David, and Solomon",d:["David, Solomon, and Rehoboam","Saul, Jonathan, and David","Samuel, Saul, and David","David, Solomon, and Jeroboam"],n:"After Solomon the kingdom divided.",m:"Three S-D-S: Saul, David, Solomon."},
+ {id:"f015",e:15,b:"2 Samuel",s:"HIST",t:"T7",k:"loc",q:"Where is God's covenant with David?",a:"2 Samuel 7",d:["1 Samuel 16","2 Samuel 6","2 Samuel 11","1 Kings 8"],r:[["2 Samuel",7,7]],ev:"God's covenant with David",dn:{"1 Samuel 16":"1 Samuel 16 is David's anointing.","2 Samuel 11":"2 Samuel 11 is David and Bathsheba.","2 Samuel 6":"2 Samuel 6 is the ark brought to Jerusalem.","1 Kings 8":"1 Kings 8 is Solomon's temple dedication."},n:"Parallel in 1 Chronicles 17.",m:"7 = the perfect, eternal throne."},
+ {id:"f016",e:16,b:"1 Kings",s:"HIST",t:"T7",k:"chron",q:"Who was the first king of the southern kingdom of Judah?",a:"Rehoboam",d:["Jeroboam","Abijah","Asa","Jehoshaphat"],n:"Solomon's son; the ten northern tribes broke away under him (1 Kings 12).",m:"Rehoboam = Royal line, south."},
+ {id:"f017",e:17,b:"1 Kings",s:"HIST",t:"T7",k:"chron",q:"Who was the first king of the northern kingdom?",a:"Jeroboam",d:["Rehoboam","Omri","Ahab","Baasha"],n:"He set up golden calves at Bethel and Dan.",m:"Jeroboam Jumped north."},
+ {id:"f014",e:14,b:"1 Kings",s:"HIST",t:"T7",k:"chron",q:"Asa was king of:",a:"Judah",d:["Israel (the northern kingdom)","Aram","Moab","Edom"],n:"Asa was a reforming king of Judah (1 Kings 15).",m:"Asa = A Southern king."},
+ {id:"f018",e:18,b:"1 Kings",s:"HIST",t:"T7",k:"people",q:"Who was Jezebel's husband?",a:"Ahab",d:["Ahaziah","Jehu","Omri","Jehoram"],n:"Ahab ruled the northern kingdom; Jehu later had Jezebel killed.",m:"Ahab and Jezebel: the bad couple."},
+ {id:"f019",e:19,b:"1 Kings",s:"HIST",t:"T7",k:"people",q:"Where did Elijah confront the prophets of Baal?",a:"Mount Carmel",d:["Mount Horeb","Mount Gerizim","Mount Tabor","Mount Moriah"],dn:{"Mount Horeb":"Elijah fled to Horeb afterward (1 Kings 19)."},n:"1 Kings 18: fire falls on Elijah's sacrifice.",m:"Carmel = fire like caramelized sugar."},
+ {id:"f020",e:20,b:"2 Kings",s:"HIST",t:"T7",k:"chron",q:"In what year did the northern kingdom fall to Assyria?",a:"722 BC",d:["586 BC","605 BC","931 BC","701 BC"],dn:{"586 BC":"586 BC is the fall of Jerusalem (the south) to Babylon.","931 BC":"931 BC is roughly when the kingdom divided.","701 BC":"701 BC is Sennacherib's siege of Jerusalem."},n:"Samaria fell; the northern tribes were exiled (2 Kings 17).",m:"“Seven-two-two, Israel's through.”"},
+ {id:"f021",e:21,b:"2 Kings",s:"HIST",t:"T7",k:"chron",q:"Which of these kings of Judah is remembered as notoriously wicked?",a:"Manasseh",d:["Josiah","Hezekiah","Asa","Jehoshaphat"],n:"2 Kings 21: he rebuilt the high places and shed innocent blood.",m:"Manasseh made a mess."},
+ {id:"f033",e:33,b:"2 Kings",s:"HIST",t:"T7",k:"chron",q:"Which king of Judah instituted a series of reforms around 620 BC?",a:"Josiah",d:["Hezekiah","Asa","Jehoshaphat","Manasseh"],dn:{"Hezekiah":"Hezekiah's reform came about a century earlier."},n:"Triggered by finding the Book of the Law in the temple (2 Kings 22–23).",m:"Josiah found the scroll."},
+ // ---------- Wisdom ----------
+ {id:"f037",e:37,b:"Psalms",s:"WIS",t:"T8",k:"loc",q:"Which psalm opens, “O LORD, our Lord, how majestic is Your name in all the earth”?",a:"Psalm 8",d:["Psalm 19","Psalm 24","Psalm 46","Psalm 100"],r:[["Psalms",8,8]],ev:"“How majestic is Your name in all the earth”",n:"The same line closes the psalm.",m:"8 = majesty with no end, like the ∞ on its side."},
+ {id:"f040",e:40,b:"Psalms",s:"WIS",t:"T8",k:"loc",q:"Which psalm begins, “The LORD says to my Lord: Sit at My right hand”?",a:"Psalm 110",d:["Psalm 2","Psalm 22","Psalm 45","Psalm 72"],r:[["Psalms",110,110]],ev:"“The LORD says to my Lord”",dn:{"Psalm 2":"Psalm 2 is also royal and messianic (“You are My Son”), but it doesn't begin this way."},n:"The most-quoted psalm in the New Testament.",m:"110 = one Lord seated at the right hand."},
+ {id:"f041",e:41,b:"Job",s:"WIS",t:"T8",k:"people",q:"Who were Job's three comforters?",a:"Eliphaz, Bildad, and Zophar",d:["Eliphaz, Bildad, and Elihu","Bildad, Zophar, and Elihu","Eliphaz, Zophar, and Baruch","Eliphaz, Bildad, and Shuah"],dn:{"Eliphaz, Bildad, and Elihu":"Elihu speaks later (Job 32–37) but is not one of the three comforters."},n:"Elihu is a fourth speaker, not one of the three.",m:"“Eli, Bill, and Zo.”"},
+ {id:"f042",e:42,b:"Job",s:"WIS",t:"T8",k:"theme",q:"At the end of Job, how does the LORD restore Job's fortunes?",a:"He gives Job twice as much as he had before",d:["He restores exactly what Job lost","He gives Job seven times as much as before","He gives Job three times as much as before","He returns half of Job's former possessions"],n:"Job 42:10.",m:"Double back."},
+ {id:"f043",e:43,b:"Ecclesiastes",s:"WIS",t:"T8",k:"theme",q:"What is the Preacher's conclusion at the end of Ecclesiastes?",a:"Fear God and keep His commandments",d:["Eat, drink, and find enjoyment in your toil","Trust in the LORD with all your heart","Seek wisdom above all treasure","Love your neighbor as yourself"],dn:{"Eat, drink, and find enjoyment in your toil":"Ecclesiastes says this along the way (e.g. 2:24), but it is not the book's conclusion."},n:"Ecclesiastes 12:13.",m:"End of the matter: fear and obey."},
+ // ---------- Major Prophets ----------
+ {id:"f023",e:23,b:"Jeremiah",s:"MAJ",t:"T9",k:"loc",q:"Where is the prophecy of the new covenant?",a:"Jeremiah 31",d:["Jeremiah 1","Jeremiah 7","Jeremiah 23","Jeremiah 29"],r:[["Jeremiah",31,31]],ev:"The prophecy of the new covenant",dn:{"Jeremiah 29":"Jeremiah 29 is the letter to the exiles.","Jeremiah 7":"Jeremiah 7 is the temple sermon.","Jeremiah 1":"Jeremiah 1 is the prophet's call."},n:"Quoted at length in Hebrews 8.",m:"Jeremiah 31: like the 31st, the last page before a new month begins."},
+ {id:"f029",e:29,b:"Ezekiel",s:"MAJ",t:"T9",k:"loc",q:"Where is the prophecy of the valley of dry bones?",a:"Ezekiel 37",d:["Ezekiel 36","Ezekiel 34","Ezekiel 40","Ezekiel 47"],r:[["Ezekiel",37,37]],ev:"The valley of dry bones",dn:{"Ezekiel 36":"Ezekiel 36 promises a new heart and spirit, the chapter before.","Ezekiel 34":"Ezekiel 34 is the shepherds chapter.","Ezekiel 47":"Ezekiel 47 is the river flowing from the temple."},n:"Bones come to life by the Spirit.",m:"36 new heart, 37 new life."},
+ {id:"f034",e:34,b:"Isaiah",s:"MAJ",t:"T9",k:"loc",q:"Where is the best-known Suffering Servant song (“He was pierced for our transgressions”)?",a:"Isaiah 52–53",d:["Isaiah 40–41","Isaiah 7–9","Isaiah 60–61","Isaiah 6"],r:[["Isaiah",52,53]],ev:"The Suffering Servant song",dn:{"Isaiah 6":"Isaiah 6 is Isaiah's call vision.","Isaiah 7–9":"Isaiah 7–9 holds the Immanuel and “unto us a child” prophecies.","Isaiah 60–61":"Isaiah 61 is “the Spirit of the Lord is upon me.”"},n:"Runs from 52:13 to 53:12.",m:"53 — the cross."},
+ {id:"f032",e:32,b:"Daniel",s:"MAJ",t:"T9",k:"doctrine",q:"Which prophetic book teaches the resurrection of both the righteous and the unrighteous?",a:"Daniel",d:["Hosea","Zechariah","Joel","Amos"],n:"Daniel 12:2 — some to everlasting life, some to shame.",m:"Daniel 12:2 — two destinies."},
+ {id:"f035",e:35,b:"Isaiah",s:"MAJ",t:"T9",k:"theme",q:"How do the cards summarize the role of an Old Testament prophet?",a:"A preacher of God's law",d:["A temple administrator","A royal scribe","A military deliverer","An interpreter of dreams for kings"],n:"Prophets called Israel back to the covenant.",m:"Prophets prosecute the covenant."},
+ // ---------- Minor Prophets ----------
+ {id:"f022",e:22,b:"Malachi",s:"MIN",t:"T10",k:"loc",q:"Where is “Jacob I loved, but Esau I hated” found?",a:"Romans 9 and Malachi 1",d:["Romans 8 and Malachi 3","Romans 11 and Hosea 11","Galatians 4 and Malachi 2","Romans 9 and Hosea 2"],r:[["Malachi",1,1],["Romans",9,9]],ev:"“Jacob I loved, but Esau I hated”",n:"Paul quotes Malachi 1:2–3 in Romans 9:13.",m:"Malachi's first word, Paul's ninth chapter."},
+ {id:"f030",e:30,b:"Haggai",s:"MIN",t:"T10",k:"theme",q:"Which prophets focus on rebuilding the temple?",a:"Haggai and Zechariah",d:["Micah and Malachi","Zephaniah and Malachi","Joel and Amos","Nahum and Habakkuk"],n:"Both preached to the returned exiles around 520 BC.",m:"H and Z — the builders, side by side in the canon."},
+ {id:"f031",e:31,b:"Jonah",s:"MIN",t:"T10",k:"theme",q:"Which prophetic book is significantly different in form from the others?",a:"Jonah",d:["Obadiah","Nahum","Habakkuk","Haggai"],n:"It is mostly a narrative about the prophet rather than a collection of oracles.",m:"Jonah is the story; the others are sermons."},
+ {id:"f036a",e:36,b:"Hosea",s:"MIN",t:"T10",k:"list",q:"Which book is first among the Minor Prophets?",a:"Hosea",d:["Joel","Amos","Daniel","Obadiah"],g:"minors",n:"Daniel closes the Major Prophets; Hosea opens the Twelve.",m:"Hosea Opens."},
+ {id:"f036b",e:36,b:"Malachi",s:"MIN",t:"T10",k:"list",q:"Which book is last among the Minor Prophets?",a:"Malachi",d:["Zechariah","Haggai","Zephaniah","Habakkuk"],g:"minors",n:"Malachi closes the Old Testament.",m:"Malachi = My Messenger, the last word."},
+ {id:"f036c",e:36,b:"Micah",s:"MIN",t:"T10",k:"list",q:"Which book comes immediately after Jonah among the Minor Prophets?",a:"Micah",d:["Nahum","Obadiah","Habakkuk","Amos"],g:"minors",n:"Obadiah, Jonah, Micah, Nahum.",m:"“Jonah's whale spat out a Micah-phone.”"},
+ {id:"f036d",e:36,b:"Nahum",s:"MIN",t:"T10",k:"list",q:"Which of these is not one of the twelve Minor Prophets?",a:"Lamentations",d:["Obadiah","Nahum","Zephaniah","Habakkuk"],g:"minors",n:"Lamentations follows Jeremiah among the Major Prophets.",m:"Lamentations laments with Jeremiah."},
+ // ---------- Gospels & Acts ----------
+ {id:"f044",e:44,b:"Matthew",s:"GOS",t:"T11",k:"loc",q:"Where is the Sermon on the Mount?",a:"Matthew 5–7",d:["Matthew 4–6","Matthew 10–12","Matthew 13–15","Matthew 5–9"],r:[["Matthew",5,7]],ev:"The Sermon on the Mount",n:"Luke 6 has the related Sermon on the Plain.",m:"5–7: three chapters, one mountain."},
+ {id:"f045",e:45,b:"Matthew",s:"GOS",t:"T11",k:"loc",q:"Where is the parable of the sower in the Synoptics?",a:"Matthew 13; Mark 4; Luke 8",d:["Matthew 12; Mark 4; Luke 8","Matthew 13; Mark 5; Luke 9","Matthew 14; Mark 6; Luke 9","Matthew 13; Mark 3; Luke 7"],r:[["Matthew",13,13],["Mark",4,4],["Luke",8,8]],ev:"The parable of the sower",n:"Matthew 13 gathers seven kingdom parables.",m:"Sower 13-4-8."},
+ {id:"f046",e:46,b:"Matthew",s:"GOS",t:"T11",k:"loc",q:"Where is the Olivet Discourse in the Synoptics?",a:"Matthew 24; Mark 13; Luke 21",d:["Matthew 23; Mark 13; Luke 21","Matthew 24; Mark 12; Luke 20","Matthew 25; Mark 14; Luke 22","Matthew 24; Mark 11; Luke 19"],r:[["Matthew",24,25],["Mark",13,13],["Luke",21,21]],ev:"The Olivet Discourse",n:"Jesus speaks of the temple's destruction and His coming, from the Mount of Olives.",m:"Olivet 24-13-21."},
+ {id:"f047",e:47,b:"Matthew",s:"GOS",t:"T11",k:"loc",q:"Where is Jesus' prayer in Gethsemane in the Synoptics?",a:"Matthew 26; Mark 14; Luke 22",d:["Matthew 26; Mark 15; Luke 23","Matthew 27; Mark 14; Luke 22","Matthew 25; Mark 13; Luke 21","Matthew 26; Mark 14; Luke 21"],r:[["Matthew",26,26],["Mark",14,14],["Luke",22,22]],ev:"Jesus praying in Gethsemane",n:"The chapter numbers sit just after the Olivet Discourse.",m:"From Olivet, add 2, 1, 1: 26-14-22."},
+ {id:"f048",e:48,b:"Matthew",s:"GOS",t:"T11",k:"theme",q:"Which Gospel's birth narrative features revelatory dreams?",a:"Matthew",d:["Luke","Mark","John"],n:"Joseph is warned in dreams, as are the magi.",m:"Matthew's Joseph dreams, like Genesis' Joseph."},
+ {id:"f049",e:49,b:"John",s:"GOS",t:"T12",k:"theme",q:"Which three terms are central to the prologue of John?",a:"Light, life, and Word",d:["Way, truth, and life","Light, way, and Word","Grace, peace, and love","Spirit, water, and blood"],dn:{"Way, truth, and life":"That's John 14:6, not the prologue.","Spirit, water, and blood":"That's 1 John 5:8."},n:"The card stresses “not way.”",m:"John 1: Word, life, light — no way."},
+ {id:"f050",e:50,b:"John",s:"GOS",t:"T12",k:"loc",q:"Where is the wedding at Cana?",a:"John 2",d:["John 1","John 3","John 4","John 6"],r:[["John",2,2]],ev:"The wedding at Cana",n:"Jesus' first sign: water into wine.",m:"2-3-4: Wine, Wind, Well."},
+ {id:"f051",e:51,b:"John",s:"GOS",t:"T12",k:"loc",q:"Where is Jesus' conversation with Nicodemus?",a:"John 3",d:["John 2","John 4","John 5","John 8"],r:[["John",3,3]],ev:"Jesus' conversation with Nicodemus",n:"“You must be born again.”",m:"Wind blows where it wishes — chapter 3."},
+ {id:"f054",e:54,b:"John",s:"GOS",t:"T12",k:"loc",q:"Where is Jesus' conversation with the Samaritan woman?",a:"John 4",d:["John 3","John 5","John 6","John 8"],r:[["John",4,4]],ev:"Jesus and the Samaritan woman",n:"At Jacob's well: living water.",m:"Well = 4."},
+ {id:"f055",e:55,b:"John",s:"GOS",t:"T12",k:"loc",q:"Where is Jesus' high priestly prayer?",a:"John 17",d:["John 14","John 15","John 16","John 18"],r:[["John",17,17]],ev:"Jesus' high priestly prayer",n:"Ends the upper room discourse (13–17).",m:"17 = the prayer before the arrest in 18."},
+ {id:"f056",e:56,b:"Acts",s:"ACTS",t:"T13",k:"loc",q:"Where is the appointment of the deacons?",a:"Acts 6",d:["Acts 2","Acts 4","Acts 7","Acts 13"],r:[["Acts",6,6]],ev:"The appointment of the seven (deacons)",dn:{"Acts 7":"Acts 7 is Stephen's speech and martyrdom.","Acts 2":"Acts 2 is Pentecost.","Acts 13":"Acts 13 is the start of the first missionary journey."},n:"Stephen is among the seven.",m:"Six serve."},
+ {id:"f057",e:57,b:"Acts",s:"ACTS",t:"T13",k:"loc",q:"Where is the conversion of Saul?",a:"Acts 9",d:["Acts 7","Acts 8","Acts 11","Acts 13"],r:[["Acts",9,9],["Acts",22,22],["Acts",26,26]],ev:"The conversion of Saul",dn:{"Acts 8":"Acts 8 is Philip and the Ethiopian.","Acts 7":"Acts 7 is Stephen's martyrdom, where Saul first appears."},n:"Paul retells it in Acts 22 and 26.",m:"Nine sees the light."},
+ {id:"f058",e:58,b:"Acts",s:"ACTS",t:"T13",k:"loc",q:"Where is Paul's Areopagus address?",a:"Acts 17",d:["Acts 14","Acts 16","Acts 18","Acts 19"],r:[["Acts",17,17]],ev:"Paul's address at the Areopagus",dn:{"Acts 16":"Acts 16 is Philippi (Lydia, the jailer).","Acts 19":"Acts 19 is Ephesus.","Acts 18":"Acts 18 is Corinth."},n:"In Athens: “To an unknown god.”",m:"Seventeen speaks."},
+ // ---------- Pauline ----------
+ {id:"f052",e:52,b:"Romans",s:"PAUL",t:"T14",k:"loc",q:"Where is “I am not ashamed of the gospel, for it is the power of God for salvation”?",a:"Romans 1:16",d:["Romans 5:1","1 Corinthians 1:18","2 Timothy 1:8","Romans 10:9"],r:[["Romans",1,1]],ev:"“I am not ashamed of the gospel”",n:"The theme verse of Romans.",m:"1:16 — the gospel's front door."},
+ {id:"f053",e:53,b:"Romans",s:"PAUL",t:"T14",k:"loc",q:"Where is “Oh, the depth of the riches and wisdom and knowledge of God!”?",a:"Romans 11:33",d:["Romans 8:28","Ephesians 3:18","Romans 9:20","Isaiah 55:8"],r:[["Romans",11,11]],ev:"“Oh, the depth of the riches and wisdom and knowledge of God!”",dn:{"Ephesians 3:18":"Ephesians 3:18 speaks of breadth, length, height, and depth of Christ's love."},n:"The doxology closing Romans 9–11.",m:"After 9–11, praise."},
+ {id:"f060",e:60,b:"Romans",s:"PAUL",t:"T14",k:"doctrine",q:"Which passage is a basis for the ordo salutis?",a:"Romans 8:29–30",d:["Romans 5:1–2","Romans 3:23–24","Romans 12:1–2","Romans 6:3–4"],r:[["Romans",8,8]],n:"Foreknew, predestined, called, justified, glorified.",m:"Five links: F-P-C-J-G."},
+ {id:"f059",e:59,b:"Philippians",s:"PAUL",t:"T15",k:"loc",q:"Where is Christ described as emptying Himself?",a:"Philippians 2",d:["Colossians 1","Hebrews 1","John 1","Philippians 3"],r:[["Philippians",2,2]],ev:"Christ empties Himself, taking the form of a servant",g:"phil2",n:"The card's wording: emptying Himself of divine prerogatives (Phil 2:7).",m:"Two — He came down to us."},
+ {id:"f061",e:61,b:"Philippians",s:"PAUL",t:"T15",k:"doctrine",q:"Philippians 2 is a key text for which doctrine?",a:"Christology",d:["Ecclesiology","Eschatology","Pneumatology","Bibliology"],g:"phil2",n:"The person and work of Christ.",m:"Phil 2 = Christ."},
+ {id:"f065",e:65,b:"Philippians",s:"PAUL",t:"T15",k:"loc",q:"Where is “For to me to live is Christ, and to die is gain”?",a:"Philippians 1:21",d:["Philippians 3:8","Galatians 2:20","2 Corinthians 5:8","Philippians 4:13"],r:[["Philippians",1,1]],ev:"“To live is Christ, and to die is gain”",n:"Written from prison.",m:"Twenty-one and living for Christ."},
+ {id:"f062",e:62,b:"Ephesians",s:"PAUL",t:"T15",k:"doctrine",q:"Ephesians 4:1–7 emphasizes which aspect of the church?",a:"Unity",d:["Holiness","Catholicity","Apostolicity","Discipline"],n:"“One body and one Spirit… one Lord, one faith, one baptism.”",m:"Eph 4 — “one” seven times."},
+ {id:"f074",e:74,b:"Ephesians",s:"PAUL",t:"T15",k:"loc",q:"Being blessed “with every spiritual blessing in the heavenly places” is found in:",a:"Ephesians 1",d:["Colossians 1","Philippians 3","Galatians 3","Romans 8"],r:[["Ephesians",1,6]],ev:"Every spiritual blessing “in the heavenly places”",n:"The phrase recurs in Ephesians (2:6; 3:10; 6:12).",m:"Eph 1 opens in heaven."},
+ {id:"f064",e:64,b:"Colossians",s:"PAUL",t:"T15",k:"loc",q:"Where is “your life is hidden with Christ in God”?",a:"Colossians 3:3",d:["Colossians 1:27","Colossians 2:12","Philippians 3:20","Galatians 2:20"],r:[["Colossians",3,3]],ev:"“Your life is hidden with Christ in God”",n:"Set your minds on things above.",m:"Three-three, hidden in Thee."},
+ {id:"f066",e:66,b:"Colossians",s:"PAUL",t:"T15",k:"loc",q:"Where does Colossians say the whole fullness of deity dwells bodily in Christ?",a:"Colossians 2:9",d:["Colossians 1:15","Colossians 2:3","Colossians 3:1","Colossians 2:15"],r:[["Colossians",2,2]],ev:"The whole fullness of deity dwells bodily in Christ",n:"Compare 1:19, which is similar; the card is 2:9.",m:"2:9 — fullness, fine."},
+ {id:"f063",e:63,b:"Philemon",s:"PAUL",t:"T15",k:"people",q:"Who was Onesimus's master?",a:"Philemon",d:["Archippus","Tychicus","Epaphras","Aristarchus"],dn:{"Archippus":"Archippus is greeted in Philemon 2.","Tychicus":"Tychicus traveled with Onesimus (Col 4:7–9)."},n:"Paul sends Onesimus back as a brother.",m:"The letter is named for the master."},
+ // ---------- General epistles & Revelation ----------
+ {id:"f073",e:73,b:"1 Timothy",s:"PAUL",t:"T16",k:"theme",q:"What is the dominant theme of the Pastoral Epistles?",a:"Church order",d:["Justification by faith","Christ's superiority to angels","The return of Christ","Freedom from the law"],n:"1–2 Timothy and Titus: elders, deacons, sound doctrine.",m:"Pastors → order the church."},
+ {id:"f069",e:69,b:"Hebrews",s:"GEN",t:"T16",k:"loc",q:"Where is “Now faith is the substance (assurance) of things hoped for”?",a:"Hebrews 11:1",d:["Hebrews 12:1","Hebrews 11:6","Romans 10:17","James 2:17"],r:[["Hebrews",11,11]],ev:"“Faith is the substance of things hoped for”",dn:{"Hebrews 11:6":"Hebrews 11:6 says without faith it is impossible to please God."},n:"Opens the hall of faith.",m:"11:1 — faith's definition comes first."},
+ {id:"f076",e:76,b:"1 Peter",s:"GEN",t:"T16",k:"loc",q:"Where does Peter call the church “a chosen race, a royal priesthood, a holy nation”?",a:"1 Peter 2:9",d:["1 Peter 1:16","1 Peter 4:10","Revelation 1:6","2 Peter 1:4"],r:[["1 Peter",2,2]],ev:"The church as a royal priesthood and holy nation",n:"Peter echoes Exodus 19:6.",m:"2:9 — royal line."},
+ {id:"f068",e:68,b:"1 Peter",s:"GEN",t:"T16",k:"loc",q:"Which chapter of 1 Peter addresses wives with unbelieving husbands?",a:"1 Peter 3",d:["1 Peter 1","1 Peter 2","1 Peter 4","1 Peter 5"],r:[["1 Peter",3,3]],ev:"Instructions to wives with unbelieving husbands",n:"Won without a word by their conduct.",m:"2 priests, 3 wives, 5 elders."},
+ {id:"f067",e:67,b:"1 Peter",s:"GEN",t:"T16",k:"loc",q:"Which chapter of 1 Peter addresses elders?",a:"1 Peter 5",d:["1 Peter 1","1 Peter 2","1 Peter 3","1 Peter 4"],r:[["1 Peter",5,5]],ev:"Peter's charge to the elders",n:"“Shepherd the flock of God.”",m:"5 = the last word to shepherds."},
+ {id:"f071",e:71,b:"1 John",s:"GEN",t:"T16",k:"loc",q:"Where does John give confidence in God's forgiveness: “If we confess our sins, He is faithful and just to forgive”?",a:"1 John 1:9",d:["1 John 2:1","1 John 3:9","1 John 4:18","1 John 5:13"],r:[["1 John",1,1]],ev:"“If we confess our sins, He is faithful and just to forgive us”",dn:{"1 John 2:1":"1 John 2:1 calls Jesus our advocate.","1 John 5:13":"1 John 5:13 is about knowing you have eternal life."},n:"Card answer: 1:9.",m:"One-nine, sins resign."},
+ {id:"f070",e:70,b:"1 John",s:"GEN",t:"T16",k:"doctrine",q:"First John 4:10 teaches which doctrine?",a:"Propitiation",d:["Regeneration","Adoption","Sanctification","Perseverance"],n:"He sent His Son to be the propitiation for our sins.",m:"4:10 — love sent a sacrifice."},
+ {id:"f077",e:77,b:"1 John",s:"GEN",t:"T16",k:"theme",q:"Which letter warns believers about false teachers who deny that Jesus came in the flesh?",a:"1 John",d:["Philemon","James","1 Thessalonians"],n:"See 1 John 2:18–22; 4:1–3.",m:"Test the spirits — 1 John 4."},
+ {id:"f072",e:72,b:"Revelation",s:"REV",t:"T17",k:"doctrine",q:"Which millennial position reads Revelation 20 as describing the present age of the church?",a:"Amillennialism",d:["Historic premillennialism","Dispensational premillennialism","Chiliasm (a future earthly thousand-year reign)"],n:"The thousand years symbolize the time between Christ's two comings.",m:"A-mill = Already now."},
+ {id:"f075",e:75,b:"Revelation",s:"REV",t:"T17",k:"loc",q:"Where is the thousand-year reign of Christ described?",a:"Revelation 20",d:["Revelation 19","Revelation 21","Revelation 12","Revelation 7"],r:[["Revelation",20,20]],ev:"The thousand-year reign of Christ",dn:{"Revelation 21":"Revelation 21 is the new heaven and new earth.","Revelation 19":"Revelation 19 is the rider on the white horse."},n:"Satan bound; saints reign with Christ.",m:"Rev 20 — the thousand years, just before the new creation in 21."},
+];
+
+// ===== CANONICAL ORDER (authorized addition, tracked separately from source facts) =====
+const CANON = {
+ OT:[["Pentateuch",["Genesis","Exodus","Leviticus","Numbers","Deuteronomy"]],
+     ["Historical Books",["Joshua","Judges","Ruth","1 Samuel","2 Samuel","1 Kings","2 Kings","1 Chronicles","2 Chronicles","Ezra","Nehemiah","Esther"]],
+     ["Wisdom & Poetry",["Job","Psalms","Proverbs","Ecclesiastes","Song of Solomon"]],
+     ["Major Prophets",["Isaiah","Jeremiah","Lamentations","Ezekiel","Daniel"]],
+     ["Minor Prophets",["Hosea","Joel","Amos","Obadiah","Jonah","Micah","Nahum","Habakkuk","Zephaniah","Haggai","Zechariah","Malachi"]]],
+ NT:[["Gospels",["Matthew","Mark","Luke","John"]],["History",["Acts"]],
+     ["Pauline Epistles",["Romans","1 Corinthians","2 Corinthians","Galatians","Ephesians","Philippians","Colossians","1 Thessalonians","2 Thessalonians","1 Timothy","2 Timothy","Titus","Philemon"]],
+     ["General Epistles",["Hebrews","James","1 Peter","2 Peter","1 John","2 John","3 John","Jude"]],
+     ["Apocalyptic",["Revelation"]]],
+};
+// Which canon groups are taught on which lesson day
+const CANON_DAYS = {1:["Pentateuch","Historical Books"],2:["Historical Books","Wisdom & Poetry","Major Prophets","Minor Prophets"],3:["Gospels","History","Pauline Epistles"],4:["Pauline Epistles","General Epistles","Apocalyptic"],5:null};
+const CANON_TRICKS = {
+ "Pentateuch":"“Get Every Little Nugget Down” — Genesis, Exodus, Leviticus, Numbers, Deuteronomy.",
+ "Historical Books":"Conquest (Joshua, Judges, Ruth) → kingdom in pairs (1–2 Samuel, 1–2 Kings, 1–2 Chronicles) → return (Ezra, Nehemiah, Esther).",
+ "Wisdom & Poetry":"“Job Prays, Proverbs Echo Songs” — Job, Psalms, Proverbs, Ecclesiastes, Song of Solomon.",
+ "Major Prophets":"“I Just Love Every Day” — Isaiah, Jeremiah, Lamentations, Ezekiel, Daniel.",
+ "Minor Prophets":"Four triplets: Hosea Joel Amos · Obadiah Jonah Micah · Nahum Habakkuk Zephaniah · Haggai Zechariah Malachi.",
+ "Gospels":"Matthew, Mark, Luke, John — then Acts tells what happened next.",
+ "History":"Acts sits alone between the Gospels and Romans.",
+ "Pauline Epistles":"“Real Christians Can Go Eat Pie Carefully, Then Then Timidly Ask Patiently” — Romans, 1–2 Corinthians, Galatians, Ephesians, Philippians, Colossians, 1–2 Thessalonians, 1–2 Timothy, Titus, Philemon. Churches first (longest to shortest), then persons.",
+ "General Epistles":"“Hebrews Just Prefers Johns Judiciously” — Hebrews, James, 1–2 Peter, 1–3 John, Jude.",
+ "Apocalyptic":"Revelation closes the canon.",
+};
+const TRANSITIONS = [["Deuteronomy","Joshua"],["Esther","Job"],["Song of Solomon","Isaiah"],["Daniel","Hosea"],["Malachi","Matthew"],["Acts","Romans"],["Philemon","Hebrews"],["Jude","Revelation"]];
+
+if (typeof window !== "undefined") window.__DATA = {RAW, FLAGS, OVERLAPS, SECTIONS, KINDS, TOPICS, FACTS, CANON, CANON_DAYS, CANON_TRICKS, TRANSITIONS, SOURCE_STATED_TOTAL};
+if (typeof module !== "undefined") module.exports = {RAW, FLAGS, OVERLAPS, SECTIONS, KINDS, TOPICS, FACTS, CANON, CANON_DAYS, CANON_TRICKS, TRANSITIONS, SOURCE_STATED_TOTAL};
+
+// ===== ENGINE (pure functions; runs in browser and in node tests) =====
+const ENG = (() => {
+const D = (typeof module !== "undefined") ? require("./data.js") : window.__DATA;
+const {FACTS, TOPICS, SECTIONS, CANON, CANON_DAYS, TRANSITIONS, FLAGS} = D;
+
+// --- RNG
+function rng(seed){ let a = seed >>> 0; return () => { a |= 0; a = a + 0x6D2B79F5 | 0; let t = Math.imul(a ^ a >>> 15, 1 | a); t = t + Math.imul(t ^ t >>> 7, 61 | t) ^ t; return ((t ^ t >>> 14) >>> 0) / 4294967296; }; }
+const shuffle = (arr, r) => { const a = arr.slice(); for (let i = a.length - 1; i > 0; i--) { const j = Math.floor(r() * (i + 1)); [a[i], a[j]] = [a[j], a[i]]; } return a; };
+const pick = (arr, n, r) => shuffle(arr, r).slice(0, n);
+
+const FBY = Object.fromEntries(FACTS.map(f => [f.id, f]));
+const day = f => SECTIONS[f.s].day;
+const testament = f => SECTIONS[f.s].t;
+
+// --- Canon helpers
+const OT = CANON.OT.flatMap(g => g[1]), NT = CANON.NT.flatMap(g => g[1]);
+const ALL = OT.concat(NT);
+const GROUP_OF = {}; for (const t of ["OT","NT"]) for (const [g, bs] of CANON[t]) for (const b of bs) GROUP_OF[b] = g;
+const TEST_OF = b => OT.includes(b) ? "OT" : "NT";
+const canonFactId = b => "c:" + b;
+const CANON_FACTS = ALL.map(b => ({id: canonFactId(b), canon: true, b, s: null, group: GROUP_OF[b], t: "C:" + GROUP_OF[b], k: "canon", tm: TEST_OF(b)}));
+CANON_FACTS.forEach(c => FBY[c.id] = c);
+function canonGroupsForDay(d){ return d === 5 ? [...CANON.OT, ...CANON.NT].map(g => g[0]) : CANON_DAYS[d]; }
+
+// --- Ref overlap (for reverse-question distractors)
+function overlaps(a, b){ if (!a.r || !b.r) return false; return a.r.some(([bk, s, e]) => b.r.some(([bk2, s2, e2]) => bk === bk2 && s <= e2 && s2 <= e)); }
+
+// --- Build one question from a fact. form: "f" forward, "r" reverse, "a" alternate
+function buildQ(f, form, r){
+  let stem, ans, wrong, kind = f.k;
+  if (form === "r" && f.ev) {
+    const pool = FACTS.filter(x => x.ev && x.id !== f.id && !overlaps(f, x) && x.ev !== f.ev);
+    const same = pool.filter(x => x.b === f.b), sec = pool.filter(x => x.s === f.s && x.b !== f.b), rest = pool.filter(x => testament(x) === testament(f) && x.s !== f.s);
+    const cand = [...shuffle(same, r), ...shuffle(sec, r), ...shuffle(rest, r)].map(x => x.ev);
+    stem = `What is found in ${f.a}?`; ans = f.ev; wrong = [...new Set(cand)].slice(0, 3);
+  } else if (form === "a" && f.alt) {
+    stem = f.alt.q; ans = f.alt.a; wrong = pick(f.alt.d, 3, r);
+  } else if (form === "s") {
+    // pairing format: one true prompt→answer, three other cards from the same section paired with their own vetted wrong answers
+    const label = x => (x.ev || x.q).replace(/\?$/, "");
+    const ok = x => x.id !== f.id && (!f.g || x.g !== f.g);
+    const others = [...shuffle(FACTS.filter(x => ok(x) && x.s === f.s), r), ...shuffle(FACTS.filter(x => ok(x) && x.s !== f.s && testament(x) === testament(f)), r)].slice(0, 3);
+    stem = "Which pairing is correct?"; ans = `${label(f)} → ${f.a}`; wrong = others.map(x => `${label(x)} → ${pick(x.d, 1, r)[0]}`);
+  } else { form = "f"; stem = f.q; ans = f.a; wrong = pick(f.d, 3, r); }
+  const opts = shuffle([ans, ...wrong], r);
+  return {qid: f.id + ":" + form, fid: f.id, form, stem, opts, ans: opts.indexOf(ans), kind};
+}
+function formsFor(f){ return ["f", ...(f.ev ? ["r"] : []), ...(f.alt ? ["a"] : []), "s"]; }
+
+// --- Canon questions
+function canonQ(type, book, r){
+  const list = TEST_OF(book) === "OT" ? OT : NT, i = list.indexOf(book), T = TEST_OF(book) === "OT" ? "Old" : "New";
+  const near = (exclude, n) => { const c = []; for (let d = 1; c.length < 12 && d < list.length; d++) for (const j of [i + d, i - d]) if (list[j] && !exclude.includes(list[j])) c.push(list[j]); return pick(c.slice(0, 6), n, r); };
+  let stem, ans, wrong, fid = canonFactId(book);
+  if (type === "after" && i < list.length - 1) { stem = `Which book comes immediately after ${book}?`; ans = list[i + 1]; wrong = near([book, ans], 3); fid = canonFactId(ans); }
+  else if (type === "before" && i > 0) { stem = `Which book comes immediately before ${book}?`; ans = list[i - 1]; wrong = near([book, ans], 3); fid = canonFactId(ans); }
+  else if (type === "seq") {
+    const start = Math.max(0, Math.min(i, list.length - 4)), seq = list.slice(start, start + 4); fid = canonFactId(seq[1]);
+    ans = seq.join(", "); const perms = new Set();
+    while (perms.size < 3) { const p = shuffle(seq, r).join(", "); if (p !== ans) perms.add(p); }
+    stem = `Which group of ${T} Testament books is in the correct canonical order?`; wrong = [...perms];
+  } else if (type === "earliest") {
+    const win = list.slice(Math.max(0, i - 3), i + 5); const four = pick(win.includes(book) ? win : [book, ...win], 4, r);
+    if (!four.includes(book)) four[0] = book;
+    const sorted = four.slice().sort((a, b) => list.indexOf(a) - list.indexOf(b));
+    stem = `Which of these appears earliest in the ${T} Testament?`; ans = sorted[0]; wrong = sorted.slice(1); fid = canonFactId(ans);
+  } else if (type === "group") {
+    const groups = CANON[TEST_OF(book)].map(g => g[0]).filter(g => g !== GROUP_OF[book]);
+    stem = `To which section does ${book} belong?`; ans = GROUP_OF[book]; wrong = pick(groups, 3, r);
+    if (wrong.length < 3) wrong = wrong.concat(pick(CANON[TEST_OF(book) === "OT" ? "NT" : "OT"].map(g => g[0]), 3 - wrong.length, r));
+  } else return canonQ("after", list[Math.max(0, i - 1)], r);
+  const opts = shuffle([ans, ...wrong], r);
+  const key = type === "seq" ? ans : type === "earliest" ? opts.slice().sort().join("|") : book;
+  return {qid: `canon:${type}:${key}`, fid, form: "c", stem, opts, ans: opts.indexOf(ans), kind: "canon"};
+}
+function canonQuestions(groups, n, r, used = new Set()){
+  const books = [...CANON.OT, ...CANON.NT].filter(g => groups.includes(g[0])).flatMap(g => g[1]);
+  const trans = TRANSITIONS.filter(([a, b]) => books.includes(a) || books.includes(b));
+  const out = []; const types = ["after", "before", "seq", "earliest", "group"]; let guard = 0;
+  // transitions get priority, they're the classic weak spots
+  for (const [a] of shuffle(trans, r)) { if (out.length >= Math.ceil(n / 3)) break; const q = canonQ("after", a, r); if (!used.has(q.qid)) { used.add(q.qid); out.push(q); } }
+  while (out.length < n && guard++ < 400) {
+    const q = canonQ(types[Math.floor(r() * types.length)], books[Math.floor(r() * books.length)], r);
+    if (!used.has(q.qid)) { used.add(q.qid); out.push(q); }
+  }
+  return out;
+}
+
+// --- Mastery
+const W = {"1:knew":1, "1:elim":0.65, "1:guess":0.3, "0:knew":0, "0:elim":0, "0:guess":0};
+const PRIOR = 0.3, PRIOR_K = 1;
+// obs: [time, correct(0/1), conf, weight, source]  source: d=diag, q=quiz, x=final, c=recap, m=memorize(flashcard)
+function factStats(st, fid){
+  const o = (st.facts[fid] && st.facts[fid].obs) || [];
+  const mc = o.filter(x => x[4] !== "m");
+  let num = PRIOR * PRIOR_K, den = PRIOR_K;
+  o.forEach((x, idx) => { const recency = 0.6 + 0.4 * ((idx + 1) / o.length); const ev = x[4] === "m" ? (x[1] ? 0.7 : 0) : W[x[1] + ":" + x[2]]; const w = (x[3] || 1) * recency; num += w * ev; den += w; });
+  const mastery = num / den;
+  const misconception = mc.some((x, i) => !x[1] && x[2] === "knew" && !mc.slice(i + 1).some(y => y[1] && y[2] === "knew"));
+  const last = mc[mc.length - 1];
+  const correct = mc.filter(x => x[1]).length;
+  let status;
+  if (!mc.length) status = "unassessed";
+  else if (misconception || (last && !last[1])) status = "weak";
+  else if (last && last[2] !== "knew") status = "weak";
+  else if (mastery >= 0.8 && mc.filter(x => x[1] && x[2] === "knew").length >= 2) status = "mastered";
+  else status = "strong";
+  return {mastery, misconception, n: mc.length, correct, status, last};
+}
+function severity(st, fid){
+  const s = factStats(st, fid); if (s.status === "unassessed") return 0.45;
+  let v = 1 - s.mastery; if (s.misconception) v += 0.5; if (s.last && !s.last[1]) v += 0.25;
+  return v;
+}
+function record(st, q, chosen, conf, src, weight = 1){
+  const f = st.facts[q.fid] || (st.facts[q.fid] = {obs: [], box: 0, due: 0});
+  const correct = chosen === q.ans ? 1 : 0;
+  f.obs.push([Date.now(), correct, conf, weight, src]); if (f.obs.length > 24) f.obs.splice(0, f.obs.length - 24);
+  if (src !== "m") {
+    if (correct && conf === "knew") f.box = Math.min(5, (f.box || 0) + 1);
+    else if (correct && conf === "elim") f.box = Math.max(1, f.box || 0);
+    else f.box = correct ? 1 : 0;
+  } else f.box = correct ? Math.max(f.box || 0, 1) : 0;
+  const DAYS = [0, 1, 2, 4, 7, 14];
+  f.due = Date.now() + DAYS[f.box] * 864e5;
+  return correct;
+}
+
+// --- Aggregations
+function aggregate(st, keyFn, fids = [...FACTS.map(f => f.id), ...CANON_FACTS.map(c => c.id)]){
+  const out = {};
+  for (const id of fids) {
+    const f = FBY[id]; const k = keyFn(f); if (k == null) continue;
+    const s = factStats(st, id); if (!s.n) { (out[k] = out[k] || {n: 0, correct: 0, mSum: 0, facts: 0, assessed: 0, weak: 0}).facts++; continue; }
+    const a = out[k] = out[k] || {n: 0, correct: 0, mSum: 0, facts: 0, assessed: 0, weak: 0};
+    a.n += s.n; a.correct += s.correct; a.mSum += s.mastery; a.facts++; a.assessed++; if (s.status === "weak") a.weak++;
+  }
+  for (const k in out) { const a = out[k]; a.acc = a.n ? a.correct / a.n : null; a.mastery = a.assessed ? a.mSum / a.assessed : null; }
+  return out;
+}
+// Attempt-level analysis (diagnostic / final / quiz)
+function analyzeAttempt(att){
+  const rows = att.qs.map((q, i) => { const r = att.resp[i] || {}; const f = FBY[q.fid]; return {q, f, chosen: r.c, conf: r.k, ok: r.c === q.ans}; });
+  const by = fn => { const o = {}; rows.forEach(x => { const k = fn(x); if (k == null) return; const a = o[k] = o[k] || {n: 0, c: 0, ev: 0}; a.n++; if (x.ok) a.c++; a.ev += x.ok ? W["1:" + x.conf] : 0; }); return o; };
+  const correct = rows.filter(x => x.ok).length;
+  return {
+    rows, correct, total: rows.length, pct: correct / rows.length,
+    caMastery: rows.reduce((s, x) => s + (x.ok ? W["1:" + x.conf] : 0), 0) / rows.length,
+    testament: by(x => x.f.canon ? x.f.tm : testament(x.f)),
+    book: by(x => x.f.canon ? null : x.f.b),
+    topic: by(x => x.f.canon ? "Canonical order" : TOPICS[x.f.t].name),
+    kind: by(x => x.f.k),
+    section: by(x => x.f.canon ? null : SECTIONS[x.f.s].name),
+    confWrong: rows.filter(x => !x.ok && x.conf === "knew"),
+    luckyRight: rows.filter(x => x.ok && x.conf !== "knew"),
+    need80: Math.max(0, Math.ceil(0.8 * rows.length) - correct),
+  };
+}
+// Plain-language insights
+function insights(an){
+  const out = [];
+  const kinds = an.kind, KN = D.KINDS;
+  const rate = o => o && o.n ? o.c / o.n : null;
+  const loc = rate(kinds.loc), theme = rate(kinds.theme), ppl = rate(kinds.people), chron = rate(kinds.chron), canon = rate(kinds.canon), list = rate(kinds.list), doc = rate(kinds.doctrine);
+  const pct = x => Math.round(x * 100) + "%";
+  if (loc != null && theme != null && theme - loc >= 0.15) out.push(`You know what books are about (${pct(theme)} on themes) but lose points pinning events to chapters (${pct(loc)} on locations). Most of your study time should go to chapter–event pairs.`);
+  else if (loc != null && loc < 0.75) out.push(`Chapter and verse locations are your largest single gap (${pct(loc)}). These are memorization items, so repetition will move them fastest.`);
+  if (chron != null && chron < 0.75) out.push(`Kings and chronology came in at ${pct(chron)}. Sorting kings into north and south is a quick win.`);
+  if (ppl != null && ppl < 0.75) out.push(`People and family relationships came in at ${pct(ppl)}; questions like “mother of Isaac” use close relatives as traps.`);
+  if (canon != null && canon < 0.8) out.push(`Canonical order: ${pct(canon)}. The trouble spots are usually the seams between sections (Esther → Job, Daniel → Hosea, Philemon → Hebrews).`);
+  if (list != null && list < 0.75) out.push(`Ordered lists (plagues, judges, minor prophets) came in at ${pct(list)}.`);
+  if (doc != null && doc >= 0.8) out.push(`Doctrine questions are a strength (${pct(doc)}) — keep them warm with light review.`);
+  if (an.confWrong.length) out.push(`${an.confWrong.length} answer${an.confWrong.length > 1 ? "s were" : " was"} wrong even though you marked “Knew.” These are misconceptions and get top priority.`);
+  if (an.luckyRight.length) out.push(`${an.luckyRight.length} correct answer${an.luckyRight.length > 1 ? "s" : ""} came from guessing or elimination, so they are treated as not yet learned.`);
+  return out;
+}
+
+// --- Question set assembly
+function assemble(st, {n, canonN, seed, scopeDay = null, prefer = "f", avoidQids = new Set(), factFilter = null, weights = null}){
+  const r = rng(seed);
+  let facts = FACTS.filter(f => !FLAGS[f.e] || FLAGS[f.e].level !== "exclude");
+  if (scopeDay && scopeDay < 5) facts = facts.filter(f => day(f) === scopeDay);
+  if (factFilter) facts = facts.filter(factFilter);
+  // group caps keep one fact from being tested repeatedly in one sitting
+  const caps = {gen3: 1, gen9: 2, plagues: 2, judges: 2, minors: 2, ex34: 1, phil2: 1};
+  const order = weights ? facts.slice().sort((a, b) => (weights(b) + r() * 0.3) - (weights(a) + r() * 0.3)) : shuffle(facts, r);
+  const used = {}, qs = [];
+  for (const f of order) {
+    if (qs.length >= n - canonN) break;
+    if (f.g) { used[f.g] = (used[f.g] || 0) + 1; if (used[f.g] > (caps[f.g] || 9)) continue; }
+    const forms = formsFor(f); let form = prefer === "f" ? "f" : (forms.find(x => x !== "f") || "f");
+    let q = buildQ(f, form, r);
+    if (avoidQids.has(q.qid)) { const other = forms.find(x => !avoidQids.has(f.id + ":" + x)); if (other) q = buildQ(f, other, r); }
+    qs.push(q);
+  }
+  // Fill if group caps left a gap
+  for (const f of order) { if (qs.length >= n - canonN) break; if (!qs.some(q => q.fid === f.id)) qs.push(buildQ(f, "f", r)); }
+  const groups = scopeDay ? canonGroupsForDay(scopeDay) : [...CANON.OT, ...CANON.NT].map(g => g[0]);
+  const cq = canonN ? canonQuestions(groups, canonN, r, new Set(avoidQids)) : [];
+  return shuffle(qs.concat(cq), r);
+}
+function diagnostic(seed){ return assemble({facts: {}}, {n: 100, canonN: 10, seed}); }
+function finalExam(st, seed){
+  const avoid = new Set((st.diag && st.diag.qs || []).map(q => q.qid));
+  const diagFids = new Set((st.diag && st.diag.qs || []).map(q => q.fid));
+  // Prefer facts the diagnostic did not test, then new formulations of the rest
+  return assemble(st, {n: 100, canonN: 10, seed, prefer: "alt", avoidQids: avoid, weights: f => diagFids.has(f.id) ? 0 : 1});
+}
+
+// --- The 85/15 planner
+const TIME = {learnWeak: 1.6, memWeak: 1.0, quizItem: 0.75, learnStrong: 0.45, memStrong: 0.3, canonBlock: 4};
+function planDay(st, d){
+  const all = FACTS.filter(f => !FLAGS[f.e] || FLAGS[f.e].level !== "exclude");
+  let scope = d === 5 ? all : all.filter(f => day(f) === d);
+  const stats = Object.fromEntries(scope.map(f => [f.id, factStats(st, f.id)]));
+  let weak = scope.filter(f => stats[f.id].status === "weak").sort((a, b) => severity(st, b.id) - severity(st, a.id));
+  const unassessed = scope.filter(f => stats[f.id].status === "unassessed");
+  const strong = scope.filter(f => ["strong", "mastered"].includes(stats[f.id].status)).sort((a, b) => stats[a.id].mastery - stats[b.id].mastery);
+  // carry forward: Day 4 adds remaining weaknesses from Days 1–3
+  let carried = [];
+  if (d === 4) carried = all.filter(f => day(f) < 4 && factStats(st, f.id).status === "weak").sort((a, b) => severity(st, b.id) - severity(st, a.id)).slice(0, 4);
+  const CAP = d === 5 ? 14 : 20;
+  let focus = [...weak, ...carried].slice(0, CAP);
+  const room = Math.max(0, CAP - focus.length);
+  focus = focus.concat(unassessed.slice(0, Math.max(room, Math.min(3, unassessed.length))));
+  if (!focus.length && strong.length) focus = strong.splice(0, Math.min(6, strong.length)); // nothing weak: lowest strong become focus
+  // canon: weak or strong?
+  const groups = canonGroupsForDay(d);
+  const cIds = CANON_FACTS.filter(c => groups.includes(c.group)).map(c => c.id);
+  const cAgg = aggregate(st, () => "c", cIds).c || {};
+  const canonWeak = cAgg.mastery == null || cAgg.mastery < 0.8 || cAgg.weak > 0;
+  const weakTime = focus.length * (TIME.learnWeak + TIME.memWeak) + (canonWeak ? TIME.canonBlock * groups.length / 2 : 0);
+  const strongUnit = TIME.learnStrong + TIME.memStrong;
+  let nStrong = Math.round((0.15 / 0.85) * weakTime / strongUnit);
+  const canonStrongTime = canonWeak ? 0 : TIME.canonBlock * groups.length / 2;
+  nStrong = Math.max(0, Math.min(strong.length, Math.round(((0.15 / 0.85) * weakTime - canonStrongTime) / strongUnit)));
+  const refresh = strong.slice(0, nStrong);
+  const strongTime = refresh.length * strongUnit + canonStrongTime;
+  const total = weakTime + strongTime;
+  return {
+    day: d, focus: focus.map(f => f.id), refresh: refresh.map(f => f.id), canonGroups: groups, canonWeak,
+    counts: {weak: weak.length, unassessed: unassessed.length, strong: strong.length, carried: carried.length},
+    split: {weak: total ? weakTime / total : 1, strong: total ? strongTime / total : 0},
+    minutes: Math.round(total + 20 * TIME.quizItem + (d > 1 ? 8 : 0)),
+  };
+}
+function quizFor(st, plan, seed, n = 20, avoid = new Set()){
+  const r = rng(seed);
+  const nCanon = Math.min(4, Math.max(2, Math.round(n * 0.15)));
+  const canonQs = canonQuestions(plan.canonGroups, nCanon, r, new Set(avoid));
+  const strongTotal = Math.round(n * 0.15);
+  const strongSlots = plan.refresh.length ? Math.max(0, strongTotal - (plan.canonWeak ? 0 : canonQs.length)) : 0;
+  const weakSlots = n - canonQs.length - strongSlots;
+  const take = (ids, k) => { const out = []; let i = 0; const list = shuffle(ids, r); while (out.length < k && list.length) { const f = FBY[list[i % list.length]]; const forms = formsFor(f); const form = forms[(Math.floor(i / list.length) + (avoid.has(f.id + ":f") ? 1 : 0)) % forms.length]; const q = buildQ(f, form, r); if (!out.some(x => x.qid === q.qid)) out.push(q); i++; if (i > list.length * 4) break; } return out; };
+  let weakQ = take(plan.focus, weakSlots);
+  let strongQ = take(plan.refresh, strongSlots);
+  const qs = weakQ.concat(strongQ, canonQs);
+  // top-up from scope if short
+  if (qs.length < n) { const extra = take(FACTS.filter(f => plan.day === 5 || day(f) === plan.day).map(f => f.id), n); for (const q of extra) { if (qs.length >= n) break; if (!qs.some(x => x.qid === q.qid)) qs.push(q); } }
+  return shuffle(qs.slice(0, n), r);
+}
+function recapFor(st, d, seed){
+  const r = rng(seed);
+  const prior = FACTS.filter(f => day(f) < d || (d === 5));
+  const ids = prior.map(f => f.id).filter(id => factStats(st, id).n);
+  const ranked = ids.sort((a, b) => severity(st, b) - severity(st, a));
+  const yesterday = ranked.filter(id => day(FBY[id]) === d - 1).slice(0, 4);
+  const spaced = ranked.filter(id => !yesterday.includes(id)).slice(0, 4);
+  const qs = [...yesterday, ...spaced].map(id => { const f = FBY[id]; const forms = formsFor(f); return buildQ(f, forms[Math.floor(r() * forms.length)], r); });
+  const c = canonQuestions(canonGroupsForDay(d - 1 || 1), 2, r);
+  return shuffle(qs.concat(c), r).slice(0, 10);
+}
+function dueReview(st, n = 8){
+  const now = Date.now();
+  return FACTS.filter(f => st.facts[f.id] && st.facts[f.id].due <= now && factStats(st, f.id).status !== "mastered")
+    .sort((a, b) => severity(st, b.id) - severity(st, a.id)).slice(0, n).map(f => f.id);
+}
+function readiness(st){
+  // estimated chance of answering a random exam item correctly; guessing floor 25%
+  const ids = FACTS.filter(f => !FLAGS[f.e] || FLAGS[f.e].level !== "exclude").map(f => f.id).concat(CANON_FACTS.map(c => c.id));
+  let s = 0, assessed = 0;
+  for (const id of ids) { const st1 = factStats(st, id); if (st1.n) assessed++; s += st1.n ? 0.25 + 0.75 * st1.mastery : 0.4; }
+  return {est: s / ids.length, assessed, total: ids.length};
+}
+function counts(st){
+  let mastered = 0, review = 0, weak = 0, unassessed = 0;
+  for (const f of FACTS) { if (FLAGS[f.e] && FLAGS[f.e].level === "exclude") continue; const s = factStats(st, f.id).status; if (s === "mastered") mastered++; else if (s === "weak") { weak++; review++; } else if (s === "unassessed") unassessed++; else review++; }
+  return {mastered, review, weak, unassessed};
+}
+
+return {rng, shuffle, pick, FBY, CANON_FACTS, OT, NT, GROUP_OF, buildQ, formsFor, canonQ, canonQuestions, factStats, severity, record, aggregate, analyzeAttempt, insights, assemble, diagnostic, finalExam, planDay, quizFor, recapFor, dueReview, readiness, counts, overlaps, day, testament, W, canonGroupsForDay};
+})();
+if (typeof module !== "undefined") module.exports = ENG;
+
+// ===== UI =====
+const E = ENG;
+const $ = s => document.querySelector(s);
+const esc = s => String(s == null ? "" : s).replace(/[&<>"']/g, c => ({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]));
+const pct = x => x == null ? "—" : Math.round(x * 100) + "%";
+const DAY_TITLES = {1:"Pentateuch", 2:"Histories, Wisdom & Prophets", 3:"Gospels & Acts", 4:"Epistles & Revelation", 5:"Review & final exam"};
+const DAY_SUB = {1:"Genesis–Deuteronomy · OT order, part 1", 2:"Joshua–Malachi · rest of OT order", 3:"Matthew–Acts · Synoptic parallels · NT order", 4:"Romans–Revelation · earlier weaknesses", 5:"Top weaknesses · both testaments · 100-question practice exam"};
+const CONF = [["knew","Knew"],["elim","Eliminated"],["guess","Guessed"]];
+const CONF_HELP = {knew:"I confidently knew it", elim:"I narrowed it down", guess:"I didn't know"};
+const SRC_OF = {diag:"d", final:"x", quiz:"q", recap:"c", retake:"q", rev:"q"};
+
+function blank(){ return {v:1, created:Date.now(), updatedAt:0, imported:null, diag:null, facts:{}, lessons:{}, history:[], final:null, rev:null, tutor:{}, theme:"auto"}; }
+let S = blank();
+const UI = {view:"dash", panel:null, flip:false, sel:null, matchDone:[], ladder:[], shake:null, resultOpen:{}, importFilter:"all", syncing:"local"};
+
+// ---------- persistence: Supabase (your account, any device) + this browser as a backup
+// Paste your project's values from Supabase → Project Settings → API
+const SUPABASE_URL = "https://blcdiehbuqqqqhootoki.supabase.co";
+const SUPABASE_ANON_KEY = "sb_publishable_hrHKa41ca8Qpfk0If919vA_QN_ibJei";
+const SB = window.supabase ? supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY) : null;
+let USER = null, saveT = null;
+const lsKey = () => "rts-bible-coach-v1:" + (USER ? USER.id : "anon");
+function save(){ S.updatedAt = Date.now(); clearTimeout(saveT); saveT = setTimeout(flush, 700); }
+async function flush(){
+  if (!USER) return;
+  let json = JSON.stringify(S);
+  if (json.length > 230000) { (S.history || []).slice(0, -12).forEach(h => delete h.detail); json = JSON.stringify(S); }
+  try { localStorage.setItem(lsKey(), json); } catch (e) {}
+  const {error} = await SB.from("bible_progress").upsert({user_id: USER.id, data: S, updated_at: new Date(S.updatedAt).toISOString()});
+  UI.syncing = error ? "local" : "synced"; paintSync();
+}
+function loadLocal(){ S = blank(); try { const j = localStorage.getItem(lsKey()); if (j) S = Object.assign(blank(), JSON.parse(j)); } catch (e) {} }
+async function pull(){
+  loadLocal();
+  const {data, error} = await SB.from("bible_progress").select("data").eq("user_id", USER.id).maybeSingle();
+  if (error) { UI.syncing = "local"; return; }
+  if (data && data.data && (data.data.updatedAt || 0) >= (S.updatedAt || 0)) S = Object.assign(blank(), data.data);
+  else if (S.updatedAt) await flush();
+  UI.syncing = "synced";
+}
+async function connect(){
+  if (!SB) { UI.authMsg = "Couldn't reach the sign-in service. Check your connection and reload."; render(); return; }
+  const {data: {session}} = await SB.auth.getSession();
+  if (session) { USER = session.user; await pull(); if (S.theme && S.theme !== "auto") document.documentElement.dataset.theme = S.theme; }
+  UI.ready = true; render();
+}
+function authView(){
+  return `<div class="card" style="max-width:420px;margin:40px auto;padding:26px">
+    <div class="brand" style="margin-bottom:14px"><span class="ring"><span>✝</span></span><span>English Bible · RTS exam prep</span></div>
+    <h1>${UI.signup ? "Create an account" : "Sign in"}</h1>
+    <p class="small muted">Your progress saves to your account, so you can switch between phone and computer.</p>
+    <label class="small" for="em">Email</label><input id="em" type="email" autocomplete="email" style="width:100%;padding:10px;border:1px solid var(--line);border-radius:8px;background:var(--card);margin:4px 0 10px">
+    <label class="small" for="pw">Password (6+ characters)</label><input id="pw" type="password" autocomplete="${UI.signup ? "new-password" : "current-password"}" style="width:100%;padding:10px;border:1px solid var(--line);border-radius:8px;background:var(--card);margin:4px 0 14px">
+    ${UI.authMsg ? `<p class="small" style="color:var(--bad)">${esc(UI.authMsg)}</p>` : ""}
+    <button class="btn grad" style="width:100%" data-a="${UI.signup ? "signup" : "signin"}">${UI.signup ? "Create account" : "Sign in"}</button>
+    <p class="small" style="margin-top:12px;text-align:center"><button class="btn line sm" data-a="authSwitch">${UI.signup ? "I already have an account" : "Create an account"}</button></p></div>`;
+}
+async function doAuth(kind){
+  const email = $("#em").value.trim(), password = $("#pw").value;
+  if (!email || password.length < 6) { UI.authMsg = "Enter your email and a password of 6 or more characters."; render(); return; }
+  const r = kind === "signup" ? await SB.auth.signUp({email, password}) : await SB.auth.signInWithPassword({email, password});
+  if (r.error) { UI.authMsg = r.error.message; render(); return; }
+  if (!r.data.session) { UI.authMsg = "Check your email for a confirmation link, then sign in."; UI.signup = false; render(); return; }
+  USER = r.data.session.user; UI.authMsg = ""; await pull(); UI.view = "dash"; render();
+}
+function paintSync(){ const el = $("#sync"); if (el) el.textContent = UI.syncing === "synced" ? "Saved to your account" : "Saved in this browser (will sync when back online)"; }
+
+// ---------- helpers
+const F = id => E.FBY[id];
+const topicName = f => f.canon ? "Canonical order" : TOPICS[f.t].name;
+const L = d => S.lessons[d] || (S.lessons[d] = {stage: null});
+function currentDay(){ for (let d = 1; d <= 5; d++) if (!S.lessons[d] || S.lessons[d].stage !== "done") return d; return 6; }
+function unlocked(d){ return S.diag && S.diag.done && (d === 1 || (S.lessons[d - 1] && S.lessons[d - 1].stage === "done")); }
+function toast(msg){ const t = document.createElement("div"); t.className = "toast"; t.textContent = msg; document.body.appendChild(t); setTimeout(() => t.remove(), 2200); }
+function go(view){ UI.view = view; UI.panel = null; render(); window.scrollTo({top: 0}); }
+function attAt(path){ const [a, b] = path.split("."); if (a === "diag") return S.diag; if (a === "final") return S.final; if (a === "rev") return S.rev && S.rev.quiz; const d = +a.slice(1); return L(d)[b]; }
+
+// ---------- celebration (same moments as the catechism app)
+const SPORTS = [
+ {ball:"🏀", label:"SWISH!", path:"arc", target:'<div class="hoop"></div>'},
+ {ball:"🏀", label:"SLAM DUNK!", path:"drop", target:'<div class="hoop"></div>'},
+ {ball:"🏀", label:"FROM DOWNTOWN!", path:"longarc", target:'<div class="hoop"></div>'},
+ {ball:"🟡", label:"KITCHEN WINNER!", path:"arc", target:'<div class="netline"></div>'},
+ {ball:"🎾", label:"ACE!", path:"line", target:'<div class="netline"></div>'},
+ {ball:"🏓", label:"SMASH!", path:"zig", target:'<div class="netline"></div>'},
+ {ball:"🏐", label:"SPIKE!", path:"spike", target:'<div class="netline"></div>'},
+ {ball:"⚽", label:"GOOOAL!", path:"line", target:'<div class="goal"></div>'},
+ {ball:"🏈", label:"IT'S GOOD!", path:"longarc", target:'<div class="uprights"></div>'},
+ {ball:"🏈", label:"TOUCHDOWN!", path:"line", target:'<div class="endzone">END ZONE</div>'},
+ {ball:"🎱", label:"IN THE POCKET!", path:"roll", target:'<div class="pocket"></div>'},
+ {ball:"🎳", label:"STRIKE!", path:"roll", target:'<div class="emoji-target">🎳</div>'},
+ {ball:"⚾", label:"HOME RUN!", path:"homer", target:'<div class="emoji-target">🏟️</div>'},
+ {ball:"🏒", label:"HE SCORES!", path:"line", target:'<div class="goal"></div>'},
+ {ball:"⛳", label:"HOLE IN ONE!", path:"roll", target:'<div class="emoji-target">🕳️</div>'},
+];
+function celebrate(big){
+  const s = SPORTS[Math.floor(Math.random() * SPORTS.length)];
+  const el = document.createElement("div"); el.className = "celebrate" + (big ? " big" : "");
+  el.innerHTML = `<div class="target">${s.target}</div><div class="ball" style="animation-name:${s.path}">${s.ball}</div><div class="label">${big ? "🏆 " : ""}${s.label}</div>`;
+  if (big) for (let i = 0; i < 40; i++) { const c = document.createElement("i"); c.className = "confetti"; c.style.left = Math.random() * 100 + "%"; c.style.background = ["#F58529","#DD2A7B","#8134AF","#515BD4","#0095F6","#FFD600"][i % 6]; c.style.animationDelay = Math.random() * .5 + "s"; el.appendChild(c); }
+  document.body.appendChild(el); setTimeout(() => el.remove(), big ? 2200 : 1700);
+}
+function fireworks(ms = 4200){
+  if (matchMedia("(prefers-reduced-motion: reduce)").matches) { celebrate(true); return; }
+  const c = document.createElement("canvas"); c.id = "fw"; document.body.appendChild(c);
+  const x = c.getContext && c.getContext("2d"); if (!x) { c.remove(); celebrate(true); return; } const W = c.width = innerWidth * devicePixelRatio, H = c.height = innerHeight * devicePixelRatio;
+  const parts = []; const cols = ["#F58529","#DD2A7B","#8134AF","#515BD4","#0095F6","#FFD600","#5BD16B"];
+  const burst = () => { const cx = W * (.15 + Math.random() * .7), cy = H * (.12 + Math.random() * .4), col = cols[Math.floor(Math.random() * cols.length)]; for (let i = 0; i < 70; i++) { const a = Math.random() * Math.PI * 2, v = (1.5 + Math.random() * 4) * devicePixelRatio; parts.push({x: cx, y: cy, vx: Math.cos(a) * v, vy: Math.sin(a) * v, l: 1, col}); } };
+  const t0 = performance.now(); let last = 0;
+  (function f(t){ if (t - last > 380 && t - t0 < ms - 900) { burst(); last = t; } x.globalCompositeOperation = "destination-out"; x.fillStyle = "rgba(0,0,0,.22)"; x.fillRect(0, 0, W, H); x.globalCompositeOperation = "lighter";
+    for (const p of parts) { p.x += p.vx; p.y += p.vy; p.vy += .05 * devicePixelRatio; p.l -= .012; if (p.l > 0) { x.fillStyle = p.col; x.globalAlpha = p.l; x.fillRect(p.x, p.y, 3 * devicePixelRatio, 3 * devicePixelRatio); } }
+    x.globalAlpha = 1; if (t - t0 < ms) requestAnimationFrame(f); else c.remove(); })(t0);
+}
+
+// ---------- layout
+const NAV = [["dash","Dashboard","🏠"],["diag","Diagnostic","📝"],["plan","My Study Plan","🗓️"],["lesson","Today's Lesson","📖"],["review","Review","🔁"],["progress","Progress","📈"]];
+function shell(content){
+  const navv = UI.view === "diagResults" ? "diag" : ["final","finalResults"].includes(UI.view) ? "lesson" : UI.view === "import" ? "dash" : UI.view;
+  const nb = (cls) => NAV.map(([v, n, i]) => `<button data-a="go" data-v="${v}" ${navv === v ? 'aria-current="page"' : ""}>${cls ? `<span class="i" aria-hidden="true">${i}</span>` : ""}${cls && n === "My Study Plan" ? "Plan" : cls && n === "Today's Lesson" ? "Lesson" : n}</button>`).join("");
+  return `<header class="top"><div class="top-in">
+    <button class="brand" data-a="go" data-v="dash" aria-label="Dashboard"><span class="ring"><span>✝</span></span><span class="wordmark">English Bible <small class="muted" style="font-weight:500">· RTS exam prep</small></span></button>
+    <nav class="tabs" aria-label="Main">${nb(false)}</nav>
+    <button class="iconbtn" data-a="theme" aria-label="Switch light or dark mode">${document.documentElement.dataset.theme === "dark" ? "☀️" : "🌙"}</button>
+    <button class="iconbtn small" data-a="signout">Sign out</button>
+  </div></header>
+  <main id="main">${content}</main>
+  <nav class="bottom" aria-label="Main">${nb(true)}</nav>`;
+}
+function render(){
+  if (!UI.ready) { document.getElementById("app").innerHTML = `<main><p class="muted">Loading…</p></main>`; return; }
+  if (!USER) { document.getElementById("app").innerHTML = authView(); return; }
+  const v = UI.view;
+  const views = {dash, welcome, import: importView, diag: diagView, diagResults, plan: planView, lesson: lessonView, review: reviewView, progress: progressView, final: finalView, finalResults};
+  if (!S.imported) S.imported = {builtIn: true, pages: 19, matched: []};
+  if (UI.view === "welcome") UI.view = "dash";
+  document.getElementById("app").innerHTML = shell((views[UI.view] || dash)());
+  paintSync();
+}
+
+// ---------- welcome & import
+function welcome(){
+  return `<div class="card" style="padding:26px">
+    <h1>Prepare for the RTS English Bible Exam</h1>
+    <p class="lead muted">A 100-question diagnostic finds what you don't know yet. Then five lessons teach it, drill it, and quiz you on it in the exam's own four-choice format. The pass line is 80%.</p>
+    <div class="stage">${["Diagnose","Learn","Memorize & repeat","Recall & quiz","Improve"].map(x => `<span>${x}</span>`).join("")}</div>
+    <div class="drop" style="margin-top:16px">
+      <p><b>Upload your Quizlet PDF</b></p>
+      <p class="small muted">The app reads the file in your browser and checks it against the RTS card set.</p>
+      <label class="btn" style="display:inline-block">Choose PDF<input type="file" accept="application/pdf" id="pdfin" hidden></label>
+      <p class="small muted" id="pdfstatus" style="margin-top:10px"></p>
+    </div>
+    <p class="small muted" style="margin-top:12px">Already processed: “English Bible Exam (RTS) Flashcards | Quizlet,” 19 pages. <button class="btn line sm" data-a="useBuiltIn">Use this set</button></p>
+  </div>`;
+}
+async function handlePdf(file){
+  const st = $("#pdfstatus"); st.textContent = "Reading PDF…";
+  try {
+    if (!window.pdfjsLib) throw new Error("PDF reader didn't load. Check your connection, or use the set that's already processed.");
+    pdfjsLib.GlobalWorkerOptions.workerSrc = "https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.worker.min.js";
+    const doc = await pdfjsLib.getDocument({data: await file.arrayBuffer()}).promise;
+    let text = ""; const pages = [];
+    for (let p = 1; p <= doc.numPages; p++) { const tc = await (await doc.getPage(p)).getTextContent(); const t = tc.items.map(i => i.str).join(" "); pages.push(t); text += " " + t; }
+    const norm = s => s.toLowerCase().replace(/[^a-z0-9]+/g, "");
+    const N = norm(text);
+    const matched = RAW.filter(r => N.includes(norm(r[2]).slice(0, 28))).map(r => r[0]);
+    const stated = (text.match(/Terms \((\d+)\)/) || [])[1];
+    S.imported = {at: Date.now(), file: file.name, pages: doc.numPages, matched, stated: stated ? +stated : null, builtIn: false};
+    if (matched.length < 50) { S.imported.foreign = true; S.imported.preview = pages.slice(0, 2).join(" ").slice(0, 600); }
+    save(); go("import");
+  } catch (e) { st.textContent = e.message || "Couldn't read that PDF."; }
+}
+function importView(){
+  const im = S.imported || {}; const ex = Object.entries(FLAGS).filter(([, f]) => f.level === "exclude"), nt = Object.entries(FLAGS).filter(([, f]) => f.level === "note");
+  const factsByE = {}; FACTS.forEach(f => (factsByE[f.e] = factsByE[f.e] || []).push(f));
+  const secOf = e => factsByE[e] ? SECTIONS[factsByE[e][0].s].name : "—";
+  const filt = UI.importFilter;
+  const rows = RAW.filter(r => filt === "all" || (filt === "flag" && FLAGS[r[0]]) || (filt !== "flag" && factsByE[r[0]] && factsByE[r[0]][0].s === filt));
+  const foreign = im.foreign ? `<div class="flag"><b>This file doesn't match the RTS English Bible set.</b> Only ${im.matched.length} of 100 known cards were found in ${im.pages} pages. Building a new study program from a different card set needs the deck builder, which isn't in this version yet. The RTS set below is still loaded.</div>` : "";
+  return `<h1>Your flashcards</h1><p class="muted">Loaded from your PDF, “English Bible Exam (RTS) Flashcards | Quizlet.”</p>
+  ${foreign}
+  <div class="grid3">
+    <div class="card stat"><span class="muted small">Cards extracted</span><b>100</b><span class="small muted">Pages 2–19 of 19. The Quizlet header says ${SOURCE_STATED_TOTAL} terms; the rest weren't in the PDF.</span></div>
+    <div class="card stat"><span class="muted small">Used for testing</span><b>97</b><span class="small muted">Split into ${FACTS.length} testable facts (lists like the plagues become several).</span></div>
+    <div class="card stat"><span class="muted small">Held back for review</span><b>${ex.length}</b><span class="small muted">${nt.length} more are tested with a caution note.</span></div>
+  </div>
+  ${im.builtIn === false && !im.foreign ? `<p class="small muted">Checked your upload “${esc(im.file)}”: ${im.matched.length} of 100 cards matched${im.matched.length < 100 ? "; unmatched cards use the processed text" : ""}.</p>` : ""}
+  <div class="card"><h2>Held back: likely errors in the source</h2>
+    ${ex.map(([e, f]) => `<div class="flag"><b>Card ${e} (p. ${RAW[e - 1][1]}):</b> “${esc(RAW[e - 1][2])}” → “${esc(RAW[e - 1][3])}”<br>${esc(f.msg)}</div>`).join("")}
+    <p class="small muted">These won't appear in any quiz until you review them.</p></div>
+  <div class="card"><h2>Overlapping cards</h2><ul class="small">${OVERLAPS.map(o => `<li>Cards ${o.entries.join(", ")} — ${esc(o.why)}</li>`).join("")}</ul>
+    <p class="small muted">Overlaps are capped so one passage isn't tested several times in one sitting.</p></div>
+  <div class="card"><div class="row" style="justify-content:space-between"><h2 style="margin:0">All 100 cards</h2>
+    <div class="row">${[["all","All"],["flag","Flagged"],...Object.entries(SECTIONS).map(([k, s]) => [k, s.name])].map(([k, n]) => `<button class="btn sm ${filt === k ? "" : "ghost"}" data-a="ifilter" data-k="${k}">${n}</button>`).join("")}</div></div>
+    <div class="tablewrap"><table class="t" style="margin-top:10px"><thead><tr><th>#</th><th>Page</th><th>Card</th><th>Answer</th><th>Section</th><th>Status</th></tr></thead><tbody>
+    ${rows.map(r => `<tr><td>${r[0]}</td><td>${r[1]}</td><td>${esc(r[2])}</td><td>${esc(r[3])}</td><td class="small">${secOf(r[0])}</td><td>${FLAGS[r[0]] ? `<span class="pill ${FLAGS[r[0]].level === "exclude" ? "bad" : "warn"}">${FLAGS[r[0]].level === "exclude" ? "Held back" : "Note"}</span>` : `<span class="pill good">${(factsByE[r[0]] || []).length} fact${(factsByE[r[0]] || []).length > 1 ? "s" : ""}</span>`}</td></tr>`).join("")}
+    </tbody></table></div></div>
+  <div class="card"><h2>Added curriculum</h2><p class="small">Canonical order of all 66 books, as you requested. It's tracked separately from the Quizlet facts: 10 of the 100 diagnostic questions, and about 3 of every 20 quiz questions.</p></div>
+  <button class="btn" data-a="go" data-v="${S.diag ? "dash" : "diag"}">${S.diag ? "Back to dashboard" : "Continue to the diagnostic"}</button>`;
+}
+
+// ---------- multiple-choice runner (diagnostic, quizzes, recap, final)
+function newAttempt(kind, qs, extra = {}){ return Object.assign({kind, qs, resp: qs.map(() => ({})), page: 0, per: 10, done: false, startedAt: Date.now()}, extra); }
+function runner(att, path, title){
+  const per = att.per, pages = Math.ceil(att.qs.length / per), p = att.page, from = p * per;
+  const answered = att.resp.filter(r => r.c != null && r.k).length;
+  const qcards = att.qs.slice(from, from + per).map((q, j) => {
+    const i = from + j, r = att.resp[i];
+    return `<article class="q" tabindex="0" data-qi="${i}" aria-label="Question ${i + 1}">
+      <div class="num">Question ${i + 1} of ${att.qs.length}${q.form === "c" ? " · canonical order" : ""}</div>
+      <div class="stem">${esc(q.stem)}</div>
+      <div class="opts" role="group" aria-label="Answer choices">${q.opts.map((o, k) => `<button class="opt" data-a="pick" data-p="${path}" data-i="${i}" data-k="${k}" aria-pressed="${r.c === k}"><span class="k">${"ABCD"[k]}</span><span>${esc(o)}</span></button>`).join("")}</div>
+      ${r.c != null ? `<div class="conf" role="group" aria-label="Confidence">${CONF.map(([k, n]) => `<button data-a="conf" data-p="${path}" data-i="${i}" data-k="${k}" aria-pressed="${r.k === k}" title="${CONF_HELP[k]}">${n}</button>`).join("")}${r.k ? "" : '<span class="need">How sure were you?</span>'}</div>` : ""}
+    </article>`;
+  }).join("");
+  const grid = att.qs.length > per ? `<details style="margin:6px 0 12px"><summary class="small">Jump to a question (${answered}/${att.qs.length} answered)</summary><div class="qgrid" style="margin-top:8px">${att.qs.map((q, i) => { const r = att.resp[i]; const cls = r.c != null && r.k ? "a" : r.c != null ? "p" : ""; return `<button class="${cls} ${Math.floor(i / per) === p ? "cur" : ""}" data-a="jump" data-p="${path}" data-i="${i}" aria-label="Question ${i + 1}">${i + 1}</button>`; }).join("")}</div></details>` : "";
+  return `<h1>${esc(title)}</h1>
+   <p class="small muted">Pick an answer, then say how sure you were. Answers stay hidden until you submit. <span class="kbd">A–D</span> picks, <span class="kbd">K</span> <span class="kbd">E</span> <span class="kbd">G</span> rates confidence.</p>
+   <div class="bar grad" style="margin:8px 0 4px"><i style="width:${answered / att.qs.length * 100}%"></i></div>
+   ${grid}${qcards}
+   <div class="sticky-foot">
+     ${pages > 1 ? `<button class="btn ghost" data-a="page" data-p="${path}" data-d="-1" ${p === 0 ? "disabled" : ""}>Previous ${per}</button><span class="small muted">Set ${p + 1} of ${pages}</span>` : ""}
+     ${p < pages - 1 ? `<button class="btn" data-a="page" data-p="${path}" data-d="1">Next ${per}</button>` : `<button class="btn grad" data-a="submit" data-p="${path}" ${answered < att.qs.length ? "disabled" : ""}>Submit ${att.qs.length} answers</button>${answered < att.qs.length ? `<span class="small muted">${att.qs.length - answered} still need an answer and a confidence rating</span>` : ""}`}
+   </div>`;
+}
+function submit(path){
+  const att = attAt(path); if (!att || att.done) return;
+  const src = SRC_OF[path.includes(".") ? (path.startsWith("rev") ? "rev" : path.split(".")[1]) : path];
+  att.qs.forEach((q, i) => E.record(S, q, att.resp[i].c, att.resp[i].k, src));
+  att.done = true; att.finishedAt = Date.now();
+  const an = E.analyzeAttempt(att); att.summary = {correct: an.correct, total: an.total, pct: an.pct, ca: an.caMastery};
+  S.history.push({at: Date.now(), kind: path.split(".").pop().replace(/^L\d$/, ""), path, day: path[0] === "L" ? +path[1] : null, ...att.summary});
+  save();
+  if (path === "final" && an.pct >= 0.8) { setTimeout(() => fireworks(), 150); }
+  else if (an.pct >= 0.8) celebrate(true);
+  else if (an.correct > 0) celebrate(false);
+}
+
+// result review list
+function explain(q, chosen){
+  const f = F(q.fid);
+  if (f.canon) {
+    const list = E.OT.includes(f.b) ? E.OT : E.NT; const grp = E.GROUP_OF[f.b];
+    const books = [...CANON.OT, ...CANON.NT].find(g => g[0] === grp)[1];
+    return `<div class="expl"><div class="seqline">${books.map(b => `<span class="${q.opts[q.ans].split(", ").includes(b) ? "hl" : ""}">${esc(b)}</span>`).join("")}</div><p class="small muted" style="margin-top:6px">${esc(grp)}. ${esc(CANON_TRICKS[grp] || "")}</p><p class="supp">Canonical order is added curriculum, not from the Quizlet cards.</p></div>`;
+  }
+  const raw = RAW[f.e - 1]; const fl = FLAGS[f.e];
+  const others = q.opts.map((o, k) => { if (k === q.ans) return ""; let why = (f.dn && f.dn[o]);
+    if (!why) { const other = FACTS.find(x => x.id !== f.id && (x.a === o || x.ev === o)); if (other) why = q.form === "r" ? `That's ${other.a}.` : `That answer belongs to a different card: ${other.ev || other.q}`; }
+    return `<li${k === chosen ? ' style="font-weight:600"' : ""}>${esc(o)} — ${esc(why || (f.k === "loc" ? "not where the card places it." : "not the card's answer."))}</li>`; }).join("");
+  return `<div class="expl"><p><b>Answer: ${esc(q.opts[q.ans])}.</b> ${esc(f.n || "")}</p>
+   <ul class="small" style="margin:6px 0">${others}</ul>
+   ${f.m ? `<p class="small">💡 ${esc(f.m)}</p>` : ""}
+   ${fl ? `<div class="flag">${esc(fl.msg)}</div>` : ""}
+   <p class="src">Source: card ${f.e}, PDF page ${raw[1]} — “${esc(raw[2])}” → “${esc(raw[3])}”. Notes and memory hooks are added explanation.</p></div>`;
+}
+function resultList(att, path, onlyMissed){
+  const rows = att.qs.map((q, i) => ({q, i, r: att.resp[i]})).filter(x => !onlyMissed || x.r.c !== x.q.ans || x.r.k !== "knew");
+  return rows.map(({q, i, r}) => { const ok = r.c === q.ans; const open = UI.resultOpen[path + i];
+    return `<article class="q"><div class="num">Question ${i + 1} · ${ok ? '<span class="pill good">Correct</span>' : '<span class="pill bad">Missed</span>'} <span class="pill">${CONF.find(c => c[0] === r.k)[1]}</span>${!ok && r.k === "knew" ? ' <span class="pill bad">Misconception</span>' : ""}</div>
+      <div class="stem">${esc(q.stem)}</div>
+      <div class="opts">${q.opts.map((o, k) => `<div class="opt ${k === q.ans ? "right" : k === r.c ? "wrong" : ""}"><span class="k">${"ABCD"[k]}</span><span>${esc(o)}</span></div>`).join("")}</div>
+      ${open || !ok ? explain(q, r.c) : `<button class="btn ghost sm" style="margin-top:10px" data-a="openres" data-k="${path + i}">Show explanation</button>`}</article>`; }).join("");
+}
+function scoreRing(p, label){ return `<div class="ring-score" style="--p:${Math.round(p * 100)}"><div><div><b>${Math.round(p * 100)}%</b><span class="small muted">${label}</span></div></div></div>`; }
+function breakdown(obj, title, sortWeak = true){
+  const rows = Object.entries(obj).map(([k, v]) => ({k, ...v, r: v.c / v.n})).sort((a, b) => sortWeak ? a.r - b.r : b.n - a.n);
+  return `<div class="card"><h3>${title}</h3><table class="t"><tbody>${rows.map(x => `<tr><td>${esc(KINDS[x.k] || x.k)}</td><td style="width:42%"><div class="bar"><i style="width:${x.r * 100}%;${x.r < .8 ? "background:var(--bad)" : ""}"></i><span class="mark" style="left:80%"></span></div></td><td class="small" style="white-space:nowrap">${x.c}/${x.n} · ${pct(x.ev / x.n)} adj.</td></tr>`).join("")}</tbody></table></div>`;
+}
+
+// ---------- diagnostic
+function diagView(){
+  if (S.diag && S.diag.done) return diagResults();
+  if (!S.diag) return `<div class="card" style="padding:24px"><h1>Diagnostic exam</h1>
+    <p class="lead">100 four-choice questions, like the real exam: 90 from your Quizlet cards and 10 on the order of the books.</p>
+    <ul class="muted"><li>Shown 10 at a time. Move back and forth freely.</li><li>After each answer, rate your confidence: Knew, Eliminated, or Guessed. That's how the app tells real knowledge from lucky guesses.</li><li>Nothing is graded until you submit all 100. Progress saves as you go.</li><li>Plan on 60–75 minutes. You can stop and come back.</li></ul>
+    <button class="btn grad" data-a="startDiag">Start the diagnostic</button></div>`;
+  return runner(S.diag, "diag", "Diagnostic exam");
+}
+function diagResults(){
+  const an = E.analyzeAttempt(S.diag); const ins = E.insights(an);
+  const topics = Object.entries(an.topic).map(([k, v]) => ({k, ...v, r: v.c / v.n})).filter(x => x.n >= 2);
+  const weak = topics.slice().sort((a, b) => a.r - b.r || b.n - a.n).slice(0, 5), strong = topics.slice().sort((a, b) => b.ev / b.n - a.ev / a.n).slice(0, 4);
+  const sec = Object.entries(an.section).map(([k, v]) => ({k, ...v}));
+  return `<h1>Diagnostic results</h1>
+  <div class="card"><div class="row" style="gap:22px">${scoreRing(an.pct, "correct")}
+    <div><div class="stat"><b>${an.correct} / 100</b><span class="muted">Pass line is 80. ${an.need80 ? `You need ${an.need80} more correct answers.` : "You're above the line — now make it reliable."}</span></div>
+    <p class="small" style="margin-top:8px">Confidence-adjusted mastery: <b>${pct(an.caMastery)}</b> <span class="muted">— counts a guessed right answer as 30% learned and an eliminated one as 65%.</span></p>
+    <div class="row small"><span class="pill">Old Testament ${an.testament.OT ? `${an.testament.OT.c}/${an.testament.OT.n}` : "—"}</span><span class="pill">New Testament ${an.testament.NT ? `${an.testament.NT.c}/${an.testament.NT.n}` : "—"}</span><span class="pill bad">${an.confWrong.length} confidently wrong</span><span class="pill warn">${an.luckyRight.length} right by guess or elimination</span></div></div></div></div>
+  <div class="card"><h2>What this means</h2>${ins.map(x => `<p>${esc(x)}</p>`).join("") || "<p>Solid across the board. The plan will keep everything warm.</p>"}</div>
+  <div class="grid2"><div class="card"><h3>Biggest gaps</h3>${weak.map(x => `<p class="small"><b>${esc(x.k)}</b> — ${x.c}/${x.n} correct, ${pct(x.ev / x.n)} confidence-adjusted</p>`).join("")}</div>
+   <div class="card"><h3>Strongest areas</h3>${strong.map(x => `<p class="small"><b>${esc(x.k)}</b> — ${x.c}/${x.n} correct, ${pct(x.ev / x.n)} confidence-adjusted</p>`).join("")}</div></div>
+  <div class="grid2">${breakdown(an.kind, "By kind of question")}<div class="card"><h3>By section</h3><table class="t"><tbody>${sec.map(x => `<tr><td>${esc(x.k)}</td><td>${x.c}/${x.n}</td><td class="small muted">${pct(x.ev / x.n)} adj.</td></tr>`).join("")}</tbody></table></div></div>
+  <div class="card"><h3>By book</h3><div class="tablewrap"><table class="t"><thead><tr><th>Book</th><th>Correct</th><th>Adjusted</th></tr></thead><tbody>${Object.entries(an.book).sort((a, b) => a[1].c / a[1].n - b[1].c / b[1].n).map(([k, v]) => `<tr><td>${esc(k)}</td><td>${v.c}/${v.n}</td><td>${pct(v.ev / v.n)}</td></tr>`).join("")}</tbody></table></div></div>
+  <div class="row" style="margin:6px 0 18px"><button class="btn grad" data-a="go" data-v="plan">See my five-lesson plan</button><button class="btn line" data-a="toggleAll" data-p="diag">${UI.showAll ? "Show only misses & unsure" : "Show all 100 answers"}</button></div>
+  <h2>${UI.showAll ? "All answers" : "Missed or unsure"}</h2>${resultList(S.diag, "diag", !UI.showAll)}`;
+}
+
+// ---------- plan
+function planFor(d){ const l = S.lessons[d]; return l && l.plan ? l.plan : E.planDay(S, d); }
+function planView(){
+  if (!S.diag || !S.diag.done) return `<div class="card"><h1>My study plan</h1><p>Your plan is built from your diagnostic. Take it first.</p><button class="btn" data-a="go" data-v="diag">Go to the diagnostic</button></div>`;
+  return `<h1>My five-lesson plan</h1><p class="lead muted">About 85% of each lesson goes to what you missed, guessed, or only narrowed down; about 15% keeps your strengths sharp. Lessons you haven't started re-plan themselves after every quiz.</p>
+  ${[1, 2, 3, 4, 5].map(d => { const p = planFor(d), l = S.lessons[d] || {}; const st = l.stage === "done" ? '<span class="pill good">Done</span>' : l.stage ? '<span class="pill acc">In progress</span>' : unlocked(d) ? '<span class="pill acc">Up next</span>' : '<span class="pill">Locked until the lesson before</span>';
+    const byTopic = {}; p.focus.forEach(id => { const n = topicName(F(id)); byTopic[n] = (byTopic[n] || 0) + 1; });
+    return `<div class="card"><div class="row" style="justify-content:space-between"><h2 style="margin:0">Lesson ${d} · ${DAY_TITLES[d]}</h2>${st}</div>
+    <p class="small muted">${DAY_SUB[d]} · about ${p.minutes} minutes${l.plan ? " · plan locked when you started" : ""}</p>
+    <div class="split" aria-label="Weaknesses ${pct(p.split.weak)}, strengths ${pct(p.split.strong)}"><div class="w" style="width:${p.split.weak * 100}%"></div><div class="s" style="width:${p.split.strong * 100}%"></div></div>
+    <p class="small" style="margin-top:6px"><b>${pct(p.split.weak)}</b> on ${p.focus.length} weak or untested facts${p.canonWeak ? " and book order" : ""} · <b>${pct(p.split.strong)}</b> refreshing ${p.refresh.length} strong facts${!p.canonWeak ? " and book order" : ""}${p.counts.strong <= p.refresh.length && p.split.strong < .13 ? `<span class="muted"> (that's every strong fact in this section)</span>` : ""}</p>
+    <p class="small">${Object.entries(byTopic).map(([k, n]) => `<span class="pill" style="margin:0 4px 4px 0">${esc(k)} · ${n}</span>`).join("")}${p.counts.carried ? `<span class="pill warn">${p.counts.carried} carried over from earlier lessons</span>` : ""}</p>
+    <p class="small muted">Book order: ${p.canonGroups.join(", ")}</p>
+    ${unlocked(d) && l.stage !== "done" ? `<button class="btn sm" data-a="openLesson" data-d="${d}">${l.stage ? "Continue" : "Start"} lesson ${d}</button>` : ""}</div>`; }).join("")}`;
+}
+
+// ---------- lesson flow
+const STAGES = d => [...(d > 1 ? [["recap","Recap"]] : []), ["learn","Learn"], ["memorize","Memorize & repeat"], ["quiz","Recall & quiz"], ...(d === 5 ? [["final","Final exam"]] : [])];
+function stageBar(d, cur){ const s = STAGES(d); const ci = s.findIndex(x => x[0] === cur || (cur === "relearn" && x[0] === "quiz")); return `<div class="stage">${s.map(([k, n], i) => `<span class="${i === ci ? "on" : i < ci ? "ok" : ""}">${i < ci ? "✓ " : ""}${n}</span>`).join("")}</div>`; }
+function startLesson(d){
+  const l = L(d); if (l.stage) return;
+  l.plan = E.planDay(S, d); l.startedAt = Date.now(); l.learn = {i: 0}; l.stage = d > 1 ? "recap" : "learn";
+  if (d > 1) l.recap = newAttempt("recap", E.recapFor(S, d, Date.now() % 1e9), {per: 10});
+  buildMem(l, l.plan.focus, l.plan.refresh); save();
+}
+function modulesFor(l){
+  const mods = []; const seen = new Set();
+  const focus = l.relearn || l.plan.focus;
+  const ordered = focus.slice().sort((a, b) => Object.keys(TOPICS).indexOf(F(a).t) - Object.keys(TOPICS).indexOf(F(b).t));
+  for (const id of ordered) { const t = F(id).t; if (!seen.has(t) && !l.relearn) { seen.add(t); mods.push({type: "topic", t}); } mods.push({type: "fact", id}); }
+  if (!l.relearn) { if (l.plan.refresh.length) mods.push({type: "refresh", ids: l.plan.refresh}); for (const g of l.plan.canonGroups) mods.push({type: "canon", g}); }
+  return mods;
+}
+function buildMem(l, focus, refresh){
+  const cards = [...focus, ...refresh]; const groups = []; for (let i = 0; i < cards.length; i += 5) groups.push(cards.slice(i, i + 5));
+  l.mem = {groups, gi: 0, phase: "cards", queue: groups[0] ? groups[0].slice() : [], misses: {}, ladderIdx: 0};
+}
+function lessonView(){
+  if (!S.diag || !S.diag.done) return `<div class="card"><h1>Today's lesson</h1><p>Take the diagnostic first; lessons are built from it.</p><button class="btn" data-a="go" data-v="diag">Go to the diagnostic</button></div>`;
+  const d = UI.day || Math.min(currentDay(), 5);
+  if (d === 6 || (S.lessons[5] && S.lessons[5].stage === "done" && !UI.day)) return finalResults();
+  const l = L(d);
+  if (!l.stage) { const p = E.planDay(S, d); return `<div class="card lesson" style="padding:24px"><p class="muted small">Lesson ${d} of 5</p><h1>${DAY_TITLES[d]}</h1><p class="muted">${DAY_SUB[d]}</p>${stageBar(d, "")}
+    <p>${p.focus.length} facts to learn${d > 1 ? ", after a short recap of earlier lessons" : ""}. About ${p.minutes} minutes; you can stop anytime and pick up where you left off.</p>
+    ${unlocked(d) ? `<button class="btn grad" data-a="beginLesson" data-d="${d}">Begin lesson ${d}</button>` : `<p class="small muted">Finish lesson ${d - 1} first.</p>`}</div>`; }
+  if (l.stage === "done") return `<div class="card victory"><h1>Lesson ${d} complete 🏆</h1><p class="muted">${l.quiz && l.quiz.summary ? `Quiz: ${l.quiz.summary.correct}/${l.quiz.summary.total}` : ""}</p>${d < 5 ? `<button class="btn grad" data-a="openLesson" data-d="${d + 1}">Go to lesson ${d + 1}</button>` : ""} <button class="btn line" data-a="go" data-v="dash">Dashboard</button></div>`;
+  const head = `<p class="muted small" style="margin:0">Lesson ${d} · ${DAY_TITLES[d]}</p>${stageBar(d, l.stage)}`;
+  if (l.stage === "recap") return head + recapView(d, l);
+  if (l.stage === "learn" || l.stage === "relearnLearn") return head + learnView(d, l);
+  if (l.stage === "memorize" || l.stage === "relearnMem") return head + memView(d, l);
+  if (l.stage === "quiz") return head + quizStage(d, l);
+  if (l.stage === "retake") return head + (l.retake.done ? quizResults(d, l, l.retake, `L${d}.retake`, true) : runner(l.retake, `L${d}.retake`, "Retake: new wording"));
+  if (l.stage === "final") return head + finalStage();
+  return head;
+}
+function recapView(d, l){
+  const att = l.recap;
+  if (!l.recapRead) {
+    const prev = S.lessons[d - 1] && S.lessons[d - 1].plan; const ids = (prev ? prev.focus : []).slice().sort((a, b) => E.severity(S, b) - E.severity(S, a)).slice(0, 6);
+    return `<div class="card"><h2>Recap: lesson ${d - 1}</h2><p class="muted small">The facts from last time that still need the most work.</p>
+      <table class="t"><tbody>${ids.map(id => { const f = F(id); return `<tr><td>${esc(f.ev || f.q)}</td><td><b>${esc(f.a)}</b></td></tr>`; }).join("")}</tbody></table>
+      <p class="small muted" style="margin-top:10px">Next: ${att.qs.length} quick questions mixing last lesson with earlier ones.</p><button class="btn" data-a="recapRead">Start the recap questions</button></div>`;
+  }
+  if (!att.done) return runner(att, `L${d}.recap`, "Recap questions");
+  const s = att.summary;
+  return `<div class="card"><h2>Recap: ${s.correct}/${s.total}</h2><p class="muted">Missed items move to the top of your review queue.</p><button class="btn grad" data-a="toStage" data-d="${d}" data-s="learn">Start today's lesson</button></div>${resultList(att, `L${d}.recap`, true)}`;
+}
+function learnView(d, l){
+  const mods = modulesFor(l); const i = Math.min(l.learn.i, mods.length - 1); const m = mods[i];
+  const nav = `<div class="row" style="justify-content:space-between;margin-bottom:8px"><span class="small muted">Learn · ${i + 1} of ${mods.length}</span><div class="bar" style="flex:1;max-width:260px"><i style="width:${(i + 1) / mods.length * 100}%"></i></div></div>`;
+  const cont = `<button class="btn" data-a="learnNext" data-d="${d}">${i === mods.length - 1 ? "Done learning — memorize" : "Continue"}</button>`;
+  const back = i > 0 ? `<button class="btn ghost" data-a="learnPrev" data-d="${d}">Back</button>` : "";
+  if (m.type === "topic") { const T = TOPICS[m.t]; const n = l.plan.focus.filter(id => F(id).t === m.t).length;
+    return nav + `<div class="card lesson"><span class="pill acc">${esc(SECTIONS[T.sec].name)}</span><h2 style="margin-top:8px">${esc(T.name)}</h2><p class="lead">${esc(T.intro)}</p>
+     <p class="small muted">${n} fact${n > 1 ? "s" : ""} from this topic are on your list.</p>
+     ${UI.panel === "context" ? `<div class="panel"><b>The big picture.</b> ${esc(T.context)}</div>` : ""}
+     ${UI.panel === "confuse" ? `<div class="panel"><b>Commonly confused.</b> ${esc(T.confuse)}</div>` : ""}
+     ${UI.panel === "trick" ? `<div class="panel">💡 ${esc(T.trick)}</div>` : ""}
+     ${UI.panel === "exam" ? `<div class="panel"><b>How it shows up on the exam.</b> ${esc(T.exam)}</div>` : ""}
+     <div class="controls">${[["context","Show the biblical context"],["confuse","What gets confused"],["trick","Give me a memory trick"],["exam","Likely exam questions"]].map(([k, n]) => `<button class="btn line sm" data-a="panel" data-k="${k}">${n}</button>`).join("")}</div>
+     <div class="controls">${back}${cont}</div><p class="supp" style="margin-top:10px">Topic overviews are added explanation built around your cards.</p></div>`; }
+  if (m.type === "fact") { const f = F(m.id), s = E.factStats(S, m.id), raw = RAW[f.e - 1], T = TOPICS[f.t];
+    const why = s.misconception ? '<span class="pill bad">You were confident but wrong</span>' : s.status === "unassessed" ? '<span class="pill">Not tested yet</span>' : s.last && !s.last[1] ? '<span class="pill bad">Missed</span>' : s.last && s.last[2] === "guess" ? '<span class="pill warn">Guessed right</span>' : s.last && s.last[2] === "elim" ? '<span class="pill warn">Narrowed it down</span>' : "";
+    const tutor = S.tutor[m.id];
+    return nav + `<div class="card lesson"><div class="row"><span class="small muted">${esc(T.name)}</span>${why}</div>
+     <p style="margin-top:10px;font-size:16px">${esc(f.ev ? f.ev : f.q)}</p>
+     <div class="big-answer">${esc(f.ev ? f.a : f.a)}</div>
+     ${UI.panel === "simple" ? `<div class="panel"><b>In one line:</b> ${esc(f.ev ? `${f.ev} → ${f.a}` : `${f.q} ${f.a}.`)}</div>` : `<p>${esc(f.n || "")}</p>`}
+     ${UI.panel === "trick" ? `<div class="panel">💡 ${esc(f.m || T.trick)}</div>` : ""}
+     ${UI.panel === "context" ? `<div class="panel">${esc(T.context)}</div>` : ""}
+     ${UI.panel === "more" ? `<div class="panel">${f.dn ? `<b>Don't confuse it with:</b><ul style="margin:6px 0">${Object.entries(f.dn).map(([k, v]) => `<li>${esc(v)}</li>`).join("")}</ul>` : `<b>Watch for:</b> ${esc(T.confuse)}`}
+        ${tutor ? `<p style="margin-top:8px">${esc(tutor)}</p><p class="supp">From the AI tutor — added explanation, not from your cards.</p>` : ""}</div>` : ""}
+     ${FLAGS[f.e] ? `<div class="flag">${esc(FLAGS[f.e].msg)}</div>` : ""}
+     <div class="controls">${[["more","Explain more"],["simple","Simplify this"],["trick","Give me a memory trick"],["context","Show the biblical context"]].map(([k, n]) => `<button class="btn line sm" data-a="panel" data-k="${k}">${n}</button>`).join("")}<button class="btn line sm" data-a="reviewAgain" data-d="${d}">Review this topic again</button></div>
+     <div class="controls">${back}${cont}</div>
+     <p class="src small muted" style="margin-top:10px">Card ${f.e}, page ${raw[1]}: “${esc(raw[2])}” → “${esc(raw[3])}”</p></div>`; }
+  if (m.type === "refresh") return nav + `<div class="card lesson"><span class="pill good">Strengths · quick refresh</span><h2 style="margin-top:8px">Keep these sharp</h2><p class="small muted">You answered these confidently. A fast look keeps them that way.</p>
+     <table class="t"><tbody>${m.ids.map(id => { const f = F(id); return `<tr><td>${esc(f.ev || f.q)}</td><td><b>${esc(f.a)}</b></td></tr>`; }).join("")}</tbody></table><div class="controls">${back}${cont}</div></div>`;
+  if (m.type === "canon") { const [, books] = [...CANON.OT, ...CANON.NT].find(g => g[0] === m.g); const tr = TRANSITIONS.filter(([a, b]) => books.includes(a) || books.includes(b));
+    return nav + `<div class="card lesson"><span class="pill acc">Order of the books</span><h2 style="margin-top:8px">${esc(m.g)}</h2>
+     <div class="seqline" style="margin:10px 0">${books.map((b, i) => `<span>${i + 1}. ${esc(b)}</span>`).join("")}</div>
+     <div class="panel">💡 ${esc(CANON_TRICKS[m.g])}</div>
+     ${tr.length ? `<p class="small" style="margin-top:10px"><b>Seams to watch:</b> ${tr.map(([a, b]) => `${esc(a)} → ${esc(b)}`).join(" · ")}</p>` : ""}
+     <div class="controls">${back}${cont}</div><p class="supp">Canonical order is added curriculum.</p></div>`; }
+}
+function memView(d, l){
+  const M = l.mem; const g = M.groups[M.gi];
+  const skip = `<button class="btn line sm" data-a="memSkip" data-d="${d}">Skip to the quiz</button>`;
+  const head = `<div class="row" style="justify-content:space-between;margin-bottom:6px"><span class="small muted">Memorize · group ${Math.min(M.gi + 1, M.groups.length)} of ${M.groups.length}${M.phase === "ladder" ? " · book order" : ""}</span>${l.stage === "memorize" ? skip : ""}</div>`;
+  if (M.phase === "cards" && M.queue.length) {
+    const id = M.queue[0], f = F(id);
+    return head + `<p class="small muted">Say the answer out loud before you flip. Cards you miss come back sooner.</p>
+      <div class="flash ${UI.flip ? "back" : ""}"><div class="face">${UI.flip ? `<div class="muted small">${esc(f.ev || f.q)}</div><div class="big">${esc(f.a)}</div>${f.m ? `<div class="small">💡 ${esc(f.m)}</div>` : ""}` : `<div class="small muted">${esc(TOPICS[f.t].name)}</div><div class="big">${esc(f.ev ? f.ev : f.q)}</div><div class="small muted">${f.ev ? "Where is it?" : ""}</div>`}</div></div>
+      <div class="row" style="justify-content:center">${UI.flip ? `<button class="btn ghost" data-a="memGrade" data-d="${d}" data-ok="0">Not yet</button><button class="btn" data-a="memGrade" data-d="${d}" data-ok="1">Got it</button>` : `<button class="btn" data-a="flip">Flip card</button>`}</div>
+      <p class="small muted" style="text-align:center;margin-top:8px">${M.queue.length} card${M.queue.length > 1 ? "s" : ""} left in this group</p>`;
+  }
+  if (M.phase === "cards") { M.phase = "match"; UI.sel = null; UI.matchDone = []; }
+  if (M.phase === "match") {
+    const pairs = matchPairs(g);
+    if (pairs.length < 3) return nextMemGroup(d, l) || memView(d, l);
+    const left = pairs, right = E.shuffle(pairs, E.rng(M.gi + 7));
+    return head + `<h2>Match them</h2><p class="small muted">Tap a prompt, then its answer.</p><div class="match">
+      <div class="chips" style="flex-direction:column">${left.map(p => `<button class="chip ${UI.matchDone.includes(p.id) ? "done" : ""} ${UI.sel === p.id ? "sel" : ""}" data-a="mL" data-id="${p.id}" ${UI.matchDone.includes(p.id) ? "disabled" : ""}>${esc(p.l)}</button>`).join("")}</div>
+      <div class="chips" style="flex-direction:column">${right.map(p => `<button class="chip ${UI.matchDone.includes(p.id) ? "done" : ""} ${UI.shake === p.id ? "shake" : ""}" data-a="mR" data-d="${d}" data-id="${p.id}" ${UI.matchDone.includes(p.id) ? "disabled" : ""}>${esc(p.r)}</button>`).join("")}</div></div>`;
+  }
+  if (M.phase === "ladder") {
+    const groups = l.plan.canonGroups; const g2 = groups[M.ladderIdx]; if (!g2) { return head + `<div class="card victory"><h2>Memorization done</h2><p class="muted">${Object.values(M.misses).filter(x => x >= 2).length ? `${Object.values(M.misses).filter(x => x >= 2).length} cards took several tries; they'll come back in your review queue.` : "Every card stuck. Nice."}</p><button class="btn grad" data-a="toStage" data-d="${d}" data-s="${l.stage === "relearnMem" ? "retake" : "quiz"}">${l.stage === "relearnMem" ? "Retake with new wording" : "Start the 20-question quiz"}</button></div>`; }
+    const books = [...CANON.OT, ...CANON.NT].find(x => x[0] === g2)[1];
+    const chunk = books.length > 7 ? books.slice(0, Math.ceil(books.length / 2)) : books; const chunk2 = books.length > 7 ? books.slice(Math.ceil(books.length / 2)) : null;
+    const part = UI.ladderPart || 0; const target = part === 0 ? chunk : chunk2;
+    const shuffled = E.shuffle(target, E.rng(M.ladderIdx * 13 + part + 3));
+    return head + `<h2>Book-order ladder: ${esc(g2)}${chunk2 ? ` (part ${part + 1} of 2)` : ""}</h2><p class="small muted">Tap the books in canonical order.${part === 1 ? ` Starts after ${esc(chunk[chunk.length - 1])}.` : ""}</p>
+      <div class="seqline" style="min-height:34px;margin:10px 0">${UI.ladder.map(b => `<span class="hl">${esc(b)}</span>`).join("")}</div>
+      <div class="chips">${shuffled.map(b => `<button class="chip ${UI.ladder.includes(b) ? "done" : ""} ${UI.shake === b ? "shake" : ""}" data-a="ladder" data-d="${d}" data-b="${esc(b)}" ${UI.ladder.includes(b) ? "disabled" : ""}>${esc(b)}</button>`).join("")}</div>
+      <p class="small" style="margin-top:12px">💡 ${esc(CANON_TRICKS[g2])}</p>`;
+  }
+  return "";
+}
+function matchPairs(g){ const seen = new Set(); return (g || []).map(id => F(id)).filter(f => { if (seen.has(f.a)) return false; seen.add(f.a); return true; }).slice(0, 5).map(f => ({id: f.id, l: f.ev || f.q, r: f.a})); }
+function nextMemGroup(d, l){ const M = l.mem; M.gi++; UI.sel = null; UI.matchDone = []; if (M.gi < M.groups.length) { M.phase = "cards"; M.queue = M.groups[M.gi].slice(); } else { M.phase = "ladder"; M.ladderIdx = l.stage === "relearnMem" ? 99 : 0; UI.ladder = []; UI.ladderPart = 0; } save(); return null; }
+function quizStage(d, l){
+  if (!l.quiz) { l.quiz = newAttempt("quiz", E.quizFor(S, l.plan, Date.now() % 1e9)); save(); }
+  if (!l.quiz.done) return runner(l.quiz, `L${d}.quiz`, `Lesson ${d} quiz`);
+  return quizResults(d, l, l.quiz, `L${d}.quiz`, false);
+}
+function quizResults(d, l, att, path, isRetake){
+  const an = E.analyzeAttempt(att); const missed = [...new Set(an.rows.filter(x => !x.ok || x.conf !== "knew").map(x => x.q.fid).filter(id => !id.startsWith("c:")))];
+  const topics = Object.entries(an.topic).map(([k, v]) => `<tr><td>${esc(k)}</td><td>${v.c}/${v.n}</td><td class="small muted">${pct(v.ev / v.n)} adj.</td></tr>`).join("");
+  const finish = d === 5 ? `<button class="btn grad" data-a="toStage" data-d="5" data-s="final">Go to the final practice exam</button>` : `<button class="btn grad" data-a="finishLesson" data-d="${d}">Finish lesson ${d}</button>`;
+  return `<div class="card"><div class="row" style="gap:20px">${scoreRing(an.pct, isRetake ? "retake" : "quiz")}<div>
+    <h2>${an.correct}/${an.total}${an.pct >= .8 ? " — above the pass line" : ""}</h2>
+    <p class="small">Confidence-adjusted: <b>${pct(an.caMastery)}</b>. Knew it: ${an.rows.filter(x => x.ok && x.conf === "knew").length} · Eliminated: ${an.rows.filter(x => x.ok && x.conf === "elim").length} · Guessed right: ${an.rows.filter(x => x.ok && x.conf === "guess").length} · Missed: ${an.total - an.correct}</p>
+    <div class="row">${missed.length && !isRetake ? `<button class="btn" data-a="relearn" data-d="${d}">Relearn ${missed.length} shaky fact${missed.length > 1 ? "s" : ""}, then retake</button>` : ""}${finish}</div></div></div></div>
+    <div class="card"><h3>By topic</h3><table class="t"><tbody>${topics}</tbody></table></div>
+    <h2>Explanations</h2>${resultList(att, path, false)}`;
+}
+function finalStage(){
+  if (!S.final) return `<div class="card"><h1>Final practice exam</h1><p class="lead">100 questions across both testaments, worded differently from your diagnostic wherever the cards allow.</p>
+     <p class="small muted">Same rules: confidence for every answer, nothing revealed until you submit. 60–75 minutes; progress saves.</p><button class="btn grad" data-a="startFinal">Start the final exam</button></div>`;
+  if (!S.final.done) return runner(S.final, "final", "Final practice exam");
+  return finalResults();
+}
+function finalView(){ return finalStage(); }
+
+// ---------- readiness
+function finalResults(){
+  if (!S.final || !S.final.done) return finalStage();
+  const a = E.analyzeAttempt(S.diag), b = E.analyzeAttempt(S.final); const rd = E.readiness(S);
+  const secs = [...new Set([...Object.keys(a.section), ...Object.keys(b.section)])];
+  const reused = S.final.qs.filter(q => S.diag.qs.some(x => x.qid === q.qid)).length;
+  const verdict = b.pct >= .85 ? ["On target", "good", "Your practice score is at or above the 85% preparation target."] : b.pct >= .8 ? ["Passing range, thin margin", "warn", "You're above 80%, but a few unlucky questions could drop you under. Keep reviewing your weak list."] : ["Not there yet", "bad", `You need ${b.need80} more correct to reach 80%. Use Review daily on the misses below.`];
+  const misc = b.confWrong.map(x => x.q);
+  const canonA = a.kind.canon, canonB = b.kind.canon;
+  return `<h1>Exam readiness</h1>
+  ${b.pct >= .8 ? `<div class="card victory"><h2>🎆 You passed the practice exam! 🎆</h2><p class="muted">All I do is win.</p><div class="row" style="justify-content:center"><button class="btn" data-a="fireworks">Replay fireworks</button><a class="btn" style="background:var(--ink);color:var(--card);text-decoration:none" href="https://www.youtube.com/results?search_query=DJ+Khaled+All+I+Do+Is+Win" target="_blank" rel="noopener noreferrer">🎵 Play the victory song</a></div></div>` : ""}
+  <div class="card"><div class="row" style="gap:24px">${scoreRing(b.pct, "final")}<div>
+    <span class="pill ${verdict[1]}">${verdict[0]}</span><h2 style="margin-top:6px">${b.correct}/100 on the final · ${a.correct}/100 on the diagnostic</h2>
+    <p>${verdict[2]}</p><p class="small muted">A practice score can't guarantee the real result. The real exam draws on more material than the 100 cards in your PDF.</p></div></div></div>
+  <div class="grid3"><div class="card stat"><span class="small muted">Change in score</span><b>${b.correct - a.correct >= 0 ? "+" : ""}${b.correct - a.correct}</b></div>
+   <div class="card stat"><span class="small muted">Confidence-adjusted</span><b>${pct(a.caMastery)} → ${pct(b.caMastery)}</b></div>
+   <div class="card stat"><span class="small muted">Book order</span><b>${canonA ? pct(canonA.c / canonA.n) : "—"} → ${canonB ? pct(canonB.c / canonB.n) : "—"}</b></div></div>
+  <div class="card"><h3>By section: diagnostic → final</h3><table class="t"><thead><tr><th>Section</th><th>Diagnostic</th><th>Final</th></tr></thead><tbody>${secs.map(k => { const x = a.section[k], y = b.section[k]; return `<tr><td>${esc(k)}</td><td>${x ? `${x.c}/${x.n}` : "—"}</td><td>${y ? `${y.c}/${y.n}` : "—"} ${x && y ? (y.c / y.n > x.c / x.n ? '<span class="pill good">↑</span>' : y.c / y.n < x.c / x.n ? '<span class="pill bad">↓</span>' : "") : ""}</td></tr>`; }).join("")}</tbody></table></div>
+  <div class="card"><h3>Remaining misconceptions (${misc.length})</h3>${misc.length ? `<ul class="small">${misc.map(q => `<li>${esc(q.stem)} — <b>${esc(q.opts[q.ans])}</b></li>`).join("")}</ul>` : "<p class='small'>None. Every confident answer was right.</p>"}</div>
+  <p class="small muted">${reused} of the 100 final questions repeated a diagnostic question word for word; the rest tested new facts or new wording. Estimated readiness across all material: ${pct(rd.est)} (an estimate, not a score).</p>
+  <div class="row"><button class="btn" data-a="go" data-v="review">Keep reviewing</button><button class="btn line" data-a="toggleAll" data-p="final">${UI.showAll ? "Show only misses" : "Show all answers"}</button></div>
+  <h2 style="margin-top:16px">${UI.showAll ? "All answers" : "Misses and unsure answers"}</h2>${resultList(S.final, "final", !UI.showAll)}`;
+}
+
+// ---------- review (spaced repetition + evening mode)
+function reviewView(){
+  if (!S.diag || !S.diag.done) return `<div class="card"><h1>Review</h1><p>Review fills up after your diagnostic.</p></div>`;
+  const R = S.rev;
+  if (R && !R.done) {
+    if (R.stage === "learn") { const id = R.ids[R.i], f = F(id);
+      return `<p class="small muted">Evening review · learn ${R.i + 1} of ${R.ids.length}</p><div class="card lesson"><p style="font-size:16px">${esc(f.ev || f.q)}</p><div class="big-answer">${esc(f.a)}</div><p>${esc(f.n || "")}</p>${f.m ? `<div class="panel">💡 ${esc(f.m)}</div>` : ""}<div class="controls"><button class="btn" data-a="revNext">${R.i === R.ids.length - 1 ? "Quiz me" : "Next"}</button></div></div>`; }
+    if (!R.quiz.done) return runner(R.quiz, "rev.quiz", R.title);
+    return `<div class="card"><h2>${R.quiz.summary.correct}/${R.quiz.summary.total}</h2><button class="btn" data-a="revDone">Back to review</button></div>${resultList(R.quiz, "rev.quiz", false)}`;
+  }
+  const due = E.dueReview(S, 50); const c = E.counts(S);
+  const weakest = FACTS.filter(f => E.factStats(S, f.id).status === "weak").sort((a, b) => E.severity(S, b.id) - E.severity(S, a.id)).slice(0, 8);
+  return `<h1>Review</h1><p class="lead muted">Spaced repetition: facts you miss come back tomorrow; facts you know confidently come back after 2, 4, 7, then 14 days.</p>
+  <div class="grid3"><div class="card stat"><span class="small muted">Due now</span><b>${due.length}</b></div><div class="card stat"><span class="small muted">Weak</span><b>${c.weak}</b></div><div class="card stat"><span class="small muted">Mastered</span><b>${c.mastered}</b></div></div>
+  <div class="grid2"><div class="card"><h2>15-minute evening review</h2><p class="small">Six of your weakest due facts: a quick teach, then a 6-question check. No full exam.</p><button class="btn grad" data-a="startRev" data-k="evening" ${due.length + c.weak ? "" : "disabled"}>Start evening review</button></div>
+  <div class="card"><h2>Targeted drills</h2><p class="small">Ten questions in new wording.</p><div class="row"><button class="btn line sm" data-a="startRev" data-k="weak">Weakest areas</button><button class="btn line sm" data-a="startRev" data-k="canon">Book order</button></div></div></div>
+  <div class="card"><h3>Coming up</h3>${weakest.length ? `<table class="t"><tbody>${weakest.map(f => { const s = E.factStats(S, f.id); return `<tr><td>${esc(f.ev || f.q)}</td><td><b>${esc(f.a)}</b></td><td class="small">${s.misconception ? '<span class="pill bad">Misconception</span>' : `<span class="pill">${pct(s.mastery)}</span>`}</td></tr>`; }).join("")}</tbody></table>` : "<p class='small'>Nothing weak right now.</p>"}</div>`;
+}
+function startRev(kind){
+  const seed = Date.now() % 1e9, r = E.rng(seed);
+  let ids = E.dueReview(S, 6); if (ids.length < 6) ids = [...new Set(ids.concat(FACTS.filter(f => E.factStats(S, f.id).status === "weak").sort((a, b) => E.severity(S, b.id) - E.severity(S, a.id)).map(f => f.id)))].slice(0, 6);
+  if (kind === "evening") { const qs = ids.map(id => { const f = F(id), fm = E.formsFor(f); return E.buildQ(f, fm[fm.length - 1], r); }); S.rev = {kind, ids, i: 0, stage: "learn", quiz: newAttempt("rev", qs), title: "Evening review check"}; }
+  if (kind === "weak") { const pool = FACTS.filter(f => E.factStats(S, f.id).status !== "mastered").sort((a, b) => E.severity(S, b.id) - E.severity(S, a.id)).slice(0, 10); const qs = pool.map(f => { const fm = E.formsFor(f); return E.buildQ(f, fm[Math.floor(r() * fm.length)], r); }); S.rev = {kind, stage: "quiz", quiz: newAttempt("rev", qs), title: "Weakest areas drill"}; }
+  if (kind === "canon") { const all = [...CANON.OT, ...CANON.NT].map(g => g[0]); S.rev = {kind, stage: "quiz", quiz: newAttempt("rev", E.canonQuestions(all, 10, r)), title: "Book order drill"}; }
+  save(); render();
+}
+
+// ---------- progress
+function progressView(){
+  if (!S.diag || !S.diag.done) return `<div class="card"><h1>Progress</h1><p>No data yet. Every number here comes from your own answers, starting with the diagnostic.</p></div>`;
+  const byBook = E.aggregate(S, f => f.canon ? null : f.b), byTest = E.aggregate(S, f => f.canon ? f.tm : E.testament(f)), byKind = E.aggregate(S, f => f.k), byTopic = E.aggregate(S, f => f.canon ? "Canonical order: " + f.group : TOPICS[f.t].name);
+  const tbl = (o, label) => `<div class="tablewrap"><table class="t"><thead><tr><th>${label}</th><th>Accuracy</th><th>Mastery</th><th>Answers</th><th>Weak facts</th></tr></thead><tbody>${Object.entries(o).sort((a, b) => (a[1].mastery == null ? 2 : a[1].mastery) - (b[1].mastery == null ? 2 : b[1].mastery)).map(([k, v]) => `<tr><td>${esc(KINDS[k] || k)}</td><td>${v.acc == null ? '<span class="pill">Unassessed</span>' : pct(v.acc)}</td><td style="min-width:110px">${v.mastery == null ? "—" : `<div class="bar"><i style="width:${v.mastery * 100}%"></i></div>`}</td><td class="small muted">${v.n}</td><td>${v.weak || ""}</td></tr>`).join("")}</tbody></table></div>`;
+  const hist = S.history.slice(-14);
+  return `<h1>Progress</h1>
+  <div class="grid2"><div class="card"><h3>By testament</h3>${tbl(byTest, "Testament")}</div><div class="card"><h3>By kind of knowledge</h3>${tbl(byKind, "Kind")}</div></div>
+  <div class="card"><h3>Recent scores</h3>${hist.length ? `<div class="row" style="align-items:flex-end;gap:6px;height:120px">${hist.map(h => `<div title="${esc(h.kind)} ${h.correct}/${h.total}" style="flex:1;display:flex;flex-direction:column;align-items:center;gap:4px;height:100%;justify-content:flex-end"><span class="small">${Math.round(h.pct * 100)}</span><div style="width:100%;max-width:34px;height:${h.pct * 90}px;border-radius:6px 6px 2px 2px;background:${h.pct >= .8 ? "var(--good)" : "var(--accent)"}"></div><span class="small muted">${h.kind === "diag" ? "Diag" : h.kind === "final" ? "Final" : h.day ? "L" + h.day : "Rev"}</span></div>`).join("")}</div><p class="small muted">Green bars are at or above 80%.</p>` : ""}</div>
+  <div class="card"><h3>By topic</h3>${tbl(byTopic, "Topic")}</div>
+  <div class="card"><h3>By book</h3>${tbl(byBook, "Book")}</div>
+  <p class="small muted">Accuracy is raw percent correct. Mastery weighs confidence (guessed right counts 30%, eliminated 65%), favors recent answers, and needs at least two confident correct answers before a fact is called mastered.</p>`;
+}
+
+// ---------- dashboard
+function dash(){
+  if (!S.diag) return `<div class="card" style="padding:26px"><h1>Prepare for the RTS English Bible Exam</h1><p class="lead muted">Your 100 Quizlet cards are loaded. A 100-question diagnostic finds what you don't know yet; then five lessons teach it, drill it, and quiz you in the exam's four-choice format. The pass line is 80%.</p><div class="stage">${["Diagnose","Learn","Memorize & repeat","Recall & quiz","Improve"].map(x => `<span>${x}</span>`).join("")}</div><div class="row"><button class="btn grad" data-a="go" data-v="diag">Take the diagnostic</button><button class="btn line" data-a="go" data-v="import">See your cards</button></div></div>`;
+  if (!S.diag.done) { const n = S.diag.resp.filter(r => r.c != null && r.k).length; return `<div class="card" style="padding:24px"><h1>Diagnostic in progress</h1><p>${n} of 100 answered.</p><div class="bar grad"><i style="width:${n}%"></i></div><p></p><button class="btn grad" data-a="go" data-v="diag">Resume the diagnostic</button></div>`; }
+  const an = E.analyzeAttempt(S.diag), c = E.counts(S), rd = E.readiness(S), cd = currentDay();
+  const stories = [1, 2, 3, 4, 5].map(d => { const l = S.lessons[d] || {}; const cls = l.stage === "done" ? "done" : unlocked(d) ? "" : "locked"; return `<button class="story ${cls}" data-a="openLesson" data-d="${d}" ${cls === "locked" ? 'aria-disabled="true"' : ""}><span class="o"><span class="in">${l.stage === "done" ? "✓" : d}</span></span><small>${DAY_TITLES[d]}</small></button>`; }).join("");
+  const l = cd <= 5 ? S.lessons[cd] || {} : null; const stName = l && l.stage ? (STAGES(cd).find(s => s[0] === l.stage) || ["", l.stage.startsWith("relearn") ? "Relearn" : l.stage === "retake" ? "Retake" : ""])[1] : "Not started";
+  const topics = E.aggregate(S, f => f.canon ? "Canonical order" : TOPICS[f.t].name); const tl = Object.entries(topics).filter(([, v]) => v.mastery != null);
+  const weakT = tl.slice().sort((a, b) => a[1].mastery - b[1].mastery).slice(0, 4), strongT = tl.slice().sort((a, b) => b[1].mastery - a[1].mastery).slice(0, 3);
+  const canon = E.aggregate(S, () => "c", E.CANON_FACTS.map(x => x.id)).c || {}; const due = E.dueReview(S, 99).length;
+  const test = E.aggregate(S, f => f.canon ? f.tm : E.testament(f));
+  const lastQ = S.history.filter(h => h.kind !== "diag").slice(-5);
+  return `<div class="card"><div class="stories" role="list" aria-label="Lessons">${stories}</div></div>
+  <div class="card"><div class="row" style="justify-content:space-between"><div><p class="small muted" style="margin:0">${cd <= 5 ? `Lesson ${cd} · ${stName}` : "All five lessons done"}</p><h2 style="margin:2px 0 4px">${cd <= 5 ? DAY_TITLES[cd] : "Exam readiness"}</h2>
+    <p class="small muted" style="margin:0">${cd <= 5 ? `Why: ${planFor(cd).focus.length} facts here are weak or untested for you.` : "See how far you've come."}</p></div>
+    <button class="btn grad" data-a="${cd <= 5 ? "openLesson" : "go"}" data-d="${cd}" data-v="finalResults">${cd <= 5 ? (l && l.stage ? "Continue" : "Start") : "Open report"}</button></div></div>
+  <div class="grid3">
+    <div class="card stat"><span class="small muted">Diagnostic</span><b>${an.correct}/100</b><div class="bar" style="margin-top:6px"><i style="width:${an.correct}%"></i><span class="mark" style="left:80%"></span></div><span class="small muted">Pass line 80 · adjusted ${pct(an.caMastery)}</span></div>
+    <div class="card stat"><span class="small muted">Facts mastered</span><b>${c.mastered}<span class="muted" style="font-size:15px"> / ${FACTS.length}</span></b><span class="small muted">${c.review} need review · ${c.unassessed} untested</span></div>
+    <div class="card stat"><span class="small muted">Estimated readiness</span><b>${pct(rd.est)}</b><span class="small muted">An estimate from your answers, not a score. Based on ${rd.assessed} of ${rd.total} items.</span></div>
+  </div>
+  <div class="grid2">
+    <div class="card"><h3>Where you're struggling</h3>${weakT.map(([k, v]) => `<div style="margin-bottom:8px"><div class="row small" style="justify-content:space-between"><span>${esc(k)}</span><span class="muted">${pct(v.mastery)}</span></div><div class="bar"><i style="width:${v.mastery * 100}%;background:var(--bad)"></i></div></div>`).join("")}</div>
+    <div class="card"><h3>What you've got</h3>${strongT.map(([k, v]) => `<div style="margin-bottom:8px"><div class="row small" style="justify-content:space-between"><span>${esc(k)}</span><span class="muted">${pct(v.mastery)}</span></div><div class="bar"><i style="width:${v.mastery * 100}%;background:var(--good)"></i></div></div>`).join("")}
+      <p class="small muted">Mastery is confidence-adjusted.</p></div>
+  </div>
+  <div class="grid3">
+    <div class="card stat"><span class="small muted">Old / New Testament mastery</span><b>${pct(test.OT && test.OT.mastery)} · ${pct(test.NT && test.NT.mastery)}</b></div>
+    <div class="card stat"><span class="small muted">Book order mastery</span><b>${pct(canon.mastery)}</b><span class="small muted">${canon.assessed || 0} of 66 books answered</span></div>
+    <div class="card stat"><span class="small muted">Review due</span><b>${due}</b><button class="btn line sm" style="margin-top:6px;align-self:flex-start" data-a="go" data-v="review">Open review</button></div>
+  </div>
+  ${lastQ.length ? `<div class="card"><h3>Recent quizzes</h3><div class="row">${lastQ.map(h => `<span class="pill ${h.pct >= .8 ? "good" : ""}">${h.kind === "final" ? "Final" : h.day ? `Lesson ${h.day} ${h.kind}` : "Review"}: ${h.correct}/${h.total}</span>`).join("")}</div></div>` : ""}
+  <p class="small muted"><span id="sync"></span> · <button class="btn line sm" data-a="go" data-v="import">Source cards</button> <button class="btn line sm" data-a="reset">Start over</button></p>`;
+}
+
+// ---------- events
+document.addEventListener("click", async e => {
+  const b = e.target.closest("[data-a]"); if (!b) return; const a = b.dataset.a, ds = b.dataset;
+  const d = +ds.d;
+  switch (a) {
+    case "go": UI.day = null; UI.showAll = false; go(ds.v); break;
+    case "theme": { const r = document.documentElement; const dark = r.dataset.theme ? r.dataset.theme === "dark" : matchMedia("(prefers-color-scheme: dark)").matches; r.dataset.theme = dark ? "light" : "dark"; S.theme = r.dataset.theme; save(); render(); break; }
+    case "useBuiltIn": S.imported = {at: Date.now(), builtIn: true, matched: RAW.map(r => r[0]), pages: 19}; save(); go("import"); break;
+    case "ifilter": UI.importFilter = ds.k; render(); break;
+    case "startDiag": S.diag = newAttempt("diag", E.diagnostic(Date.now() % 1e9)); save(); render(); break;
+    case "pick": { const att = attAt(ds.p); if (att.done) break; att.resp[+ds.i].c = +ds.k; save(); render(); focusQ(+ds.i); break; }
+    case "conf": { const att = attAt(ds.p); if (att.done) break; att.resp[+ds.i].k = ds.k; save(); render(); focusQ(+ds.i + 1, true); break; }
+    case "page": { const att = attAt(ds.p); att.page = Math.max(0, att.page + +ds.d); save(); render(); window.scrollTo({top: 0}); break; }
+    case "jump": { const att = attAt(ds.p); att.page = Math.floor(+ds.i / att.per); save(); render(); focusQ(+ds.i); break; }
+    case "submit": submit(ds.p); if (ds.p === "diag") UI.view = "diagResults"; render(); window.scrollTo({top: 0}); break;
+    case "openres": UI.resultOpen[ds.k] = 1; render(); break;
+    case "toggleAll": UI.showAll = !UI.showAll; render(); break;
+    case "openLesson": if (!unlocked(d) && !(S.lessons[d] && S.lessons[d].stage)) { toast(S.diag && S.diag.done ? `Finish lesson ${d - 1} first` : "Take the diagnostic first"); break; } UI.day = d; go("lesson"); break;
+    case "beginLesson": startLesson(d); UI.day = d; render(); break;
+    case "recapRead": L(UI.day).recapRead = true; save(); render(); break;
+    case "toStage": { const l = L(d); if (ds.s === "retake") { l.retake = newAttempt("retake", relearnQuiz(l)); } l.stage = ds.s; UI.panel = null; UI.flip = false; save(); UI.day = d; render(); window.scrollTo({top: 0}); break; }
+    case "learnNext": { const l = L(d); const n = modulesFor(l).length; UI.panel = null; if (l.learn.i >= n - 1) { l.stage = l.stage === "relearnLearn" ? "relearnMem" : "memorize"; UI.flip = false; } else l.learn.i++; save(); render(); window.scrollTo({top: 0}); break; }
+    case "learnPrev": { const l = L(d); l.learn.i = Math.max(0, l.learn.i - 1); UI.panel = null; save(); render(); break; }
+    case "reviewAgain": { const l = L(d); const mods = modulesFor(l); const t = F(mods[l.learn.i].id).t; const first = mods.findIndex(m => (m.type === "topic" && m.t === t) || (m.type === "fact" && F(m.id).t === t)); l.learn.i = Math.max(0, first); UI.panel = null; save(); render(); break; }
+    case "panel": UI.panel = UI.panel === ds.k ? null : ds.k; render(); break;
+    case "tutor": await askTutor(ds.id); break;
+    case "flip": UI.flip = true; render(); break;
+    case "memGrade": { const l = L(d), M = l.mem, id = M.queue.shift(), ok = ds.ok === "1";
+      E.record(S, {fid: id, ans: 0}, ok ? 0 : 1, ok ? "knew" : "guess", "m", 0.5);
+      if (!ok) { M.misses[id] = (M.misses[id] || 0) + 1; M.queue.splice(Math.min(2, M.queue.length), 0, id); } else celebrate(false);
+      UI.flip = false; save(); render(); break; }
+    case "memSkip": { const l = L(d); l.stage = "quiz"; save(); render(); break; }
+    case "mL": UI.sel = ds.id; render(); break;
+    case "mR": { if (!UI.sel) { toast("Tap a prompt on the left first"); break; } if (ds.id === UI.sel) { UI.matchDone.push(ds.id); UI.sel = null; const l = L(d); if (UI.matchDone.length >= matchPairs(l.mem.groups[l.mem.gi]).length) { celebrate(false); nextMemGroup(d, l); } } else { UI.shake = ds.id; setTimeout(() => { UI.shake = null; }, 400); } render(); break; }
+    case "ladder": { const l = L(d), M = l.mem; const g2 = l.plan.canonGroups[M.ladderIdx]; const books = [...CANON.OT, ...CANON.NT].find(x => x[0] === g2)[1];
+      const chunk = books.length > 7 ? (UI.ladderPart ? books.slice(Math.ceil(books.length / 2)) : books.slice(0, Math.ceil(books.length / 2))) : books;
+      if (ds.b === chunk[UI.ladder.length]) { UI.ladder.push(ds.b); if (UI.ladder.length === chunk.length) { celebrate(false); UI.ladder = []; if (books.length > 7 && !UI.ladderPart) UI.ladderPart = 1; else { UI.ladderPart = 0; M.ladderIdx++; } save(); } }
+      else { UI.shake = ds.b; setTimeout(() => { UI.shake = null; }, 400); E.record(S, {fid: "c:" + chunk[UI.ladder.length], ans: 0}, 1, "guess", "m", 0.5); }
+      render(); break; }
+    case "relearn": { const l = L(d); const an = E.analyzeAttempt(l.quiz); l.relearn = [...new Set(an.rows.filter(x => !x.ok || x.conf !== "knew").map(x => x.q.fid).filter(id => !id.startsWith("c:")))]; l.learn.i = 0; buildMem(l, l.relearn, []); l.stage = "relearnLearn"; save(); render(); window.scrollTo({top: 0}); break; }
+    case "finishLesson": { const l = L(d); l.stage = "done"; l.doneAt = Date.now(); delete l.relearn; save(); celebrate(true); UI.day = d; render(); break; }
+    case "startFinal": S.final = newAttempt("final", E.finalExam(S, Date.now() % 1e9)); save(); render(); break;
+    case "fireworks": fireworks(); break;
+    case "startRev": startRev(ds.k); break;
+    case "revNext": { const R = S.rev; if (R.i >= R.ids.length - 1) R.stage = "quiz"; else R.i++; save(); render(); break; }
+    case "revDone": S.rev.done = true; save(); render(); break;
+    case "signin": case "signup": await doAuth(a); break;
+    case "authSwitch": UI.signup = !UI.signup; UI.authMsg = ""; render(); break;
+    case "signout": await flush(); await SB.auth.signOut(); USER = null; S = blank(); UI.signup = false; UI.authMsg = ""; UI.view = "dash"; render(); break;
+    case "reset": if (confirm("Erase your diagnostic, lessons, and progress? The imported cards stay.")) { const im = S.imported; S = blank(); S.imported = im; save(); go("dash"); } break;
+  }
+  if (a === "submit" && ds.p === "final") { const l = L(5); l.stage = "done"; l.doneAt = Date.now(); save(); UI.view = "finalResults"; render(); }
+});
+function relearnQuiz(l){ const r = E.rng(Date.now() % 1e9); const avoid = new Set(l.quiz.qs.map(q => q.qid)); return E.shuffle((l.relearn || []).map(id => { const f = F(id); const fm = E.formsFor(f).filter(x => !avoid.has(id + ":" + x)); return E.buildQ(f, fm[0] || "f", r); }), r); }
+function focusQ(i, next){ const el = document.querySelector(`[data-qi="${i}"]`); if (el) { el.focus({preventScroll: !next}); if (next) el.scrollIntoView({block: "nearest", behavior: "smooth"}); } }
+document.addEventListener("keydown", e => {
+  const art = e.target.closest && e.target.closest("[data-qi]"); if (!art || e.metaKey || e.ctrlKey) return;
+  const k = e.key.toLowerCase(); const map = {a: 0, b: 1, c: 2, d: 3, "1": 0, "2": 1, "3": 2, "4": 3};
+  const btns = art.querySelectorAll(".opt"); const cf = {k: "knew", e: "elim", g: "guess"};
+  if (k in map && btns[map[k]]) { btns[map[k]].click(); e.preventDefault(); }
+  else if (k in cf) { const c = art.querySelector(`.conf [data-k="${cf[k]}"]`); if (c) { c.click(); e.preventDefault(); } }
+});
+
+
+// AI tutor (optional): grounded in the card, labeled as supplemental
+async function askTutor(id){
+  const f = F(id), raw = RAW[f.e - 1];
+  try {
+    const sample = window.claude && await claude.use("sample"); if (!sample) { toast("The AI tutor isn't available in this view"); return; }
+    toast("Asking the tutor…");
+    const res = await sample(`You are tutoring a seminary student for a multiple-choice English Bible exam. Explain this flashcard fact in 3–4 plain sentences: what happens, where it sits in the book's flow, and one way to remember the location. Stay accurate to Scripture and don't add claims you aren't sure of. Capitalize pronouns that refer to God (He, Him, His). No headings or lists.\n\nFlashcard: "${raw[2]}" → "${raw[3]}"\nTested as: ${f.q} Answer: ${f.a}`, {modelTier: "quick"});
+    S.tutor[id] = (res.text || "").trim(); save(); render();
+  } catch (e) { toast(e && e.code === "not_granted" ? "Tutor access was declined" : "The tutor couldn't answer right now"); }
+}
+
+// ---------- boot
+render(); connect();
+
+</script></body></html>
